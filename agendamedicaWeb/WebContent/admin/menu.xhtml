@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
+		<title>Administrador</title>
+	</f:facet>
+</h:head>
+<body>
+
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+
+	<h:form>
+		<p:messages>
+
+			<p:autoUpdate />
+		</p:messages>
+
+	</h:form>
+	<p:panel header="CONSULTORIO MÉDICO - Módulo Agenda Médica">
+		<!-- 		<h:form id="form"> -->
+		<p:growl id="msgs" showDetail="true" />
+
+
+		<p:tabView>
+
+
+			<p:tab title="Registrar Tipo de usuario">
+				<div align="center">
+				
+				<h:form id="form1">
+					<p:panel header="Registrar" style="width:400px">
+
+						<h:panelGrid columns="2">
+
+							<h:outputLabel value="Tipo de Usuario:" />
+							<p:inputText value="#{beanTipo.tipo.nombreTipousuario}"></p:inputText>
+
+							<p:commandButton value="Guardar" icon="fa fa-key"
+								actionListener="#{beanTipo.actionListerInsertarTipo()}"></p:commandButton>
+
+						</h:panelGrid>
+
+					</p:panel>
+				</h:form>
+				</div>
+			<br />
+				<p:panel header="Tipo de Usuario">
+					<p:dataTable value="#{beanTipo.listaTipo}" var="tipo" reflow="true"
+					rows="5">
+						<p:column>
+							<h:outputText value="#{tipo.nombreTipousuario}" />
+						</p:column>
+
+
+					</p:dataTable>
+				</p:panel>
+			</p:tab>
+
+
+
+			<!-- FIN DE LA PRIMERA PARTE-->
+			<p:tab title="Registrar Citas">
+				<h:panelGrid columns="2" cellpadding="10">
+					<p:graphicImage name="demo/images/godfather/godfather2.jpg" />
+
+					<div class="panel panel-info">
+						<div class="panel-heading">Titulo de lo que sea</div>
+						<div class="panel-body">
+							<h1>todo lo que se quiera poner</h1>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<h1>holaaa</h1>
+						</div>
+						<div class="col-md-8">
+							<h1>hoaaa34</h1>
+						</div>
+					</div>
+				</h:panelGrid>
+			</p:tab>
+			<p:tab title="Registrar Horarios">
+				<h:panelGrid columns="2" cellpadding="10">
+					<p:graphicImage name="demo/images/godfather/godfather3.jpg" />
+					<h:outputText
+						value="After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family. 
+                    Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate." />
+				</h:panelGrid>
+			</p:tab>
+			<p:tab title="Registrar Médicos">
+				<h:panelGrid columns="2" cellpadding="10">
+					<p:graphicImage name="demo/images/godfather/godfather3.jpg" />
+					<h:outputText
+						value="After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family. 
+                    Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate." />
+				</h:panelGrid>
+			</p:tab>
+			<p:tab title="Registrar Pacientes">
+				<h:panelGrid columns="2" cellpadding="10">
+					<p:graphicImage name="demo/images/godfather/godfather3.jpg" />
+					<h:outputText
+						value="After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family. 
+                    Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate." />
+				</h:panelGrid>
+			</p:tab>
+			<p:tab title="Reporte">
+				<h:panelGrid columns="2" cellpadding="10">
+					<p:graphicImage name="demo/images/godfather/godfather3.jpg" />
+					<h:outputText
+						value="After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family. 
+                    Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate." />
+				</h:panelGrid>
+			</p:tab>
+			<p:tab title="Historial">
+				<h:panelGrid columns="2" cellpadding="10">
+					<p:graphicImage name="demo/images/godfather/godfather3.jpg" />
+					<h:outputText
+						value="After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family. 
+                    Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate." />
+				</h:panelGrid>
+			</p:tab>
+		</p:tabView>
+
+		<!-- 	</h:form> -->
+
+
+	</p:panel>
+</body>
+</html>
