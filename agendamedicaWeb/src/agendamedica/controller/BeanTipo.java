@@ -21,13 +21,19 @@ public class BeanTipo implements Serializable {
 	private ManagerTipo managerTipo;
 	private List<Tipousuario> listaTipo;
 	private Tipousuario tipo;
-	
+	private boolean panelColapsado;
+	private Tipousuario tipoSeleccionado;
 	
 	@PostConstruct
 	private void inicializar() {
 		listaTipo = managerTipo.findAllTipousuario();
-		
+		tipo = new Tipousuario();
+		panelColapsado = true;
 	}
+	
+	public void actionListenerColapsarPanel() {
+		panelColapsado =! panelColapsado;
+	} 
 
 	public void actionListerInsertarTipo() {
 		try {
@@ -43,20 +49,17 @@ public class BeanTipo implements Serializable {
 
 	}
 	
-//	public String actionRegistrarTipo(){
-//		try {
-//		//managerTipo.registrarNuevoBlogger(idUsuario, clave, confirmacionClave, correo);
-//		managerTipo.registrarNuevoTipo(23, nombretipo);
-//		JSFUtil.crearMensajeInfo("Nuevo tipo registrado.");
-//		return "admin/index";
-//		} catch (Exception e) {
-//		JSFUtil.crearMensajeError(e.getMessage());
-//		e.printStackTrace();
-//		}
-//		return "";
-//		}
-	
-	
+	public void actionListenerSeleccionarTipo(Tipousuario tipo) {
+		tipoSeleccionado = tipo;
+	}
+
+	public List<Tipousuario> getListaTipo() {
+		return listaTipo;
+	}
+
+	public void setListaTipo(List<Tipousuario> listaTipo) {
+		this.listaTipo = listaTipo;
+	}
 
 	public Tipousuario getTipo() {
 		return tipo;
@@ -66,16 +69,22 @@ public class BeanTipo implements Serializable {
 		this.tipo = tipo;
 	}
 
-
-	public List<Tipousuario> getListaTipo() {
-		return listaTipo;
+	public boolean isPanelColapsado() {
+		return panelColapsado;
 	}
 
-
-	public void setListaTipo(List<Tipousuario> listaTipo) {
-		this.listaTipo = listaTipo;
+	public void setPanelColapsado(boolean panelColapsado) {
+		this.panelColapsado = panelColapsado;
 	}
-	
+
+	public Tipousuario getTipoSeleccionado() {
+		return tipoSeleccionado;
+	}
+
+	public void setTipoSeleccionado(Tipousuario tipoSeleccionado) {
+		this.tipoSeleccionado = tipoSeleccionado;
+	}
+
 	
 	
 

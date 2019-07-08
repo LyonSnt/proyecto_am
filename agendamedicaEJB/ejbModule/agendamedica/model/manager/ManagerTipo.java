@@ -1,7 +1,5 @@
 package agendamedica.model.manager;
 
-import agendamedica.model.util.ModelUtil;
-
 import java.util.List;
 
 import javax.ejb.LocalBean;
@@ -32,7 +30,6 @@ public class ManagerTipo {
 		String consulta = "select o from Tipousuario o";
 		Query q = em.createQuery(consulta, Tipousuario.class);
 		return q.getResultList();
-
 	}
 
 	public Tipousuario findTipousuarioByCedula(String cedula) {
@@ -45,17 +42,5 @@ public class ManagerTipo {
 	    	em.persist(tipo);
 	    	
 	    }
-	  
-//	  public void registrarNuevoTipo(Integer idUsuario,String nomtipo) throws Exception{
-//		
-//			  Tipousuario u=findTipoByCedula(idUsuario);
-//			  if(u!=null)
-//			  throw new Exception("Ya existe un usuario "+idUsuario);
-//			  //finalmente se puede guardar el nuevo usuario:
-//			  u=new Tipousuario();
-//			u.setIdTipousuario(idUsuario);
-//			  u.setNombreTipousuario(nomtipo);
-//			  em.persist(u);
-//			  }
 	
 }

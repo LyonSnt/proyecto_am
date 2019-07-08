@@ -13,56 +13,16 @@
 	</f:facet>
 </h:head>
 <body>
+<ui:include src="/admin/cabecera.xhtml" />
+<br />
 
-	<p:growl>
-		<p:autoUpdate />
-	</p:growl>
-
-	<h:form>
-		<p:messages>
-
-			<p:autoUpdate />
-		</p:messages>
-
-	</h:form>
 	<p:panel header="CONSULTORIO MÉDICO - Módulo Agenda Médica">
 		<!-- 		<h:form id="form"> -->
-		<p:growl id="msgs" showDetail="true" />
-
-
 		<p:tabView>
 
-
 			<p:tab title="Registrar Tipo de usuario">
-				<div align="center">
+
 				
-				<h:form id="form1">
-					<p:panel header="Registrar" style="width:400px">
-
-						<h:panelGrid columns="2">
-
-							<h:outputLabel value="Tipo de Usuario:" />
-							<p:inputText value="#{beanTipo.tipo.nombreTipousuario}"></p:inputText>
-
-							<p:commandButton value="Guardar" icon="fa fa-key"
-								actionListener="#{beanTipo.actionListerInsertarTipo()}"></p:commandButton>
-
-						</h:panelGrid>
-
-					</p:panel>
-				</h:form>
-				</div>
-			<br />
-				<p:panel header="Tipo de Usuario">
-					<p:dataTable value="#{beanTipo.listaTipo}" var="tipo" reflow="true"
-					rows="5">
-						<p:column>
-							<h:outputText value="#{tipo.nombreTipousuario}" />
-						</p:column>
-
-
-					</p:dataTable>
-				</p:panel>
 			</p:tab>
 
 

@@ -1,13 +1,17 @@
 package agendamedica.controller;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
+import agendamedica.model.entities.Tipousuario;
+import agendamedica.model.entities.Usuario;
 import agendamedica.model.manager.ManagerUsuario;
 import agendamedica.view.util.JSFUtil;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Named
 @SessionScoped
@@ -25,6 +29,39 @@ public class ControllerUsuario implements Serializable {
 
 	@EJB
 	private ManagerUsuario managerUsuario;
+	private List<Usuario> listaUsuarios;
+	private Usuario usuario;
+	private boolean panelColapsado;
+	private Usuario usuarioSeleccionado;
+	
+	@PostConstruct
+	private void inicializar() {
+		listaUsuarios = managerUsuario.findAllUsuario();
+		usuario = new Usuario();
+//		panelColapsado = true;
+	}
+	
+	public void actionListenerColapsarPanel() {
+		panelColapsado =! panelColapsado;
+	} 
+	
+	public void actionListerInsertarUsuario() {
+		try {
+			
+			managerUsuario.insertarUsuario(usuario);
+			listaUsuarios = managerUsuario.findAllUsuario();
+			usuario = new Usuario();
+			JSFUtil.crearMensajeInfo("Datos de usuario insertados.");
+		} catch (Exception e) {
+			JSFUtil.crearMensajeError(e.getMessage());
+			e.printStackTrace();
+		}
+
+	}
+	
+	public void actionListenerSeleccionarTipo(Usuario usuario) {
+		usuarioSeleccionado = usuario;
+	}
 
 	public String actionLogin() {
 		try {
@@ -46,6 +83,10 @@ public class ControllerUsuario implements Serializable {
 		}
 		return "";
 	}
+	
+	
+	
+	
 
 	public String getIdUsuario() {
 		return idUsuario;
@@ -109,6 +150,40 @@ public class ControllerUsuario implements Serializable {
 
 	public void setTipousuario(Integer tipousuario) {
 		this.tipousuario = tipousuario;
+	}
+
+	
+
+	public List<Usuario> getListaUsuarios() {
+		return listaUsuarios;
+	}
+
+	public void setListaUsuarios(List<Usuario> listaUsuarios) {
+		this.listaUsuarios = listaUsuarios;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public boolean isPanelColapsado() {
+		return panelColapsado;
+	}
+
+	public void setPanelColapsado(boolean panelColapsado) {
+		this.panelColapsado = panelColapsado;
+	}
+
+	public Usuario getUsuarioSeleccionado() {
+		return usuarioSeleccionado;
+	}
+
+	public void setUsuarioSeleccionado(Usuario usuarioSeleccionado) {
+		this.usuarioSeleccionado = usuarioSeleccionado;
 	}
 
 	

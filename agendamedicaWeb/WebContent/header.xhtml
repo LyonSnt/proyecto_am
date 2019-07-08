@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
+		<title>Administrador</title>
+	</f:facet>
+</h:head>
+<body>
+
+	<!--  <p:panel header="Moulo">
+ 
+ -->
+
+	<p:panel header="CONSULTORIO MÉDICO - Módulo Agenda Médica"></p:panel>
+	<p:megaMenu>
+		<p:menuitem value="Inicio" url="header.xhtml"
+			icon="pi pi-home" />
+
+		<p:submenu label="Registrar" icon="pi pi-check">
+			<p:column>
+				<p:submenu label=".">
+					<p:menuitem value="Tipo de usuario" url="./tipousuario.xhtml" />
+					<p:menuitem value="admin pagina" url="./paciente.xhtml" />
+
+					<p:menuitem value="TV.2.1" url="#" />
+					<p:menuitem value="TV.2.2" url="#" />
+					<p:menuitem value="TV.2.3" url="#" />
+				</p:submenu>
+			</p:column>
+		</p:submenu>
+
+
+
+		<p:submenu label="Consultar" icon="pi pi-file">
+
+			<p:column>
+				<p:submenu label="Sports.1">
+					<p:menuitem value="Sports.1.1" url="#" />
+					<p:menuitem value="Sports.1.2" url="#" />
+				</p:submenu>
+				<p:submenu label="Sports.2">
+					<p:menuitem value="Sports.2.1" url="#" />
+					<p:menuitem value="Sports.2.2" url="#" />
+					<p:menuitem value="Sports.2.3" url="#" />
+				</p:submenu>
+			</p:column>
+
+		</p:submenu>
+
+		<p:submenu label="Citas" icon="pi pi-pencil">
+			<p:column>
+				<p:submenu label="Entertainment.1">
+					<p:menuitem value="Entertainment.1.1" url="#" />
+					<p:menuitem value="Entertainment.1.2" url="#" />
+				</p:submenu>
+				<p:submenu label="Entertainment.2">
+					<p:menuitem value="Entertainment.2.1" url="#" />
+					<p:menuitem value="Entertainment.2.2" url="#" />
+					<p:menuitem value="Entertainment.2.3" url="#" />
+				</p:submenu>
+			</p:column>
+		</p:submenu>
+
+		<p:submenu label="Tech" icon="pi pi-briefcase">
+			<p:column>
+				<p:submenu label="Tech.1">
+					<p:menuitem value="Tech.1.1" url="#" />
+					<p:menuitem value="Tech.1.2" url="#" />
+				</p:submenu>
+				<p:submenu label="Tech.2">
+					<p:menuitem value="Tech.2.1" url="#" />
+					<p:menuitem value="Tech.2.2" url="#" />
+					<p:menuitem value="Tech.2.3" url="#" />
+				</p:submenu>
+			</p:column>
+
+		</p:submenu>
+
+		<p:menuitem value="Quit" url="http://www.primefaces.org"
+			icon="pi pi-times" />
+	</p:megaMenu>
+
+	<!-- </p:panel> -->
+
+</body>
+</html>

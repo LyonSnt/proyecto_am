@@ -1,10 +1,14 @@
 package agendamedica.model.manager;
 
+import java.util.List;
+
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
+import agendamedica.model.entities.Tipousuario;
 import agendamedica.model.entities.Usuario;
 import agendamedica.model.util.ModelUtil;
 
@@ -15,7 +19,10 @@ import agendamedica.model.util.ModelUtil;
 @LocalBean
 public class ManagerUsuario {
 
-	@PersistenceContext(unitName = "bdd_amDS")
+//	@PersistenceContext(unitName = "bdd_amDS")
+//	private EntityManager em;
+	
+	@PersistenceContext
 	private EntityManager em;
 
 	/**
@@ -40,6 +47,25 @@ public class ManagerUsuario {
 		Usuario u = em.find(Usuario.class, idUsuario);
 		return u;
 	}
+	
+	
+	public List<Usuario> findAllUsuario() {
+		String consulta = "select o from Usuario o";
+		Query q = em.createQuery(consulta, Usuario.class);
+		return q.getResultList();
+	}
+
+	public Usuario findUsuarioByCedula(String cedula) {
+    	return em.find(Usuario.class, cedula);
+    }
+
+	  public void insertarUsuario(Usuario usuario) throws Exception{
+	    	if(findUsuarioByCedula(usuario.getIdUsuario())!=null)
+	    			throw new Exception("Ya existe la cédula");
+	    	em.persist(usuario);
+	    	
+	    }
+	
 
 	public void registrarNuevoUsuario(String idUsuario, String nombreUsua, String claveUsua, 
 			Integer tipoUsua, String estado,Integer respon, Integer medico)
