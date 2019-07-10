@@ -2,6 +2,7 @@ package agendamedica.model.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.List;
 
 
 /**
@@ -21,6 +22,10 @@ public class Tipousuario implements Serializable {
 	@Column(name="nombre_tipousuario", length=50)
 	private String nombreTipousuario;
 
+	//bi-directional many-to-one association to Usuario
+	@OneToMany(mappedBy="tipousuario")
+	private List<Usuario> usuarios;
+
 	public Tipousuario() {
 	}
 
@@ -38,6 +43,28 @@ public class Tipousuario implements Serializable {
 
 	public void setNombreTipousuario(String nombreTipousuario) {
 		this.nombreTipousuario = nombreTipousuario;
+	}
+
+	public List<Usuario> getUsuarios() {
+		return this.usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	public Usuario addUsuario(Usuario usuario) {
+		getUsuarios().add(usuario);
+		usuario.setTipousuario(this);
+
+		return usuario;
+	}
+
+	public Usuario removeUsuario(Usuario usuario) {
+		getUsuarios().remove(usuario);
+		usuario.setTipousuario(null);
+
+		return usuario;
 	}
 
 }

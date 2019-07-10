@@ -5,7 +5,6 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-import agendamedica.model.entities.Tipousuario;
 import agendamedica.model.entities.Usuario;
 import agendamedica.model.manager.ManagerUsuario;
 import agendamedica.view.util.JSFUtil;
@@ -40,6 +39,27 @@ public class ControllerUsuario implements Serializable {
 		usuario = new Usuario();
 //		panelColapsado = true;
 	}
+	public String actionLogin() {
+		try {
+			boolean respuesta = managerUsuario.comprobarUsuario(idUsuario, clave);
+			JSFUtil.crearMensajeInfo("Login correcto");
+			// verificamos si el acceso es con admin:
+			if (idUsuario.equals("admin")) {
+				///JSFUtil.crearMensajeInfo("Login correcto");
+				//return "/admin/menu.xhtml";
+				return "/admin/index?faces-redirect=true";
+				
+			}else if(idUsuario.equals("medico")) {
+				return "medico/index";
+			}
+			return "clientes/index";
+		} catch (Exception e) {
+			JSFUtil.crearMensajeError(e.getMessage());
+			e.printStackTrace();
+		}
+		return "";
+	}
+	
 	
 	public void actionListenerColapsarPanel() {
 		panelColapsado =! panelColapsado;
@@ -59,32 +79,28 @@ public class ControllerUsuario implements Serializable {
 
 	}
 	
-	public void actionListenerSeleccionarTipo(Usuario usuario) {
+	public void actionListenerEliminarUsuario(String idUsuario) {
+		managerUsuario.eliminarUsuario(idUsuario);
+		listaUsuarios = managerUsuario.findAllUsuario();
+		JSFUtil.crearMensajeInfo("Usuario Eliminado");
+	}
+	
+	//ESTA PARTE ES PARA ACTUALIZAR
+	public void actionListenerSeleccionarUsuario(Usuario usuario) {
 		usuarioSeleccionado = usuario;
 	}
 
-	public String actionLogin() {
+	public void actionListenerActualizarUsuario() {
 		try {
-			boolean respuesta = managerUsuario.comprobarUsuario(idUsuario, clave);
-			JSFUtil.crearMensajeInfo("Login correcto");
-			// verificamos si el acceso es con admin:
-			if (idUsuario.equals("admin")) {
-				///JSFUtil.crearMensajeInfo("Login correcto");
-				//return "/admin/menu.xhtml";
-				return "/admin/menu?faces-redirect=true";
-				
-			}else if(idUsuario.equals("medico")) {
-				return "medico/index";
-			}
-			return "clientes/index";
+			managerUsuario.actualizarUsuario(usuarioSeleccionado);
+			listaUsuarios = managerUsuario.findAllUsuario();
+			JSFUtil.crearMensajeInfo("Datos actualizados");
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError(e.getMessage());
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return "";
 	}
-	
-	
 	
 	
 

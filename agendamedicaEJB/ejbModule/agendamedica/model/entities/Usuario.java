@@ -3,6 +3,7 @@ package agendamedica.model.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.List;
 
 
 /**
@@ -25,20 +26,30 @@ public class Usuario implements Serializable {
 	@Column(name="fecharegistro_usuario")
 	private Timestamp fecharegistroUsuario;
 
-	@Column(name="id_medico")
-	private Integer idMedico;
-
-	@Column(name="id_responsableturno")
-	private Integer idResponsableturno;
-
-	@Column(name="id_tipousuario")
-	private Integer idTipousuario;
-
 	@Column(name="nombre_usuario", length=50)
 	private String nombreUsuario;
 
 	@Column(name="password_usuario", length=20)
 	private String passwordUsuario;
+
+	//bi-directional many-to-one association to Evento
+	@OneToMany(mappedBy="usuario")
+	private List<Evento> eventos;
+
+	//bi-directional many-to-one association to Medico
+	@ManyToOne
+	@JoinColumn(name="id_medico")
+	private Medico medico;
+
+	//bi-directional many-to-one association to Responsableturno
+	@ManyToOne
+	@JoinColumn(name="id_responsableturno")
+	private Responsableturno responsableturno;
+
+	//bi-directional many-to-one association to Tipousuario
+	@ManyToOne
+	@JoinColumn(name="id_tipousuario")
+	private Tipousuario tipousuario;
 
 	public Usuario() {
 	}
@@ -67,30 +78,6 @@ public class Usuario implements Serializable {
 		this.fecharegistroUsuario = fecharegistroUsuario;
 	}
 
-	public Integer getIdMedico() {
-		return this.idMedico;
-	}
-
-	public void setIdMedico(Integer idMedico) {
-		this.idMedico = idMedico;
-	}
-
-	public Integer getIdResponsableturno() {
-		return this.idResponsableturno;
-	}
-
-	public void setIdResponsableturno(Integer idResponsableturno) {
-		this.idResponsableturno = idResponsableturno;
-	}
-
-	public Integer getIdTipousuario() {
-		return this.idTipousuario;
-	}
-
-	public void setIdTipousuario(Integer idTipousuario) {
-		this.idTipousuario = idTipousuario;
-	}
-
 	public String getNombreUsuario() {
 		return this.nombreUsuario;
 	}
@@ -105,6 +92,52 @@ public class Usuario implements Serializable {
 
 	public void setPasswordUsuario(String passwordUsuario) {
 		this.passwordUsuario = passwordUsuario;
+	}
+
+	public List<Evento> getEventos() {
+		return this.eventos;
+	}
+
+	public void setEventos(List<Evento> eventos) {
+		this.eventos = eventos;
+	}
+
+	public Evento addEvento(Evento evento) {
+		getEventos().add(evento);
+		evento.setUsuario(this);
+
+		return evento;
+	}
+
+	public Evento removeEvento(Evento evento) {
+		getEventos().remove(evento);
+		evento.setUsuario(null);
+
+		return evento;
+	}
+
+	public Medico getMedico() {
+		return this.medico;
+	}
+
+	public void setMedico(Medico medico) {
+		this.medico = medico;
+	}
+
+	public Responsableturno getResponsableturno() {
+		return this.responsableturno;
+	}
+
+	public void setResponsableturno(Responsableturno responsableturno) {
+		this.responsableturno = responsableturno;
+	}
+
+	public Tipousuario getTipousuario() {
+		return this.tipousuario;
+	}
+
+	public void setTipousuario(Tipousuario tipousuario) {
+		this.tipousuario = tipousuario;
 	}
 
 }

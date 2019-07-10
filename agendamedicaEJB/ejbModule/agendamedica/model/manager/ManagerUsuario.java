@@ -65,31 +65,48 @@ public class ManagerUsuario {
 	    	em.persist(usuario);
 	    	
 	    }
+	  
+	  public void eliminarUsuario(String idUsuario) {
+		  Usuario usuario = findUsuarioByCedula(idUsuario);
+		  if(usuario!=null)
+			  em.remove(usuario);
+	  }
+	  
+	  public void actualizarUsuario(Usuario usuario) throws Exception{
+		  Usuario  u = findUsuarioById(usuario.getIdUsuario());
+		  if(u==null)
+			  throw new Exception("No existe el usuario con el id especificado");
+		  u.setNombreUsuario(usuario.getNombreUsuario());
+		  u.setPasswordUsuario(usuario.getPasswordUsuario());
+		  em.merge(u);
+		  
+		  
+	  }
 	
 
-	public void registrarNuevoUsuario(String idUsuario, String nombreUsua, String claveUsua, 
-			Integer tipoUsua, String estado,Integer respon, Integer medico)
-			throws Exception {
-		if (ModelUtil.isEmpty(idUsuario))
-			throw new Exception("Debe especificar un ID de usuario.");
-		// verificamos la contraseña:
-		if (ModelUtil.isEmpty(claveUsua))
-			throw new Exception("Debe especificar una clave.");
-		Usuario u = findUsuarioById(idUsuario);
-		if (u != null)
-			throw new Exception("Ya existe un usuario " + idUsuario);
-		// finalmente se puede guardar el nuevo usuario:
-		u = new Usuario();
-		u.setIdUsuario(idUsuario);
-		u.setNombreUsuario(nombreUsua);
-		u.setPasswordUsuario(claveUsua);
-		//u.setTipousuario(});
-		u.setEstadoUsuario(estado);
-//		u.setResponsableturno(respon);
-//		u.setMedico(medico);
-
-		//u.setActivo(true);
-		em.persist(u);
-	}
+//	public void registrarNuevoUsuario(String idUsuario, String nombreUsua, String claveUsua, 
+//			Integer tipoUsua, String estado,Integer respon, Integer medico)
+//			throws Exception {
+//		if (ModelUtil.isEmpty(idUsuario))
+//			throw new Exception("Debe especificar un ID de usuario.");
+//		// verificamos la contraseña:
+//		if (ModelUtil.isEmpty(claveUsua))
+//			throw new Exception("Debe especificar una clave.");
+//		Usuario u = findUsuarioById(idUsuario);
+//		if (u != null)
+//			throw new Exception("Ya existe un usuario " + idUsuario);
+//		// finalmente se puede guardar el nuevo usuario:
+//		u = new Usuario();
+//		u.setIdUsuario(idUsuario);
+//		u.setNombreUsuario(nombreUsua);
+//		u.setPasswordUsuario(claveUsua);
+//		//u.setTipousuario(});
+//		u.setEstadoUsuario(estado);
+////		u.setResponsableturno(respon);
+////		u.setMedico(medico);
+//
+//		//u.setActivo(true);
+//		em.persist(u);
+//	}
 
 }

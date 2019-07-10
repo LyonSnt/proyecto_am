@@ -14,7 +14,7 @@
 </h:head>
 <body>
 
-	<ui:include src="/header.xhtml" />
+	<ui:include src="/headerIndex.xhtml" />
 	<p:growl>
 		<p:autoUpdate></p:autoUpdate>
 	</p:growl>
@@ -25,7 +25,8 @@
 				<p:autoUpdate />
 			</p:messages>
 
-			<p:panel collapsed="#{controllerUsuario.panelColapsado}" style="width:400px">
+			<p:panel collapsed="#{controllerUsuario.panelColapsado}"
+				style="width:400px">
 				<f:facet name="header">
 					<p:commandButton value="Nuevo usuario" icon="fa fa-plus"
 						update="@form"
@@ -33,8 +34,32 @@
 				</f:facet>
 
 				<p:panelGrid columns="2">
-					<h:outputText value="Cedula" />
+					<h:outputText value="Id Usuario" />
 					<p:inputText value="#{controllerUsuario.usuario.idUsuario}"></p:inputText>
+
+					<h:outputText value="Nombre de Usuario" />
+					<p:inputText value="#{controllerUsuario.usuario.nombreUsuario}"></p:inputText>
+
+					<h:outputText value="Contraseña" />
+					<p:inputText value="#{controllerUsuario.usuario.passwordUsuario}"></p:inputText>
+
+					<h:outputText value="Tipo de Usaurio" />
+					<p:inputText value="#{controllerUsuario.usuario.tipousuario}"></p:inputText>
+
+					<h:outputText value="Estado" />
+					<p:inputText value="#{controllerUsuario.usuario.estadoUsuario}"></p:inputText>
+
+					<h:outputText value="Fecha Registro" />
+					<p:inputText
+						value="#{controllerUsuario.usuario.fecharegistroUsuario}"></p:inputText>
+
+					<h:outputText value="Id Responsable" />
+					<p:inputText
+						value="#{controllerUsuario.usuario.responsableturno}"></p:inputText>
+
+					<h:outputText value="Id Medico" />
+					<p:inputText value="#{controllerUsuario.usuario.medico}"></p:inputText>
+
 
 					<p:commandButton value="Ingresar" icon="fa fa-save"
 						update="@form,:form2"
@@ -49,13 +74,86 @@
 	<br />
 	<h:form id="form2">
 		<p:panel header="Usuarios">
-			<p:dataTable value="#{controllerUsuario.listaUsuarios}" var="usuario" reflow="true"
-				rows="5">
+			<p:dataTable value="#{controllerUsuario.listaUsuarios}" var="usuario"
+				reflow="true" rows="5">
 				<p:column headerText="Id usuario">
 					<h:outputText value="#{usuario.idUsuario}" />
+				</p:column>
+				<p:column headerText="Nombre Usuario">
+					<h:outputText value="#{usuario.nombreUsuario}" />
+				</p:column>
+				<p:column headerText="Contraseña">
+					<h:outputText value="#{usuario.passwordUsuario}" />
+				</p:column>
+				<p:column headerText="Tipo de Usuario">
+					<h:outputText value="#{usuario.tipousuario}" />
+				</p:column>
+				<p:column headerText="Estado">
+					<h:outputText value="#{usuario.estadoUsuario}" />
+				</p:column>
+				<p:column headerText="Fecha de Registro">
+					<h:outputText value="#{usuario.fecharegistroUsuario}" />
+				</p:column>
+				<p:column headerText="Id Responsable">
+					<h:outputText value="#{usuario.responsableturno}" />
+				</p:column>
+				<p:column headerText="Id Medico">
+					<h:outputText value="#{usuario.medico}" />
+				</p:column>
+
+				<p:column headerText="OPCIONES" priority="1">
+					<p:commandButton icon="fa fa-close" title="Eliminar" update="@form"
+						actionListener="#{controllerUsuario.actionListenerEliminarUsuario(usuario.idUsuario)}">
+						<p:confirm header="Confirmacion" message="Desea eliminar?"
+							icon="fa fa-exclamation-triangle"></p:confirm>
+					</p:commandButton>
+
+					<p:commandButton icon="fa fa-edit" title="Editar"
+						actionListener="#{controllerUsuario.actionListenerSeleccionarUsuario(usuario)}"
+						update=":formEdicion" oncomplete="PF('dlgEdicion').show();"></p:commandButton>
+
 				</p:column>
 			</p:dataTable>
 		</p:panel>
 	</h:form>
+
+	<p:dialog header="Editar informacion" widgetVar="dlgEdicion"
+		modal="true">
+		<h:form id="formEdicion">
+			<p:growl>
+				<p:autoUpdate></p:autoUpdate>
+			</p:growl>
+			<h:outputText value="Id Usuario:" />
+			<h:outputText
+				value="#{controllerUsuario.usuarioSeleccionado.idUsuario}" />
+
+			<p:panelGrid columns="2">
+
+				<h:outputText value="Nombre de Usuario" />
+				<p:inputText
+					value="#{controllerUsuario.usuarioSeleccionado.nombreUsuario}"></p:inputText>
+
+				<h:outputText value="Contraseña" />
+				<p:inputText
+					value="#{controllerUsuario.usuarioSeleccionado.passwordUsuario}"></p:inputText>
+			<p:commandButton value="Actualizar" icon="fa fa-save"
+				update="@form,:form2"
+				actionListener="#{controllerUsuario.actionListenerActualizarUsuario()}"></p:commandButton>
+			
+			</p:panelGrid>
+
+			
+		</h:form>
+	</p:dialog>
+
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+		<p:commandButton value="si" type="button"
+			styleClass="ui-confirmdialog-yes" icon="fa fa-check"></p:commandButton>
+		<p:commandButton value="no" type="button"
+			styleClass="ui-confirmdialog-no" icon="fa fa-times"></p:commandButton>
+
+	</p:confirmDialog>
+
+
 </body>
 </html>
