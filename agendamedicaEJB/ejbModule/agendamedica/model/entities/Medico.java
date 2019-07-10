@@ -16,8 +16,8 @@ public class Medico implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="id_medico", unique=true, nullable=false)
-	private Integer idMedico;
+//	@Column(name="id_medico", unique=true, nullable=false)
+//	private Integer idMedico;
 
 	@Column(name="apellido_medico", length=50)
 	private String apellidoMedico;
@@ -58,13 +58,13 @@ public class Medico implements Serializable {
 	public Medico() {
 	}
 
-	public Integer getIdMedico() {
-		return this.idMedico;
-	}
-
-	public void setIdMedico(Integer idMedico) {
-		this.idMedico = idMedico;
-	}
+//	public Integer getIdMedico() {
+//		return this.idMedico;
+//	}
+//
+//	public void setIdMedico(Integer idMedico) {
+//		this.idMedico = idMedico;
+//	}
 
 	public String getApellidoMedico() {
 		return this.apellidoMedico;

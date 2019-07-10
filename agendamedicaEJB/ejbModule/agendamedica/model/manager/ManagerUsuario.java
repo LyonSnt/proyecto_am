@@ -7,10 +7,8 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
-import agendamedica.model.entities.Tipousuario;
 import agendamedica.model.entities.Usuario;
-import agendamedica.model.util.ModelUtil;
+
 
 /**
  * Session Bean implementation class ManagerUsuario
@@ -42,12 +40,6 @@ public class ManagerUsuario {
 			return true;
 		throw new Exception("Contraseña no válida.");
 	}
-
-	public Usuario findUsuarioById(String idUsuario) {
-		Usuario u = em.find(Usuario.class, idUsuario);
-		return u;
-	}
-	
 	
 	public List<Usuario> findAllUsuario() {
 		String consulta = "select o from Usuario o";
@@ -55,6 +47,8 @@ public class ManagerUsuario {
 		return q.getResultList();
 	}
 
+	
+	
 	public Usuario findUsuarioByCedula(String cedula) {
     	return em.find(Usuario.class, cedula);
     }
@@ -65,6 +59,11 @@ public class ManagerUsuario {
 	    	em.persist(usuario);
 	    	
 	    }
+	  
+	  public Usuario findUsuarioById(String idUsuario) {
+			Usuario u = em.find(Usuario.class, idUsuario);
+			return u;
+		}
 	  
 	  public void eliminarUsuario(String idUsuario) {
 		  Usuario usuario = findUsuarioByCedula(idUsuario);

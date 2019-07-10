@@ -17,8 +17,8 @@ public class Horario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="id_horario", unique=true, nullable=false)
-	private Integer idHorario;
+//	@Column(name="id_horario", unique=true, nullable=false)
+//	private Integer idHorario;
 
 	@Column(name="fin_horario")
 	private Timestamp finHorario;
@@ -51,13 +51,13 @@ public class Horario implements Serializable {
 	public Horario() {
 	}
 
-	public Integer getIdHorario() {
-		return this.idHorario;
-	}
-
-	public void setIdHorario(Integer idHorario) {
-		this.idHorario = idHorario;
-	}
+//	public Integer getIdHorario() {
+//		return this.idHorario;
+//	}
+//
+//	public void setIdHorario(Integer idHorario) {
+//		this.idHorario = idHorario;
+//	}
 
 	public Timestamp getFinHorario() {
 		return this.finHorario;

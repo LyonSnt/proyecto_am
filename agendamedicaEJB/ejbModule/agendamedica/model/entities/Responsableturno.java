@@ -17,11 +17,14 @@ public class Responsableturno implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="id_responsableturno", unique=true, nullable=false)
-	private Integer idResponsableturno;
+//	@Column(name="id_responsableturno", unique=true, nullable=false)
+//	private Integer idResponsableturno;
 
 	@Column(name="apellido_responsableturno", length=50)
 	private String apellidoResponsableturno;
+
+	@Column(name="cedula_responsableturno", length=10)
+	private String cedulaResponsableturno;
 
 	@Column(name="celular_responsableturno", precision=10)
 	private BigDecimal celularResponsableturno;
@@ -40,13 +43,13 @@ public class Responsableturno implements Serializable {
 	public Responsableturno() {
 	}
 
-	public Integer getIdResponsableturno() {
-		return this.idResponsableturno;
-	}
-
-	public void setIdResponsableturno(Integer idResponsableturno) {
-		this.idResponsableturno = idResponsableturno;
-	}
+//	public Integer getIdResponsableturno() {
+//		return this.idResponsableturno;
+//	}
+//
+//	public void setIdResponsableturno(Integer idResponsableturno) {
+//		this.idResponsableturno = idResponsableturno;
+//	}
 
 	public String getApellidoResponsableturno() {
 		return this.apellidoResponsableturno;
@@ -54,6 +57,14 @@ public class Responsableturno implements Serializable {
 
 	public void setApellidoResponsableturno(String apellidoResponsableturno) {
 		this.apellidoResponsableturno = apellidoResponsableturno;
+	}
+
+	public String getCedulaResponsableturno() {
+		return this.cedulaResponsableturno;
+	}
+
+	public void setCedulaResponsableturno(String cedulaResponsableturno) {
+		this.cedulaResponsableturno = cedulaResponsableturno;
 	}
 
 	public BigDecimal getCelularResponsableturno() {

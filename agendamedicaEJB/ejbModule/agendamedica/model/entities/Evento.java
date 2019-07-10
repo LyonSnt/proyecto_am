@@ -17,8 +17,8 @@ public class Evento implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="id_evento", unique=true, nullable=false)
-	private Integer idEvento;
+//	@Column(name="id_evento", unique=true, nullable=false)
+//	private Integer idEvento;
 
 	@Column(name="descripcion_evento", length=50)
 	private String descripcionEvento;
@@ -44,13 +44,13 @@ public class Evento implements Serializable {
 	public Evento() {
 	}
 
-	public Integer getIdEvento() {
-		return this.idEvento;
-	}
-
-	public void setIdEvento(Integer idEvento) {
-		this.idEvento = idEvento;
-	}
+//	public Integer getIdEvento() {
+//		return this.idEvento;
+//	}
+//
+//	public void setIdEvento(Integer idEvento) {
+//		this.idEvento = idEvento;
+//	}
 
 	public String getDescripcionEvento() {
 		return this.descripcionEvento;

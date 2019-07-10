@@ -6,9 +6,10 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-import agendamedica.view.util.JSFUtil;
 import agendamedica.model.entities.Tipousuario;
 import agendamedica.model.manager.ManagerTipo;
+import agendamedica.view.util.JSFUtil;
+
 
 import java.io.Serializable;
 import java.util.List;

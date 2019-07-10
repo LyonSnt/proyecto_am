@@ -16,8 +16,8 @@ public class Estado implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="id_estado", unique=true, nullable=false)
-	private Integer idEstado;
+//	@Column(name="id_estado", unique=true, nullable=false)
+//	private Integer idEstado;
 
 	private Integer estado;
 
@@ -31,13 +31,13 @@ public class Estado implements Serializable {
 	public Estado() {
 	}
 
-	public Integer getIdEstado() {
-		return this.idEstado;
-	}
-
-	public void setIdEstado(Integer idEstado) {
-		this.idEstado = idEstado;
-	}
+//	public Integer getIdEstado() {
+//		return this.idEstado;
+//	}
+//
+//	public void setIdEstado(Integer idEstado) {
+//		this.idEstado = idEstado;
+//	}
 
 	public Integer getEstado() {
 		return this.estado;

@@ -16,8 +16,8 @@ public class Turno implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="id_turno", unique=true, nullable=false)
-	private Integer idTurno;
+//	@Column(name="id_turno", unique=true, nullable=false)
+//	private Integer idTurno;
 
 	@Column(name="alergia_turno", length=50)
 	private String alergiaTurno;
@@ -72,13 +72,13 @@ public class Turno implements Serializable {
 	public Turno() {
 	}
 
-	public Integer getIdTurno() {
-		return this.idTurno;
-	}
-
-	public void setIdTurno(Integer idTurno) {
-		this.idTurno = idTurno;
-	}
+//	public Integer getIdTurno() {
+//		return this.idTurno;
+//	}
+//
+//	public void setIdTurno(Integer idTurno) {
+//		this.idTurno = idTurno;
+//	}
 
 	public String getAlergiaTurno() {
 		return this.alergiaTurno;

@@ -17,8 +17,8 @@ public class Paciente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="id_paciente", unique=true, nullable=false)
-	private Integer idPaciente;
+//	@Column(name="id_paciente", unique=true, nullable=false)
+//	private Integer idPaciente;
 
 	@Column(name="apellido_paciente", length=50)
 	private String apellidoPaciente;
@@ -38,9 +38,6 @@ public class Paciente implements Serializable {
 	@Column(name="nombre_paciente", length=50)
 	private String nombrePaciente;
 
-	@Column(name="numhistorial_paciente")
-	private Integer numhistorialPaciente;
-
 	//bi-directional many-to-one association to Turno
 	@OneToMany(mappedBy="paciente")
 	private List<Turno> turnos;
@@ -48,13 +45,13 @@ public class Paciente implements Serializable {
 	public Paciente() {
 	}
 
-	public Integer getIdPaciente() {
-		return this.idPaciente;
-	}
-
-	public void setIdPaciente(Integer idPaciente) {
-		this.idPaciente = idPaciente;
-	}
+//	public Integer getIdPaciente() {
+//		return this.idPaciente;
+//	}
+//
+//	public void setIdPaciente(Integer idPaciente) {
+//		this.idPaciente = idPaciente;
+//	}
 
 	public String getApellidoPaciente() {
 		return this.apellidoPaciente;
@@ -102,14 +99,6 @@ public class Paciente implements Serializable {
 
 	public void setNombrePaciente(String nombrePaciente) {
 		this.nombrePaciente = nombrePaciente;
-	}
-
-	public Integer getNumhistorialPaciente() {
-		return this.numhistorialPaciente;
-	}
-
-	public void setNumhistorialPaciente(Integer numhistorialPaciente) {
-		this.numhistorialPaciente = numhistorialPaciente;
 	}
 
 	public List<Turno> getTurnos() {
