@@ -17,8 +17,10 @@ public class Paciente implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-//	@Column(name="id_paciente", unique=true, nullable=false)
-//	private Integer idPaciente;
+	@SequenceGenerator(name="PACIENTE_IDPACIENTE_GENERATOR", sequenceName="SEQ_PACIENTE",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="PACIENTE_IDPACIENTE_GENERATOR")
+	@Column(name="id_paciente", unique=true, nullable=false)
+	private Integer idPaciente;
 
 	@Column(name="apellido_paciente", length=50)
 	private String apellidoPaciente;
@@ -45,13 +47,13 @@ public class Paciente implements Serializable {
 	public Paciente() {
 	}
 
-//	public Integer getIdPaciente() {
-//		return this.idPaciente;
-//	}
-//
-//	public void setIdPaciente(Integer idPaciente) {
-//		this.idPaciente = idPaciente;
-//	}
+	public Integer getIdPaciente() {
+		return this.idPaciente;
+	}
+
+	public void setIdPaciente(Integer idPaciente) {
+		this.idPaciente = idPaciente;
+	}
 
 	public String getApellidoPaciente() {
 		return this.apellidoPaciente;

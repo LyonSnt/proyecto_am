@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.9.1" last-position="0,0" last-zoom="0.75"
+	 default-schema="public" default-owner="postgres">
+<database name="bdd_am" is-template="false" allow-conns="true">
+</database>
+
+<schema name="public" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<table name="usuario" hide-ext-attribs="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="760" y="20"/>
+	<column name="id_usuario" not-null="true">
+		<type name="integer" length="10"/>
+	</column>
+	<column name="nombre_usuario">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="password_usuario">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="id_tipousuario">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="estado_usuario">
+		<type name="character varying" length="10"/>
+	</column>
+	<column name="fecharegistro_usuario">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="id_responsableturno" default-value="1">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="id_medico" default-value="1">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="usuario_pk" type="pk-constr" table="public.usuario">
+		<columns names="id_usuario" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="paciente" hide-ext-attribs="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="960" y="600"/>
+	<column name="id_paciente" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="cedula_paciente">
+		<type name="character varying" length="10"/>
+	</column>
+	<column name="nombre_paciente">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="apellido_paciente">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="celular_paciente">
+		<type name="numeric" length="10"/>
+	</column>
+	<column name="direccion_paciente">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="correo_paciente">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="paciente_pk" type="pk-constr" table="public.paciente">
+		<columns names="id_paciente" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="medico" hide-ext-attribs="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="100" y="200"/>
+	<column name="id_medico" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="cedula_medico">
+		<type name="character varying" length="10"/>
+	</column>
+	<column name="nombre_medico">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="apellido_medico">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="celular_medico">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="direccion_medico">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="correo_medico">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="id_especialidad">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="id_horario">
+		<type name="integer" length="0"/>
+	</column>
+	<constraint name="medico_pk" type="pk-constr" table="public.medico">
+		<columns names="id_medico" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="horario" hide-ext-attribs="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="480" y="540"/>
+	<column name="id_horario" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="inicio_horario">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="fin_horario">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="lunes_horario">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="martes_horario">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="miercoles_horario">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="jueves_horario">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="viernes_horario">
+		<type name="smallint" length="0"/>
+	</column>
+	<column name="sabado_horario">
+		<type name="smallint" length="0"/>
+	</column>
+	<constraint name="horario_pk" type="pk-constr" table="public.horario">
+		<columns names="id_horario" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="especialidad" hide-ext-attribs="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="40" y="580"/>
+	<column name="id_especialidad" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="nombre_especialidad">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="especialista_pk" type="pk-constr" table="public.especialidad">
+		<columns names="id_especialidad" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="responsableturno" hide-ext-attribs="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1320" y="180"/>
+	<column name="id_responsableturno" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="cedula_responsableturno">
+		<type name="character varying" length="10"/>
+	</column>
+	<column name="nombre_responsableturno">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="apellido_responsableturno">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="celular_responsableturno">
+		<type name="numeric" length="10"/>
+	</column>
+	<constraint name="responsable_turno_pk" type="pk-constr" table="public.responsableturno">
+		<columns names="id_responsableturno" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="turno" hide-ext-attribs="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="740" y="240"/>
+	<column name="id_turno" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="id_medico">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="id_paciente">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="id_responsableturno">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="cita_turno">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="fecha_turno">
+		<type name="timestamp" length="0"/>
+	</column>
+	<column name="valor_turno">
+		<type name="money" length="0"/>
+	</column>
+	<column name="id_estado">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="enfermedad_turno">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="sintoma_turno">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="alergia_turno">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="tiposangre_turno">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="nombremedicina_turno">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="cantmedicina_turno">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="dosisdiaria_turno">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="turno_pk" type="pk-constr" table="public.turno">
+		<columns names="id_turno" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="estado" hide-ext-attribs="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1340" y="440"/>
+	<column name="id_estado" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="estado">
+		<type name="integer" length="50"/>
+	</column>
+	<column name="nombre_estado">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="estado_pk" type="pk-constr" table="public.estado">
+		<columns names="id_estado" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="evento" hide-ext-attribs="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="320" y="20"/>
+	<column name="id_evento" not-null="true">
+		<type name="integer" length="10"/>
+	</column>
+	<column name="fecha_evento">
+		<type name="date" length="0"/>
+	</column>
+	<column name="hora_evento">
+		<type name="time" length="0"/>
+	</column>
+	<column name="nombre_evento">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="ip_evento">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="descripcion_evento">
+		<type name="character varying" length="50"/>
+	</column>
+	<column name="id_usuario">
+		<type name="integer" length="10"/>
+	</column>
+	<constraint name="eventos_pk" type="pk-constr" table="public.evento">
+		<columns names="id_evento" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="tipousuario" hide-ext-attribs="true">
+	<schema name="public"/>
+	<role name="postgres"/>
+	<position x="1340" y="40"/>
+	<column name="id_tipousuario" not-null="true">
+		<type name="integer" length="0"/>
+	</column>
+	<column name="nombre_tipousuario">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="tipo_usuario_pk" type="pk-constr" table="public.tipousuario">
+		<columns names="id_tipousuario" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<constraint name="fk_id_tipousuario" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="public.tipousuario" table="public.usuario">
+	<columns names="id_tipousuario" ref-type="src-columns"/>
+	<columns names="id_tipousuario" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_id_responsableturno" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="public.responsableturno" table="public.usuario">
+	<columns names="id_responsableturno" ref-type="src-columns"/>
+	<columns names="id_responsableturno" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_id_medico" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="public.medico" table="public.usuario">
+	<columns names="id_medico" ref-type="src-columns"/>
+	<columns names="id_medico" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_id_especialidad" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="public.especialidad" table="public.medico">
+	<columns names="id_especialidad" ref-type="src-columns"/>
+	<columns names="id_especialidad" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_id_horario" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="public.horario" table="public.medico">
+	<columns names="id_horario" ref-type="src-columns"/>
+	<columns names="id_horario" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_id_medico" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="public.medico" table="public.turno">
+	<columns names="id_medico" ref-type="src-columns"/>
+	<columns names="id_medico" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_id_responsableturno" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="public.responsableturno" table="public.turno">
+	<columns names="id_responsableturno" ref-type="src-columns"/>
+	<columns names="id_responsableturno" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_id_estado" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="public.estado" table="public.turno">
+	<columns names="id_estado" ref-type="src-columns"/>
+	<columns names="id_estado" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_id_paciente" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="public.paciente" table="public.turno">
+	<columns names="id_paciente" ref-type="src-columns"/>
+	<columns names="id_paciente" ref-type="dst-columns"/>
+</constraint>
+
+<constraint name="fk_id_usuario" type="fk-constr" comparison-type="MATCH FULL"
+	 upd-action="CASCADE" del-action="CASCADE" ref-table="public.usuario" table="public.evento">
+	<columns names="id_usuario" ref-type="src-columns"/>
+	<columns names="id_usuario" ref-type="dst-columns"/>
+</constraint>
+
+<relationship name="rel_usuario_tipousuario" type="relfk"
+	 src-table="public.usuario"
+	 dst-table="public.tipousuario" reference-fk="fk_id_tipousuario"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_usuario_responsableturno" type="relfk"
+	 src-table="public.usuario"
+	 dst-table="public.responsableturno" reference-fk="fk_id_responsableturno"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_usuario_medico" type="relfk"
+	 src-table="public.usuario"
+	 dst-table="public.medico" reference-fk="fk_id_medico"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_medico_especialidad" type="relfk"
+	 src-table="public.medico"
+	 dst-table="public.especialidad" reference-fk="fk_id_especialidad"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_medico_horario" type="relfk"
+	 src-table="public.medico"
+	 dst-table="public.horario" reference-fk="fk_id_horario"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_turno_medico" type="relfk"
+	 src-table="public.turno"
+	 dst-table="public.medico" reference-fk="fk_id_medico"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_turno_responsableturno" type="relfk"
+	 src-table="public.turno"
+	 dst-table="public.responsableturno" reference-fk="fk_id_responsableturno"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_turno_estado" type="relfk"
+	 src-table="public.turno"
+	 dst-table="public.estado" reference-fk="fk_id_estado"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_evento_usuario" type="relfk"
+	 src-table="public.evento"
+	 dst-table="public.usuario" reference-fk="fk_id_usuario"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="rel_turno_paciente" type="relfk"
+	 src-table="public.turno"
+	 dst-table="public.paciente" reference-fk="fk_id_paciente"
+	 src-required="false" dst-required="false"/>
+
+</dbmodel>

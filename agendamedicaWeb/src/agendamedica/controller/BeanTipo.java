@@ -27,7 +27,7 @@ public class BeanTipo implements Serializable {
 	
 	@PostConstruct
 	private void inicializar() {
-		listaTipo = managerTipo.findAllTipousuario();
+		listaTipo = managerTipo.findAllTipousuarios();
 		tipo = new Tipousuario();
 		panelColapsado = true;
 	}
@@ -40,14 +40,40 @@ public class BeanTipo implements Serializable {
 		try {
 			
 			managerTipo.insertarTipo(tipo);
-			listaTipo = managerTipo.findAllTipousuario();
+			listaTipo = managerTipo.findAllTipousuarios();
 			tipo = new Tipousuario();
-			JSFUtil.crearMensajeInfo("Datos de tipo insertados.");
+			JSFUtil.crearMensajeInfo("Datos de tipo usuario insertados.");
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError(e.getMessage());
 			e.printStackTrace();
 		}
 
+	}
+	
+	public void actionListenerEliminarTipousuario(int id) {
+		managerTipo.eliminarTipousuario(id);
+		listaTipo = managerTipo.findAllTipousuarios();
+		JSFUtil.crearMensajeInfo("Tipo de usuario Eliminado.");
+	}
+
+	public void actionListenerSeleccionarTipousuario(Tipousuario tipousuario) {
+		tipoSeleccionado = tipousuario;
+	}
+
+	public void actionListenerActualizarTipousuario() {
+		try {
+//			Rol r=new Rol();
+//			r.setIdRol(idrol);
+//			user.setRol(r);
+//			user.setEmpresa(new Empresa());
+//			user.getEmpresa().setIdEmpresa(idem);
+			managerTipo.actualizarTipousuario(tipoSeleccionado);
+			listaTipo = managerTipo.findAllTipousuarios();
+			JSFUtil.crearMensajeInfo("Datos actualizados");
+		} catch (Exception e) {
+			JSFUtil.crearMensajeError(e.getMessage());
+			e.printStackTrace();
+		}
 	}
 	
 	public void actionListenerSeleccionarTipo(Tipousuario tipo) {

@@ -16,8 +16,10 @@ public class Tipousuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-//	@Column(name="id_tipousuario", unique=true, nullable=false)
-//	private Integer idTipousuario;
+	@SequenceGenerator(name="TIPOUSUARIO_IDTIPOUSUARIO_GENERATOR", sequenceName="SEQ_TIPOUSUARIO",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TIPOUSUARIO_IDTIPOUSUARIO_GENERATOR")
+	@Column(name="id_tipousuario", unique=true, nullable=false)
+	private Integer idTipousuario;
 
 	@Column(name="nombre_tipousuario", length=50)
 	private String nombreTipousuario;
@@ -29,13 +31,13 @@ public class Tipousuario implements Serializable {
 	public Tipousuario() {
 	}
 
-//	public Integer getIdTipousuario() {
-//		return this.idTipousuario;
-//	}
-//
-//	public void setIdTipousuario(Integer idTipousuario) {
-//		this.idTipousuario = idTipousuario;
-//	}
+	public Integer getIdTipousuario() {
+		return this.idTipousuario;
+	}
+
+	public void setIdTipousuario(Integer idTipousuario) {
+		this.idTipousuario = idTipousuario;
+	}
 
 	public String getNombreTipousuario() {
 		return this.nombreTipousuario;

@@ -17,8 +17,10 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="id_usuario", unique=true, nullable=false, length=10)
-	private String idUsuario;
+	@SequenceGenerator(name="USUARIO_IDUSUARIO_GENERATOR", sequenceName="SEQ_USUARIO",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USUARIO_IDUSUARIO_GENERATOR")
+	@Column(name="id_usuario", unique=true, nullable=false)
+	private Integer idUsuario;
 
 	@Column(name="estado_usuario", length=10)
 	private String estadoUsuario;
@@ -54,11 +56,11 @@ public class Usuario implements Serializable {
 	public Usuario() {
 	}
 
-	public String getIdUsuario() {
+	public Integer getIdUsuario() {
 		return this.idUsuario;
 	}
 
-	public void setIdUsuario(String idUsuario) {
+	public void setIdUsuario(Integer idUsuario) {
 		this.idUsuario = idUsuario;
 	}
 

@@ -17,8 +17,10 @@ public class Responsableturno implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-//	@Column(name="id_responsableturno", unique=true, nullable=false)
-//	private Integer idResponsableturno;
+	@SequenceGenerator(name="RESPONSABLETURNO_IDRESPONSABLETURNO_GENERATOR", sequenceName="SEQ_RESPONSABLETURNO",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="RESPONSABLETURNO_IDRESPONSABLETURNO_GENERATOR")
+	@Column(name="id_responsableturno", unique=true, nullable=false)
+	private Integer idResponsableturno;
 
 	@Column(name="apellido_responsableturno", length=50)
 	private String apellidoResponsableturno;
@@ -43,13 +45,13 @@ public class Responsableturno implements Serializable {
 	public Responsableturno() {
 	}
 
-//	public Integer getIdResponsableturno() {
-//		return this.idResponsableturno;
-//	}
-//
-//	public void setIdResponsableturno(Integer idResponsableturno) {
-//		this.idResponsableturno = idResponsableturno;
-//	}
+	public Integer getIdResponsableturno() {
+		return this.idResponsableturno;
+	}
+
+	public void setIdResponsableturno(Integer idResponsableturno) {
+		this.idResponsableturno = idResponsableturno;
+	}
 
 	public String getApellidoResponsableturno() {
 		return this.apellidoResponsableturno;

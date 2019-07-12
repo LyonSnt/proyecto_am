@@ -5,6 +5,7 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
+import agendamedica.model.entities.Especialidad;
 import agendamedica.model.entities.Responsableturno;
 import agendamedica.model.manager.ManagerResponsable;
 import agendamedica.view.util.JSFUtil;
@@ -39,7 +40,7 @@ public class BeanResponsable implements Serializable {
 	public void actionListerInsertarResponsable() {
 		try {
 
-			managerResponsable.insertarResponsable(responsable);
+			managerResponsable.insertarResponsableturno(responsable);
 			listaResponsable = managerResponsable.findAllResponsableturno();
 			responsable = new Responsableturno();
 			JSFUtil.crearMensajeInfo("Datos de responsable turno insertados");
@@ -50,16 +51,26 @@ public class BeanResponsable implements Serializable {
 
 	}
 	
-	public void actionListenerEliminResponsable(String idresponsable) {
-		managerResponsable.eliminarResponsable(idresponsable);
+	public void actionListenerEliminarResponsableturno(int id) {
+		managerResponsable.eliminarResponsableturno(id);
 		listaResponsable = managerResponsable.findAllResponsableturno();
-		JSFUtil.crearMensajeInfo("Responsable del turno Eliminado");
+		JSFUtil.crearMensajeInfo("Responsable Eliminado.");
 	}
-	
-	public void actionListenerSeleccionarResponsable(Responsableturno responsable) {
+
+	public void actionListenerSeleccionarResponsableturno(Responsableturno responsable) {
 		responsableSeleccionado = responsable;
 	}
-	
+
+	public void actionListenerActualizarResponsableturno() {
+		try {
+			managerResponsable.actualizarResponsableturno(responsableSeleccionado);
+			listaResponsable = managerResponsable.findAllResponsableturno();
+			JSFUtil.crearMensajeInfo("Datos actualizados");
+		} catch (Exception e) {
+			JSFUtil.crearMensajeError(e.getMessage());
+			e.printStackTrace();
+		}
+	}
 	
 
 	public String getCedula() {

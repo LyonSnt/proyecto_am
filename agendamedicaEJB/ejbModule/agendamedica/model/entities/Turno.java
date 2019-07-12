@@ -16,8 +16,10 @@ public class Turno implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-//	@Column(name="id_turno", unique=true, nullable=false)
-//	private Integer idTurno;
+	@SequenceGenerator(name="TURNO_IDTURNO_GENERATOR", sequenceName="SEQ_TURNO",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="TURNO_IDTURNO_GENERATOR")
+	@Column(name="id_turno", unique=true, nullable=false)
+	private Integer idTurno;
 
 	@Column(name="alergia_turno", length=50)
 	private String alergiaTurno;
@@ -72,13 +74,13 @@ public class Turno implements Serializable {
 	public Turno() {
 	}
 
-//	public Integer getIdTurno() {
-//		return this.idTurno;
-//	}
-//
-//	public void setIdTurno(Integer idTurno) {
-//		this.idTurno = idTurno;
-//	}
+	public Integer getIdTurno() {
+		return this.idTurno;
+	}
+
+	public void setIdTurno(Integer idTurno) {
+		this.idTurno = idTurno;
+	}
 
 	public String getAlergiaTurno() {
 		return this.alergiaTurno;

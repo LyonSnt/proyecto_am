@@ -8,8 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import agendamedica.model.entities.Especialidad;
 import agendamedica.model.entities.Responsableturno;
-
 
 /**
  * Session Bean implementation class ManagerResponsable
@@ -17,6 +17,8 @@ import agendamedica.model.entities.Responsableturno;
 @Stateless
 @LocalBean
 public class ManagerResponsable {
+//	@PersistenceContext(unitName = "bdd_amDS")
+//	private EntityManager em;
 	@PersistenceContext
 	private EntityManager em;
 
@@ -33,41 +35,49 @@ public class ManagerResponsable {
 		return q.getResultList();
 	}
 
-	public Responsableturno findResponsableturnoByCedula(String cedula) {
-		return em.find(Responsableturno.class, cedula);
-	}
-
-	public void insertarResponsable(Responsableturno responsable) throws Exception {
-		if (findResponsableturnoByCedula(responsable.getCedulaResponsableturno())!=null)
-			throw new Exception("Ya existe la cédula");
-		em.persist(responsable);
+	public List<Responsableturno> findResponsableturnoByCedula(String cedulaResponsableturno) {
+		String consulta = "SELECT u FROM Responsableturno u where u.cedulaResponsableturno='" + cedulaResponsableturno + "'";
+		Query q = em.createQuery(consulta, Responsableturno.class);
+		return q.getResultList();
 
 	}
+
+	public void insertarResponsableturno(Responsableturno responsableturno) throws Exception {
+		if (findResponsableturnoByCedula(responsableturno.getCedulaResponsableturno()).size() > 0)
+			throw new Exception("Ya existe la cedula");
+		em.persist(responsableturno);
+
+	}
+
+	public Responsableturno findResponsableturnoById(int id) {
+		return em.find(Responsableturno.class, id);
+	}
+
+	public void eliminarResponsableturno(int id) {
+		Responsableturno responsableturno = findResponsableturnoById(id);
+		if (responsableturno != null)
+			em.remove(responsableturno);
+	}
+
+	public void actualizarResponsableturno(Responsableturno responsableturno) throws Exception {
+		Responsableturno respon = findResponsableturnoById(responsableturno.getIdResponsableturno());
+		if (respon == null)
+			throw new Exception("no existe.");
+		respon.setNombreResponsableturno(responsableturno.getNombreResponsableturno());
+		respon.setApellidoResponsableturno(responsableturno.getApellidoResponsableturno());
+		respon.setCelularResponsableturno(responsableturno.getCelularResponsableturno());
 	
-	 public void eliminarResponsable(String cedula) {
-		 Responsableturno responsable = findResponsableturnoByCedula(cedula);
-		  if(responsable!=null)
-			  em.remove(responsable);
-	  }
-	  
-	 public Responsableturno findResponsableturnoById(String idresponsable) {
-		 Responsableturno r = em.find(Responsableturno.class, idresponsable);
-			return r;
-		}
-	 
-	 
-		
-//	  public void actualizarResponsable(Responsableturno responsable) throws Exception{
-//		  Responsableturno  r = findUsuarioById(responsable.getNombreResponsableturno());
-//		  if(r==null)
-//			  throw new Exception("No existe el usuario con el id especificado");
-//		  
-////		  r.set
-////		  u.setNombreUsuario(usuario.getNombreUsuario());
-////		  u.setPasswordUsuario(usuario.getPasswordUsuario());
-////		  em.merge(r);
-//		  
-//		  
-//	  }
+//		user.setCedulaUsuario(usuario.getCedulaUsuario());
+//		user.setNombreUsuario(usuario.getNombreUsuario());
+//		user.setApellidoUsuario(usuario.getApellidoUsuario());
+//		user.setDireccionUsuario(usuario.getDireccionUsuario());
+//		user.setCorreoUsario(usuario.getCorreoUsario());
+//		user.setTelefonoUsuario(usuario.getTelefonoUsuario());
+//		user.setUsername(usuario.getUsername());
+//		user.setContrasena(usuario.getContrasena());
+//		user.setRol(usuario.getRol());
+//		user.setEmpresa(usuario.getEmpresa());
+		em.merge(respon);
+	}
 
 }

@@ -16,8 +16,10 @@ public class Especialidad implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-//	@Column(name="id_especialidad", unique=true, nullable=false)
-//	private Integer idEspecialidad;
+	@SequenceGenerator(name="ESPECIALIDAD_IDESPECIALIDAD_GENERATOR", sequenceName="SEQ_ESPECIALIDAD",allocationSize=1)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ESPECIALIDAD_IDESPECIALIDAD_GENERATOR")
+	@Column(name="id_especialidad", unique=true, nullable=false)
+	private Integer idEspecialidad;
 
 	@Column(name="nombre_especialidad", length=50)
 	private String nombreEspecialidad;
@@ -29,13 +31,13 @@ public class Especialidad implements Serializable {
 	public Especialidad() {
 	}
 
-//	public Integer getIdEspecialidad() {
-//		return this.idEspecialidad;
-//	}
-//
-//	public void setIdEspecialidad(Integer idEspecialidad) {
-//		this.idEspecialidad = idEspecialidad;
-//	}
+	public Integer getIdEspecialidad() {
+		return this.idEspecialidad;
+	}
+
+	public void setIdEspecialidad(Integer idEspecialidad) {
+		this.idEspecialidad = idEspecialidad;
+	}
 
 	public String getNombreEspecialidad() {
 		return this.nombreEspecialidad;

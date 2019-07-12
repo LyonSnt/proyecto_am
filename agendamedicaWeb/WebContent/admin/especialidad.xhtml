@@ -9,7 +9,7 @@
 	<f:facet name="first">
 		<meta name="viewport"
 			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
-		<title>Tipo de Usuario</title>
+		<title>Especialida</title>
 	</f:facet>
 </h:head>
 <body>
@@ -24,20 +24,22 @@
 				<p:autoUpdate />
 			</p:messages>
 
-			<p:panel collapsed="#{beanTipo.panelColapsado}" style="width:400px">
+			<p:panel collapsed="#{beanEspecialidad.panelColapsado}"
+				style="width:400px">
 				<f:facet name="header">
-					<p:commandButton value="Nuevo Tipo de usuario" icon="fa fa-plus"
+					<p:commandButton value="Nueva Especialidad" icon="fa fa-plus"
 						update="@form"
-						actionListener="#{beanTipo.actionListenerColapsarPanel()}"></p:commandButton>
+						actionListener="#{beanEspecialidad.actionListenerColapsarPanel()}"></p:commandButton>
 				</f:facet>
 
 				<p:panelGrid columns="2">
-					<h:outputText value="Nombre tipo" />
-					<p:inputText value="#{beanTipo.tipo.nombreTipousuario}"></p:inputText>
+					<h:outputText value="Nombre Especilidad" />
+					<p:inputText
+						value="#{beanEspecialidad.especialidad.nombreEspecialidad}"></p:inputText>
 
 					<p:commandButton value="Ingresar" icon="fa fa-save"
 						update="@form,:form2"
-						actionListener="#{beanTipo.actionListerInsertarTipo()}"></p:commandButton>
+						actionListener="#{beanEspecialidad.actionListenerInsertarEspecialidad()}"></p:commandButton>
 
 				</p:panelGrid>
 
@@ -48,23 +50,24 @@
 	<br />
 	<h:form id="form2">
 		<p:panel header="Tipo de Usuario">
-			<p:dataTable value="#{beanTipo.listaTipo}" var="tipo" reflow="true"
-				rows="5">
-				<p:column headerText="Id tipo usuario">
-					<h:outputText value="#{tipo.idTipousuario}" />
+			<p:dataTable value="#{beanEspecialidad.listaEspecialidad}"
+				var="especialidad" reflow="true" paginator="true" rows="5">
+				<p:column headerText="Id">
+					<h:outputText value="#{especialidad.idEspecialidad}" />
 				</p:column>
-				<p:column headerText="Nombre tipo usuario">
-					<h:outputText value="#{tipo.nombreTipousuario}" />
+				<p:column headerText="Especialidad"
+					filterBy="#{especialidad.nombreEspecialidad}"
+					filterMatchMode="contains">
+					<h:outputText value="#{especialidad.nombreEspecialidad}" />
 				</p:column>
-				
 				<p:column headerText="OPCIONES" priority="1">
 					<p:commandButton icon="fa fa-close" title="Eliminar" update="@form"
-						actionListener="#{beanTipo.actionListenerEliminarTipousuario(tipo.idTipousuario)}">
+						actionListener="#{beanEspecialidad.actionListenerEliminarEspecialidad(especialidad.idEspecialidad)}">
 						<p:confirm header="Confirmacion" message="Desea eliminar?"
 							icon="fa fa-exclamation-triangle"></p:confirm>
 					</p:commandButton>
 					<p:commandButton icon="fa fa-edit" title="Editar"
-						actionListener="#{beanTipo.actionListenerSeleccionarTipousuario(tipo)}"
+						actionListener="#{beanEspecialidad.actionListenerSeleccionarEspecialidad(especialidad)}"
 						update=":formEdicion" oncomplete="PF('dlgEdicion').show();"></p:commandButton>
 				</p:column>
 			</p:dataTable>
@@ -76,19 +79,19 @@
 			<p:growl>
 				<p:autoUpdate></p:autoUpdate>
 			</p:growl>
-			<h:outputText value="Id Tipo usuario" />
+			<h:outputText value="Id Especialidad:" />
 			<h:outputText
-				value="#{beanTipo.tipoSeleccionado.idTipousuario}" />
+				value="#{beanEspecialidad.especialidadSeleccionado.idEspecialidad}" />
 
 			<p:panelGrid columns="2">
 
-				<h:outputText value="Nombre Tipo usuario" />
+				<h:outputText value="Nombre Especialidad" />
 				<p:inputText
-					value="#{beanTipo.tipoSeleccionado.nombreTipousuario}"></p:inputText>
+					value="#{beanEspecialidad.especialidadSeleccionado.nombreEspecialidad}"></p:inputText>
 
 				<p:commandButton value="Actualizar" icon="fa fa-save"
 					update="@form,:form2"
-					actionListener="#{beanTipo.actionListenerActualizarTipousuario()}"></p:commandButton>
+					actionListener="#{beanEspecialidad.actionListenerActualizarEspecialidad()}"></p:commandButton>
 
 			</p:panelGrid>
 
@@ -103,6 +106,6 @@
 			styleClass="ui-confirmdialog-no" icon="fa fa-times"></p:commandButton>
 
 	</p:confirmDialog>
-	
+
 </body>
 </html>
