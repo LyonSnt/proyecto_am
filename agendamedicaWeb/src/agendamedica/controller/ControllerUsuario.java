@@ -76,28 +76,28 @@ public class ControllerUsuario implements Serializable {
 		}
 	}
 
-//	public void actionListenerEliminarUsuario(String idUsuario) {
-//		managerUsuario.eliminarUsuario(idUsuario);
-//		listaUsuarios = managerUsuario.findAllUsuario();
-//		JSFUtil.crearMensajeInfo("Usuario Eliminado");
-//	}
-//	
-//	//ESTA PARTE ES PARA ACTUALIZAR
-//	public void actionListenerSeleccionarUsuario(Usuario usuario) {
-//		usuarioSeleccionado = usuario;
-//	}
-//
-//	public void actionListenerActualizarUsuario() {
-//		try {
-//			managerUsuario.actualizarUsuario(usuarioSeleccionado);
-//			listaUsuarios = managerUsuario.findAllUsuario();
-//			JSFUtil.crearMensajeInfo("Datos actualizados");
-//		} catch (Exception e) {
-//			JSFUtil.crearMensajeError(e.getMessage());
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
+	public void actionListenerEliminarUsuario(int idUsuario) {
+		managerUsuario.eliminarUsuario(idUsuario);
+		listaUsuarios = managerUsuario.findAllUsuarios();
+		JSFUtil.crearMensajeInfo("Usuario Eliminado");
+	}
+	
+	//ESTA PARTE ES PARA ACTUALIZAR
+	public void actionListenerSeleccionarUsuario(Usuario usuario) {
+		usuarioSeleccionado = usuario;
+	}
+
+	public void actionListenerActualizarUsuario() {
+		try {
+			managerUsuario.actualizarUsuario(usuarioSeleccionado);
+			listaUsuarios = managerUsuario.findAllUsuarios();
+			JSFUtil.crearMensajeInfo("Datos actualizados");
+		} catch (Exception e) {
+			JSFUtil.crearMensajeError(e.getMessage());
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 //	
 
 	public String getIdUsuario() {

@@ -70,7 +70,7 @@ public class ManagerUsuario {
 
 	public void insertarUsuario(Usuario usuario) throws Exception {
 		if (findUsuarioByNombreUsuario(usuario.getNombreUsuario()).size() > 0)
-			throw new Exception("Ya existe la cédula");
+			throw new Exception("Ya existe el usuario");
 		em.persist(usuario);
 
 	}

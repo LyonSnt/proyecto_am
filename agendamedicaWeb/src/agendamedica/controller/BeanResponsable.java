@@ -5,7 +5,6 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-import agendamedica.model.entities.Especialidad;
 import agendamedica.model.entities.Responsableturno;
 import agendamedica.model.manager.ManagerResponsable;
 import agendamedica.view.util.JSFUtil;

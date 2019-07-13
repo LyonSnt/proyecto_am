@@ -34,8 +34,6 @@
 				</f:facet>
 
 				<p:panelGrid columns="2">
-					<h:outputText value="Id Usuario" />
-					<p:inputText value="#{controllerUsuario.usuario.idUsuario}"></p:inputText>
 
 					<h:outputText value="Nombre de Usuario" />
 					<p:inputText value="#{controllerUsuario.usuario.nombreUsuario}"></p:inputText>
@@ -43,8 +41,13 @@
 					<h:outputText value="Contraseña" />
 					<p:inputText value="#{controllerUsuario.usuario.passwordUsuario}"></p:inputText>
 
-					<h:outputText value="Tipo de Usaurio" />
-					<p:inputText value="#{controllerUsuario.usuario.tipousuario}"></p:inputText>
+					<h:outputText value="Tipo Usuario:" />
+					<p:selectOneMenu value="#{beanLogin.tipoUsuario}">
+						<f:selectItem itemLabel="Seleccione" />
+						<f:selectItems value="#{beanLogin.listaTipousuario}" var="tipo"
+							itemLabel="#{tipo.nombreTipousuario}"
+							itemValue="#{tipo.idTipousuario}" />
+					</p:selectOneMenu>
 
 					<h:outputText value="Estado" />
 					<p:inputText value="#{controllerUsuario.usuario.estadoUsuario}"></p:inputText>
@@ -53,17 +56,26 @@
 					<p:inputText
 						value="#{controllerUsuario.usuario.fecharegistroUsuario}"></p:inputText>
 
-					<h:outputText value="Id Responsable" />
-					<p:inputText
-						value="#{controllerUsuario.usuario.responsableturno}"></p:inputText>
+					<h:outputText value="Responsable" />
+					<p:selectOneMenu value="#{beanResponsable.responsable}">
+						<f:selectItem itemLabel="Seleccione" />
+						<f:selectItems value="#{beanResponsable.listaResponsable}"
+							var="responsable"
+							itemLabel="#{responsable.nombreResponsableturno} #{responsable.apellidoResponsableturno}"
+							itemValue="#{responsable.idResponsableturno}" />
+					</p:selectOneMenu>
 
-					<h:outputText value="Id Medico" />
-					<p:inputText value="#{controllerUsuario.usuario.medico}"></p:inputText>
-
+						<h:outputText value="Medico" />
+					<p:selectOneMenu value="#{beanMedico.medico}">
+						<f:selectItem itemLabel="Seleccione" />
+						<f:selectItems value="#{beanMedico.listaMedico}"
+							var="medico" itemLabel="#{medico.nombreMedico} #{medico.apellidoMedico}"
+							itemValue="#{medico.idMedico}" />
+					</p:selectOneMenu>
 
 					<p:commandButton value="Ingresar" icon="fa fa-save"
 						update="@form,:form2"
-						actionListener="#{controllerUsuario.actionListerInsertarUsuario()}"></p:commandButton>
+						actionListener="#{controllerUsuario.actionListenerInsertarUsuario()}"></p:commandButton>
 
 				</p:panelGrid>
 
@@ -136,13 +148,13 @@
 				<h:outputText value="Contraseña" />
 				<p:inputText
 					value="#{controllerUsuario.usuarioSeleccionado.passwordUsuario}"></p:inputText>
-			<p:commandButton value="Actualizar" icon="fa fa-save"
-				update="@form,:form2"
-				actionListener="#{controllerUsuario.actionListenerActualizarUsuario()}"></p:commandButton>
-			
+				<p:commandButton value="Actualizar" icon="fa fa-save"
+					update="@form,:form2"
+					actionListener="#{controllerUsuario.actionListenerActualizarUsuario()}"></p:commandButton>
+
 			</p:panelGrid>
 
-			
+
 		</h:form>
 	</p:dialog>
 

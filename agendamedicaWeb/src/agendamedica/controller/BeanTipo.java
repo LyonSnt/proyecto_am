@@ -76,10 +76,6 @@ public class BeanTipo implements Serializable {
 		}
 	}
 	
-	public void actionListenerSeleccionarTipo(Tipousuario tipo) {
-		tipoSeleccionado = tipo;
-	}
-
 	public List<Tipousuario> getListaTipo() {
 		return listaTipo;
 	}
