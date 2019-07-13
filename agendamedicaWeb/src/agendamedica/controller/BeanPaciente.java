@@ -23,42 +23,45 @@ public class BeanPaciente implements Serializable {
 	private Paciente paciente;
 	private boolean panelColapsado;
 	private Paciente pacienteSeleccionado;
-		
+
 	@PostConstruct
 	public void inicializar() {
-		listaPacientes=managerPaciente.findAllPaciente();
-		paciente=new Paciente();
-		panelColapsado=true;
+		listaPacientes = managerPaciente.findAllPaciente();
+		paciente = new Paciente();
+		panelColapsado = true;
 	}
+
 	public void actionListenerColapsarPanel() {
-		panelColapsado =! panelColapsado;
-	} 
+		panelColapsado = !panelColapsado;
+	}
+
 	public void actionListenerInsertarPaciente() {
 		try {
 			managerPaciente.insertarPaciente(paciente);
-			listaPacientes=managerPaciente.findAllPaciente();
-			paciente =new Paciente();
+			listaPacientes = managerPaciente.findAllPaciente();
+			paciente = new Paciente();
 			JSFUtil.crearMensajeInfo("Datos del paciente insertada");
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError(e.getMessage());
 			e.printStackTrace();
 		}
 	}
-	public void actionListenerEliminarPaciente(String cedula) {
-		managerPaciente.eliminarPaciente(cedula);
-		listaPacientes=managerPaciente.findAllPaciente();
+
+	public void actionListenerEliminarPaciente(int id) {
+		managerPaciente.eliminarPaciente(id);
+		listaPacientes = managerPaciente.findAllPaciente();
 		JSFUtil.crearMensajeInfo("Paciente Eliminado");
-		
+
 	}
-	
+
 	public void actionListenerSeleccionarPaciente(Paciente paciente) {
 		pacienteSeleccionado = paciente;
 	}
-	
+
 	public void actionListetenerActualizarestudiante() {
 		try {
 			managerPaciente.actualizarPaciente(pacienteSeleccionado);
-			listaPacientes=managerPaciente.findAllPaciente();
+			listaPacientes = managerPaciente.findAllPaciente();
 			JSFUtil.crearMensajeInfo("Datos Actualizados");
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError(e.getMessage());
@@ -73,25 +76,29 @@ public class BeanPaciente implements Serializable {
 	public void setListaPacientes(List<Paciente> listaPacientes) {
 		this.listaPacientes = listaPacientes;
 	}
+
 	public Paciente getPaciente() {
 		return paciente;
 	}
+
 	public void setPaciente(Paciente paciente) {
 		this.paciente = paciente;
 	}
+
 	public boolean isPanelColapsado() {
 		return panelColapsado;
 	}
+
 	public void setPanelColapsado(boolean panelColapsado) {
 		this.panelColapsado = panelColapsado;
 	}
+
 	public Paciente getPacienteSeleccionado() {
 		return pacienteSeleccionado;
 	}
+
 	public void setPacienteSeleccionado(Paciente pacienteSeleccionado) {
 		this.pacienteSeleccionado = pacienteSeleccionado;
 	}
-	
-	
-	
+
 }

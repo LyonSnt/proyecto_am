@@ -9,6 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import agendamedica.model.entities.Paciente;
+import agendamedica.model.entities.Responsableturno;
 
 /**
  * Session Bean implementation class ManagerPaciente
@@ -32,24 +33,31 @@ public class ManagerPaciente {
 		return q.getResultList();
 	}
 
-	public Paciente findPacienteByCedula(String cedula) {
-		return em.find(Paciente.class, cedula);
+	public List<Paciente> findPacienteByCedula(String cedulaPaciente){
+		String consulta = "SELECT p FROM Paciente p where p.cedulaPaciente='" + cedulaPaciente + "'";
+		Query q = em.createQuery(consulta, Paciente.class);
+		return q.getResultList();
 	}
+	
 
 	public void insertarPaciente(Paciente paciente) throws Exception {
-		if (findPacienteByCedula(paciente.getCedulaPaciente()) != null)
+		if (findPacienteByCedula(paciente.getCedulaPaciente()).size()>0)
 			throw new Exception("Ya existe la cedula indicada");
 		em.persist(paciente);
 	}
+	
+	public Paciente findPacienteById(int id) {
+		return em.find(Paciente.class, id);
+	}
 
-	public void eliminarPaciente(String cedula) {
-		Paciente paciente = findPacienteByCedula(cedula);
+	public void eliminarPaciente(int id) {
+		Paciente paciente = findPacienteById(id);
 		if (paciente != null)
 			em.remove(paciente);
 	}
 
 	public void actualizarPaciente(Paciente paciente) throws Exception {
-		Paciente p = findPacienteByCedula(paciente.getCedulaPaciente());
+		Paciente p = findPacienteById(paciente.getIdPaciente());
 		if (p == null)
 			throw new Exception("No existe el estudiante con la cédula especificada.");
 		p.setApellidoPaciente(paciente.getApellidoPaciente());

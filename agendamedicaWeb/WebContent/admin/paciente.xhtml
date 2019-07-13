@@ -76,7 +76,7 @@
 				</p:column>
 				<p:column headerText="POCIONES" priority="1">
 					<p:commandButton icon="fa fa-close" title="eliminar" update="@form"
-						actionListener="#{beanPaciente.actionListenerEliminarPaciente(paciente.cedulaPaciente)}">
+						actionListener="#{beanPaciente.actionListenerEliminarPaciente(paciente.idPaciente)}">
 						<p:confirm header="cinfirmación" message="desea eliminar?"
 							icon="fa fa-exclamation-triangle"></p:confirm>
 					</p:commandButton>
@@ -88,7 +88,7 @@
 			</p:dataTable>
 		</p:panel>
 	</h:form>
-	<p:dialog header="editar informacion" widgetVar="dlgEdicicon"
+	<p:dialog header="editar informacion" widgetVar="dlgEdicion"
 		modal="true">
 		<h:form id="fromEdicion">
 			<p:growl>
