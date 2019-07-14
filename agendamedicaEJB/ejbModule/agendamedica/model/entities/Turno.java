@@ -2,7 +2,8 @@ package agendamedica.model.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.math.BigDecimal;
+import java.util.Date;
 
 
 /**
@@ -27,17 +28,15 @@ public class Turno implements Serializable {
 	@Column(name="cantmedicina_turno")
 	private Integer cantmedicinaTurno;
 
-	@Column(name="cita_turno")
-	private Integer citaTurno;
-
 	@Column(name="dosisdiaria_turno", length=50)
 	private String dosisdiariaTurno;
 
 	@Column(name="enfermedad_turno", length=50)
 	private String enfermedadTurno;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name="fecha_turno")
-	private Timestamp fechaTurno;
+	private Date fechaTurno;
 
 	@Column(name="nombremedicina_turno", length=50)
 	private String nombremedicinaTurno;
@@ -48,28 +47,28 @@ public class Turno implements Serializable {
 	@Column(name="tiposangre_turno", length=50)
 	private String tiposangreTurno;
 
-	@Column(name="valor_turno")
-	private double valorTurno;
+	@Column(name="valor_turno", precision=12, scale=2)
+	private BigDecimal valorTurno;
 
 	//bi-directional many-to-one association to Estado
 	@ManyToOne
-	@JoinColumn(name="id_estado")
+	@JoinColumn(name="id_estado", nullable=false)
 	private Estado estado;
 
 	//bi-directional many-to-one association to Medico
 	@ManyToOne
-	@JoinColumn(name="id_medico")
+	@JoinColumn(name="id_medico", nullable=false)
 	private Medico medico;
 
 	//bi-directional many-to-one association to Paciente
 	@ManyToOne
-	@JoinColumn(name="id_paciente")
+	@JoinColumn(name="id_paciente", nullable=false)
 	private Paciente paciente;
 
-	//bi-directional many-to-one association to Responsableturno
+	//bi-directional many-to-one association to Usuario
 	@ManyToOne
-	@JoinColumn(name="id_responsableturno")
-	private Responsableturno responsableturno;
+	@JoinColumn(name="id_usuario", nullable=false)
+	private Usuario usuario;
 
 	public Turno() {
 	}
@@ -98,14 +97,6 @@ public class Turno implements Serializable {
 		this.cantmedicinaTurno = cantmedicinaTurno;
 	}
 
-	public Integer getCitaTurno() {
-		return this.citaTurno;
-	}
-
-	public void setCitaTurno(Integer citaTurno) {
-		this.citaTurno = citaTurno;
-	}
-
 	public String getDosisdiariaTurno() {
 		return this.dosisdiariaTurno;
 	}
@@ -122,11 +113,11 @@ public class Turno implements Serializable {
 		this.enfermedadTurno = enfermedadTurno;
 	}
 
-	public Timestamp getFechaTurno() {
+	public Date getFechaTurno() {
 		return this.fechaTurno;
 	}
 
-	public void setFechaTurno(Timestamp fechaTurno) {
+	public void setFechaTurno(Date fechaTurno) {
 		this.fechaTurno = fechaTurno;
 	}
 
@@ -154,11 +145,11 @@ public class Turno implements Serializable {
 		this.tiposangreTurno = tiposangreTurno;
 	}
 
-	public double getValorTurno() {
+	public BigDecimal getValorTurno() {
 		return this.valorTurno;
 	}
 
-	public void setValorTurno(double valorTurno) {
+	public void setValorTurno(BigDecimal valorTurno) {
 		this.valorTurno = valorTurno;
 	}
 
@@ -186,12 +177,12 @@ public class Turno implements Serializable {
 		this.paciente = paciente;
 	}
 
-	public Responsableturno getResponsableturno() {
-		return this.responsableturno;
+	public Usuario getUsuario() {
+		return this.usuario;
 	}
 
-	public void setResponsableturno(Responsableturno responsableturno) {
-		this.responsableturno = responsableturno;
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
 	}
 
 }

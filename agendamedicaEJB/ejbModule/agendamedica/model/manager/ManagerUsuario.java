@@ -9,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 
-import agendamedica.model.entities.Tipousuario;
 import agendamedica.model.entities.Usuario;
 
 /**
@@ -48,11 +47,11 @@ public class ManagerUsuario {
 		throw new Exception("Contraseña no válida.");
 	}
 	
-	public List <Tipousuario> findAllTipoUsauarios() {
-		String consulta = "SELECT r FROM Tipousuario r";
-		Query q = em.createQuery(consulta, Tipousuario.class);
-		return q.getResultList();
-	}
+//	public List <Tipousuario> findAllTipoUsauarios() {
+//		String consulta = "SELECT r FROM Tipousuario r";
+//		Query q = em.createQuery(consulta, Tipousuario.class);
+//		return q.getResultList();
+//	}
 	
 	public List<Usuario> findAllUsuarios() {
 		String consulta = "select o from Usuario o";
@@ -95,17 +94,17 @@ public class ManagerUsuario {
 //
 //	}
 	
-	public void actualizarUsuario(Usuario usuario) throws Exception  {
-		Usuario user = findUsuarioByIdUsuario(usuario.getIdUsuario());
-		if (user == null)
-			throw new Exception("no existe.");
-		user.setNombreUsuario(usuario.getNombreUsuario());
-		user.setPasswordUsuario(usuario.getPasswordUsuario());
-		user.setTipousuario(usuario.getTipousuario());
-		user.setEstadoUsuario(usuario.getEstadoUsuario());
-		user.setResponsableturno(usuario.getResponsableturno());
-		user.setMedico(usuario.getMedico());
-		em.merge(user);
-	}
+//	public void actualizarUsuario(Usuario usuario) throws Exception  {
+//		Usuario user = findUsuarioByIdUsuario(usuario.getIdUsuario());
+//		if (user == null)
+//			throw new Exception("no existe.");
+//		user.setNombreUsuario(usuario.getNombreUsuario());
+//		user.setPasswordUsuario(usuario.getPasswordUsuario());
+//		user.setTipousuario(usuario.getTipousuario());
+//		user.setEstadoUsuario(usuario.getEstadoUsuario());
+//		user.setResponsableturno(usuario.getResponsableturno());
+//		user.setMedico(usuario.getMedico());
+//		em.merge(user);
+//	}
 
 }

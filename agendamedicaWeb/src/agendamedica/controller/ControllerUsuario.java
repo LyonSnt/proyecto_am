@@ -5,7 +5,6 @@ import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
-import agendamedica.model.entities.Tipousuario;
 import agendamedica.model.entities.Usuario;
 
 import agendamedica.model.manager.ManagerUsuario;
@@ -27,7 +26,7 @@ public class ControllerUsuario implements Serializable {
 	@EJB
 	private ManagerUsuario managerUsuario;
 	private List<Usuario> listaUsuarios;
-	private List<Tipousuario> listaTipousuario;
+	//private List<Tipousuario> listaTipousuario;
 	private Usuario usuario;
 	private boolean panelColapsado;
 	private Usuario usuarioSeleccionado;
@@ -63,9 +62,9 @@ public class ControllerUsuario implements Serializable {
 	public void actionListenerInsertarUsuario() {
 		try {
 
-			Tipousuario tipo = new Tipousuario();
-			tipo.setIdTipousuario(tipousuario);
-			usuario.setTipousuario(tipo);
+//			Tipousuario tipo = new Tipousuario();
+//			tipo.setIdTipousuario(tipousuario);
+//			usuario.setTipousuario(tipo);
 			managerUsuario.insertarUsuario(usuario);
 			listaUsuarios = managerUsuario.findAllUsuarios();
 			usuario = new Usuario();
@@ -87,17 +86,17 @@ public class ControllerUsuario implements Serializable {
 		usuarioSeleccionado = usuario;
 	}
 
-	public void actionListenerActualizarUsuario() {
-		try {
-			managerUsuario.actualizarUsuario(usuarioSeleccionado);
-			listaUsuarios = managerUsuario.findAllUsuarios();
-			JSFUtil.crearMensajeInfo("Datos actualizados");
-		} catch (Exception e) {
-			JSFUtil.crearMensajeError(e.getMessage());
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+//	public void actionListenerActualizarUsuario() {
+//		try {
+//			managerUsuario.actualizarUsuario(usuarioSeleccionado);
+//			listaUsuarios = managerUsuario.findAllUsuarios();
+//			JSFUtil.crearMensajeInfo("Datos actualizados");
+//		} catch (Exception e) {
+//			JSFUtil.crearMensajeError(e.getMessage());
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//	}
 //	
 
 	public String getIdUsuario() {
@@ -200,13 +199,13 @@ public class ControllerUsuario implements Serializable {
 		this.user = user;
 	}
 
-	public List<Tipousuario> getListaTipousuario() {
-		return listaTipousuario;
-	}
-
-	public void setListaTipousuario(List<Tipousuario> listaTipousuario) {
-		this.listaTipousuario = listaTipousuario;
-	}
+//	public List<Tipousuario> getListaTipousuario() {
+//		return listaTipousuario;
+//	}
+//
+//	public void setListaTipousuario(List<Tipousuario> listaTipousuario) {
+//		this.listaTipousuario = listaTipousuario;
+//	}
 
 	
 	public List<Usuario> getListaUsuarios() {

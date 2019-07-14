@@ -21,10 +21,10 @@ public class Medico implements Serializable {
 	@Column(name="id_medico", unique=true, nullable=false)
 	private Integer idMedico;
 
-	@Column(name="apellido_medico", length=50)
+	@Column(name="apellido_medico", nullable=false, length=50)
 	private String apellidoMedico;
 
-	@Column(name="cedula_medico", length=10)
+	@Column(name="cedula_medico", nullable=false, length=10)
 	private String cedulaMedico;
 
 	@Column(name="celular_medico", length=50)
@@ -36,26 +36,22 @@ public class Medico implements Serializable {
 	@Column(name="direccion_medico", length=50)
 	private String direccionMedico;
 
-	@Column(name="nombre_medico", length=50)
+	@Column(name="nombre_medico", nullable=false, length=50)
 	private String nombreMedico;
 
 	//bi-directional many-to-one association to Especialidad
 	@ManyToOne
-	@JoinColumn(name="id_especialidad")
+	@JoinColumn(name="id_especialidad", nullable=false)
 	private Especialidad especialidad;
 
 	//bi-directional many-to-one association to Horario
 	@ManyToOne
-	@JoinColumn(name="id_horario")
+	@JoinColumn(name="id_horario", nullable=false)
 	private Horario horario;
 
 	//bi-directional many-to-one association to Turno
 	@OneToMany(mappedBy="medico")
 	private List<Turno> turnos;
-
-	//bi-directional many-to-one association to Usuario
-	@OneToMany(mappedBy="medico")
-	private List<Usuario> usuarios;
 
 	public Medico() {
 	}
@@ -152,28 +148,6 @@ public class Medico implements Serializable {
 		turno.setMedico(null);
 
 		return turno;
-	}
-
-	public List<Usuario> getUsuarios() {
-		return this.usuarios;
-	}
-
-	public void setUsuarios(List<Usuario> usuarios) {
-		this.usuarios = usuarios;
-	}
-
-	public Usuario addUsuario(Usuario usuario) {
-		getUsuarios().add(usuario);
-		usuario.setMedico(this);
-
-		return usuario;
-	}
-
-	public Usuario removeUsuario(Usuario usuario) {
-		getUsuarios().remove(usuario);
-		usuario.setMedico(null);
-
-		return usuario;
 	}
 
 }

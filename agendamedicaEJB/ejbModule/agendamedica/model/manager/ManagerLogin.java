@@ -8,7 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import agendamedica.model.entities.Tipousuario;
+
 import agendamedica.model.entities.Usuario;
 
 /**
@@ -23,11 +23,11 @@ public class ManagerLogin {
         // TODO Auto-generated constructor stub
     }
     
-    public List <Tipousuario> findAllTipoUsauarios() {
-		String consulta = "SELECT r FROM Tipousuario r";
-		Query q = em.createQuery(consulta, Tipousuario.class);
-		return q.getResultList();
-	}
+//    public List <Tipousuario> findAllTipoUsauarios() {
+//		String consulta = "SELECT r FROM Tipousuario r";
+//		Query q = em.createQuery(consulta, Tipousuario.class);
+//		return q.getResultList();
+//	}
     
     public Usuario findUsuarioByNombreUsuario(String nombreUsuario) {
 		return em.find(Usuario.class,nombreUsuario);

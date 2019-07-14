@@ -9,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import agendamedica.model.entities.Paciente;
-import agendamedica.model.entities.Responsableturno;
 
 /**
  * Session Bean implementation class ManagerPaciente

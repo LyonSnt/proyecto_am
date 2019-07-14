@@ -6,7 +6,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
-import agendamedica.model.entities.Tipousuario;
+
 import agendamedica.model.entities.Usuario;
 import agendamedica.model.manager.ManagerLogin;
 import agendamedica.view.util.JSFUtil;
@@ -25,12 +25,12 @@ public class BeanLogin implements Serializable {
 
 	@EJB
 	private ManagerLogin managerLogin;
-	private List<Tipousuario> listaTipousuario;
+	//private List<Tipousuario> listaTipousuario;
 	private Usuario usuario;
 
 	@PostConstruct
 	public void inicializar() {
-		listaTipousuario = managerLogin.findAllTipoUsauarios();
+		//listaTipousuario = managerLogin.findAllTipoUsauarios();
 	}
 
 	public String actionLogin() {
@@ -83,13 +83,13 @@ public class BeanLogin implements Serializable {
 		this.tipoUsuario = tipoUsuario;
 	}
 
-	public List<Tipousuario> getListaTipousuario() {
-		return listaTipousuario;
-	}
-
-	public void setListaTipousuario(List<Tipousuario> listaTipousuario) {
-		this.listaTipousuario = listaTipousuario;
-	}
+//	public List<Tipousuario> getListaTipousuario() {
+//		return listaTipousuario;
+//	}
+//
+//	public void setListaTipousuario(List<Tipousuario> listaTipousuario) {
+//		this.listaTipousuario = listaTipousuario;
+//	}
 
 	public Usuario getUsuario() {
 		return usuario;

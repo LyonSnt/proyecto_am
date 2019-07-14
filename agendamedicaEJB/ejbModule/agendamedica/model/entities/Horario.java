@@ -2,7 +2,7 @@ package agendamedica.model.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.sql.Timestamp;
+import java.sql.Time;
 import java.util.List;
 
 
@@ -23,10 +23,10 @@ public class Horario implements Serializable {
 	private Integer idHorario;
 
 	@Column(name="fin_horario")
-	private Timestamp finHorario;
+	private Time finHorario;
 
 	@Column(name="inicio_horario")
-	private Timestamp inicioHorario;
+	private Time inicioHorario;
 
 	@Column(name="jueves_horario")
 	private Integer juevesHorario;
@@ -61,19 +61,19 @@ public class Horario implements Serializable {
 		this.idHorario = idHorario;
 	}
 
-	public Timestamp getFinHorario() {
+	public Time getFinHorario() {
 		return this.finHorario;
 	}
 
-	public void setFinHorario(Timestamp finHorario) {
+	public void setFinHorario(Time finHorario) {
 		this.finHorario = finHorario;
 	}
 
-	public Timestamp getInicioHorario() {
+	public Time getInicioHorario() {
 		return this.inicioHorario;
 	}
 
-	public void setInicioHorario(Timestamp inicioHorario) {
+	public void setInicioHorario(Time inicioHorario) {
 		this.inicioHorario = inicioHorario;
 	}
 

@@ -2,7 +2,6 @@ package agendamedica.model.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.sql.Time;
 import java.util.Date;
 
 
@@ -26,21 +25,18 @@ public class Evento implements Serializable {
 	private String descripcionEvento;
 
 	@Temporal(TemporalType.DATE)
-	@Column(name="fecha_evento")
+	@Column(name="fecha_evento", nullable=false)
 	private Date fechaEvento;
-
-	@Column(name="hora_evento")
-	private Time horaEvento;
 
 	@Column(name="ip_evento", length=50)
 	private String ipEvento;
 
-	@Column(name="nombre_evento", length=50)
-	private String nombreEvento;
+	@Column(nullable=false, length=100)
+	private String metodo;
 
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne
-	@JoinColumn(name="id_usuario")
+	@JoinColumn(name="id_usuario", nullable=false)
 	private Usuario usuario;
 
 	public Evento() {
@@ -70,14 +66,6 @@ public class Evento implements Serializable {
 		this.fechaEvento = fechaEvento;
 	}
 
-	public Time getHoraEvento() {
-		return this.horaEvento;
-	}
-
-	public void setHoraEvento(Time horaEvento) {
-		this.horaEvento = horaEvento;
-	}
-
 	public String getIpEvento() {
 		return this.ipEvento;
 	}
@@ -86,12 +74,12 @@ public class Evento implements Serializable {
 		this.ipEvento = ipEvento;
 	}
 
-	public String getNombreEvento() {
-		return this.nombreEvento;
+	public String getMetodo() {
+		return this.metodo;
 	}
 
-	public void setNombreEvento(String nombreEvento) {
-		this.nombreEvento = nombreEvento;
+	public void setMetodo(String metodo) {
+		this.metodo = metodo;
 	}
 
 	public Usuario getUsuario() {

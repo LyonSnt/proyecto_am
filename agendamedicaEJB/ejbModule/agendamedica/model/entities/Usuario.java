@@ -2,7 +2,6 @@ package agendamedica.model.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.List;
 
 
@@ -17,67 +16,35 @@ public class Usuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="USUARIO_IDUSUARIO_GENERATOR", sequenceName="SEQ_USUARIO",allocationSize=1)
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="USUARIO_IDUSUARIO_GENERATOR")
-	@Column(name="id_usuario", unique=true, nullable=false)
-	private Integer idUsuario;
+	@Column(name="id_usuario", unique=true, nullable=false, length=10)
+	private String idUsuario;
 
-	@Column(name="estado_usuario", length=10)
-	private String estadoUsuario;
-
-	@Column(name="fecharegistro_usuario")
-	private Timestamp fecharegistroUsuario;
-
-	@Column(name="nombre_usuario", length=50)
+	@Column(name="nombre_usuario", nullable=false, length=50)
 	private String nombreUsuario;
 
-	@Column(name="password_usuario", length=20)
+	@Column(name="password_usuario", nullable=false, length=20)
 	private String passwordUsuario;
+
+	@Column(nullable=false, length=10)
+	private String tipousuario;
 
 	//bi-directional many-to-one association to Evento
 	@OneToMany(mappedBy="usuario")
 	private List<Evento> eventos;
 
-	//bi-directional many-to-one association to Medico
-	@ManyToOne
-	@JoinColumn(name="id_medico")
-	private Medico medico;
-
-	//bi-directional many-to-one association to Responsableturno
-	@ManyToOne
-	@JoinColumn(name="id_responsableturno")
-	private Responsableturno responsableturno;
-
-	//bi-directional many-to-one association to Tipousuario
-	@ManyToOne
-	@JoinColumn(name="id_tipousuario")
-	private Tipousuario tipousuario;
+	//bi-directional many-to-one association to Turno
+	@OneToMany(mappedBy="usuario")
+	private List<Turno> turnos;
 
 	public Usuario() {
 	}
 
-	public Integer getIdUsuario() {
+	public String getIdUsuario() {
 		return this.idUsuario;
 	}
 
-	public void setIdUsuario(Integer idUsuario) {
+	public void setIdUsuario(String idUsuario) {
 		this.idUsuario = idUsuario;
-	}
-
-	public String getEstadoUsuario() {
-		return this.estadoUsuario;
-	}
-
-	public void setEstadoUsuario(String estadoUsuario) {
-		this.estadoUsuario = estadoUsuario;
-	}
-
-	public Timestamp getFecharegistroUsuario() {
-		return this.fecharegistroUsuario;
-	}
-
-	public void setFecharegistroUsuario(Timestamp fecharegistroUsuario) {
-		this.fecharegistroUsuario = fecharegistroUsuario;
 	}
 
 	public String getNombreUsuario() {
@@ -94,6 +61,14 @@ public class Usuario implements Serializable {
 
 	public void setPasswordUsuario(String passwordUsuario) {
 		this.passwordUsuario = passwordUsuario;
+	}
+
+	public String getTipousuario() {
+		return this.tipousuario;
+	}
+
+	public void setTipousuario(String tipousuario) {
+		this.tipousuario = tipousuario;
 	}
 
 	public List<Evento> getEventos() {
@@ -118,28 +93,26 @@ public class Usuario implements Serializable {
 		return evento;
 	}
 
-	public Medico getMedico() {
-		return this.medico;
+	public List<Turno> getTurnos() {
+		return this.turnos;
 	}
 
-	public void setMedico(Medico medico) {
-		this.medico = medico;
+	public void setTurnos(List<Turno> turnos) {
+		this.turnos = turnos;
 	}
 
-	public Responsableturno getResponsableturno() {
-		return this.responsableturno;
+	public Turno addTurno(Turno turno) {
+		getTurnos().add(turno);
+		turno.setUsuario(this);
+
+		return turno;
 	}
 
-	public void setResponsableturno(Responsableturno responsableturno) {
-		this.responsableturno = responsableturno;
-	}
+	public Turno removeTurno(Turno turno) {
+		getTurnos().remove(turno);
+		turno.setUsuario(null);
 
-	public Tipousuario getTipousuario() {
-		return this.tipousuario;
-	}
-
-	public void setTipousuario(Tipousuario tipousuario) {
-		this.tipousuario = tipousuario;
+		return turno;
 	}
 
 }

@@ -21,8 +21,6 @@ public class Estado implements Serializable {
 	@Column(name="id_estado", unique=true, nullable=false)
 	private Integer idEstado;
 
-	private Integer estado;
-
 	@Column(name="nombre_estado", length=50)
 	private String nombreEstado;
 
@@ -39,14 +37,6 @@ public class Estado implements Serializable {
 
 	public void setIdEstado(Integer idEstado) {
 		this.idEstado = idEstado;
-	}
-
-	public Integer getEstado() {
-		return this.estado;
-	}
-
-	public void setEstado(Integer estado) {
-		this.estado = estado;
 	}
 
 	public String getNombreEstado() {

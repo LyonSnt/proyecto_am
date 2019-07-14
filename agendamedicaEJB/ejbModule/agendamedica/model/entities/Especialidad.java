@@ -21,7 +21,7 @@ public class Especialidad implements Serializable {
 	@Column(name="id_especialidad", unique=true, nullable=false)
 	private Integer idEspecialidad;
 
-	@Column(name="nombre_especialidad", length=50)
+	@Column(name="nombre_especialidad", nullable=false, length=50)
 	private String nombreEspecialidad;
 
 	//bi-directional many-to-one association to Medico

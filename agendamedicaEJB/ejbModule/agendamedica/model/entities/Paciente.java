@@ -22,10 +22,10 @@ public class Paciente implements Serializable {
 	@Column(name="id_paciente", unique=true, nullable=false)
 	private Integer idPaciente;
 
-	@Column(name="apellido_paciente", length=50)
+	@Column(name="apellido_paciente", nullable=false, length=50)
 	private String apellidoPaciente;
 
-	@Column(name="cedula_paciente", length=10)
+	@Column(name="cedula_paciente", nullable=false, length=10)
 	private String cedulaPaciente;
 
 	@Column(name="celular_paciente", precision=10)
@@ -37,7 +37,7 @@ public class Paciente implements Serializable {
 	@Column(name="direccion_paciente", length=50)
 	private String direccionPaciente;
 
-	@Column(name="nombre_paciente", length=50)
+	@Column(name="nombre_paciente", nullable=false, length=50)
 	private String nombrePaciente;
 
 	//bi-directional many-to-one association to Turno
