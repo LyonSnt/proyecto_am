@@ -35,7 +35,7 @@ public class ManagerHorario {
 		return q.getResultList();
 
 	}
-//jsjdjdj
+
 	  public void insertarHorario(Horario horario) throws Exception{
 	    	if(findHorarioByIdHorario(horario.getIdHorario()).size() > 0)
 	    			throw new Exception("Ya existe el id");
