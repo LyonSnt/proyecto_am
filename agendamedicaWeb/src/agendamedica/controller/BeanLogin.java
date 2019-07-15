@@ -3,68 +3,101 @@ package agendamedica.controller;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
-
-import agendamedica.model.entities.Usuario;
-import agendamedica.model.manager.ManagerLogin;
 import agendamedica.view.util.JSFUtil;
 
+import agendamadica.model.dto.LoginDTO;
+import agendamedica.model.manager.ManagerAuditoria;
+import agendamedica.model.manager.ManagerSeguridad;
+import agendamedica.model.util.ModelUtil;
+
+import java.io.IOException;
 import java.io.Serializable;
-import java.util.List;
 
 @Named
 @SessionScoped
 public class BeanLogin implements Serializable {
 	private static final long serialVersionUID = 1L;
-
-	private String nombreUsuario;
+	
+	private String codigoUsuario;
 	private String clave;
 	private String tipoUsuario;
-
+	private boolean acceso;
 	@EJB
-	private ManagerLogin managerLogin;
-	//private List<Tipousuario> listaTipousuario;
-	private Usuario usuario;
+	private ManagerSeguridad managerSeguridad;
+	@EJB
+	private ManagerAuditoria managerAuditoria;
+	private LoginDTO loginDTO;
 
 	@PostConstruct
 	public void inicializar() {
-		//listaTipousuario = managerLogin.findAllTipoUsauarios();
+		loginDTO=new LoginDTO();
 	}
-
-	public String actionLogin() {
+	/**
+	 * Action que permite el acceso al sistema.
+	 * @return
+	 */
+	public String accederSistema(){
+		acceso=false;
 		try {
-			if (tipoUsuario.equals("1")) {
-				System.out.println("Aqui esta el mensaje" + tipoUsuario);
-				/// JSFUtil.crearMensajeInfo("Login correcto");
-				// return "/admin/menu.xhtml";
-				return "/admin/headerAdmin?faces-redirect=true";
-
-				/*
-				 * }else if(idUsua.equals("medico")) { return "medico/index"; } return
-				 * "clientes/index";
-				 */
-			}
+			loginDTO=managerSeguridad.accederSistema(codigoUsuario, clave);
+			//verificamos el acceso del usuario:
+			tipoUsuario=loginDTO.getTipoUsuario();
+			//redireccion dependiendo del tipo de usuario:
+			managerAuditoria.crearEvento(codigoUsuario, this.getClass(), "accederSistema", "Acceso a login");
+			return loginDTO.getRutaAcceso()+"?faces-redirect=true";
 		} catch (Exception e) {
-			JSFUtil.crearMensajeError(e.getMessage());
 			e.printStackTrace();
+			JSFUtil.crearMensajeError(e.getMessage());
 		}
 		return "";
 	}
-
-	public String salirSistema() {
+	
+	/**
+	 * Finaliza la sesion web del usuario.
+	 * @return
+	 */
+	public String salirSistema(){
 		System.out.println("salirSistema");
+		try {
+			managerAuditoria.crearEvento(loginDTO.getCodigoUsuario(), this.getClass(), "salisSistema", "Cerrar sesion");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
-		return "/login.xhtml?faces-redirect=true";
+		return "/index.html?faces-redirect=true";
+	}
+	
+	public void actionVerificarLogin(){
+		ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+		String requestPath=ec.getRequestPathInfo();
+		try {
+			//si no paso por login:
+			if(loginDTO==null || ModelUtil.isEmpty(loginDTO.getRutaAcceso())){
+				ec.redirect(ec.getRequestContextPath() + "/index.html");
+			}else{
+				//validar las rutas de acceso:
+				if(requestPath.contains("/supervisor") && loginDTO.getRutaAcceso().startsWith("/supervisor"))
+					return;
+				if(requestPath.contains("/vendedor") && loginDTO.getRutaAcceso().startsWith("/vendedor"))
+					return;
+				//caso contrario significa que hizo login pero intenta acceder a ruta no permitida:
+				ec.redirect(ec.getRequestContextPath() + "/index.html");
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
-	public String getNombreUsuario() {
-		return nombreUsuario;
+	public String getCodigoUsuario() {
+		return codigoUsuario;
 	}
 
-	public void setNombreUsuario(String nombreUsuario) {
-		this.nombreUsuario = nombreUsuario;
+	public void setCodigoUsuario(String codigoUsuario) {
+		this.codigoUsuario = codigoUsuario;
 	}
 
 	public String getClave() {
@@ -75,28 +108,16 @@ public class BeanLogin implements Serializable {
 		this.clave = clave;
 	}
 
+	public boolean isAcceso() {
+		return acceso;
+	}
+
 	public String getTipoUsuario() {
 		return tipoUsuario;
 	}
 
 	public void setTipoUsuario(String tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
-	}
-
-//	public List<Tipousuario> getListaTipousuario() {
-//		return listaTipousuario;
-//	}
-//
-//	public void setListaTipousuario(List<Tipousuario> listaTipousuario) {
-//		this.listaTipousuario = listaTipousuario;
-//	}
-
-	public Usuario getUsuario() {
-		return usuario;
-	}
-
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
 	}
 
 }
