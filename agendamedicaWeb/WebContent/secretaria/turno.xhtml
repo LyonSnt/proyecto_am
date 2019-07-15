@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Turno</title>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<p:panel header="Secretaria:">
+		<h:outputText value="Maria Gracia" />
+	</p:panel>
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Inicio" action="index" icon="fa fa-home"></p:menuitem>
+			<p:menuitem value="Crear Paciente" action="paciente"
+				icon="fa fa-laptop"></p:menuitem>
+			<p:menuitem value="Facturas" action="facturas" icon="fa fa-bars"></p:menuitem>
+			<p:menuitem value="Parámetros" action="parametros" icon="fa fa-cog"></p:menuitem>
+			<f:facet name="options">
+				<p:commandButton value="Salir" action="#{beanLogin.salirSistema()}"
+					icon="fa fa-sign-out" />
+			</f:facet>
+		</p:menubar>
+	</h:form>
+	<br />
+	<p:panel id="panel1">
+		<h:form id="form1">
+			<p:panelGrid columns="2">
+				<p:commandButton value="Generar Turno" update="form1 "
+					icon="fa fa-file-o" />
+				<h:panelGroup>
+					<p:commandButton value="Guardar Turno" icon="fa fa-save"
+						update="@form" />
+					<p:commandButton value="Imprimir" rendered="" type="button"
+						icon="fa fa-print">
+						<p:printer target=":panel1" />
+					</p:commandButton>
+				</h:panelGroup>
+				<h:outputText value="Nro. de Turno:" style="font-weight: bold" />
+				<h:outputText />
+				<h:outputText value="Fecha de la Truno:" style="font-weight: bold" />
+				<h:outputText>
+					<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
+				</h:outputText>
+				<h:outputText value="Seleccione el Paciente:"
+					style="font-weight: bold" />
+				<h:panelGroup>
+					<p:selectOneMenu filter="true" filterMatchMode="contains">
+						<f:selectItem itemLabel="Seleccione..." itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems />
+						<p:ajax></p:ajax>
+					</p:selectOneMenu>
+				</h:panelGroup>
+				<h:outputText value="Seleccione el Medico:"
+					style="font-weight: bold" />
+				<h:panelGroup>
+					<p:selectOneMenu filter="true" filterMatchMode="contains">
+						<f:selectItem itemLabel="Seleccione..." itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems />
+						<p:ajax></p:ajax>
+					</p:selectOneMenu>
+				</h:panelGroup>
+				<h:outputText value="Codigo del Paciene:" style="font-weight: bold" />
+				<h:outputText id="cedulaPaciente" />
+				<h:outputText value="Valor:" style="font-weight: bold" />
+				<h:inputText value="" />
+			</p:panelGrid>
+		</h:form>
+		
+	</p:panel>
+
+</body>
+</html>
