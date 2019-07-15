@@ -80,9 +80,10 @@ public class BeanLogin implements Serializable {
 				ec.redirect(ec.getRequestContextPath() + "/index.html");
 			}else{
 				//validar las rutas de acceso:
-				if(requestPath.contains("/supervisor") && loginDTO.getRutaAcceso().startsWith("/supervisor"))
+				if(requestPath.contains("/admin") && loginDTO.getRutaAcceso().startsWith("/admin"))
 					return;
-				if(requestPath.contains("/vendedor") && loginDTO.getRutaAcceso().startsWith("/vendedor"))
+				if(requestPath.contains("/medico") && loginDTO.getRutaAcceso().startsWith("/medico"))
+				if(requestPath.contains("/secretaria") && loginDTO.getRutaAcceso().startsWith("/secretaria"))
 					return;
 				//caso contrario significa que hizo login pero intenta acceder a ruta no permitida:
 				ec.redirect(ec.getRequestContextPath() + "/index.html");

@@ -52,6 +52,8 @@ public class ManagerSeguridad {
 			loginDTO.setRutaAcceso("/medico/index.xhtml");
 		else if(usuario.getTipousuario().equals("admin"))
 			loginDTO.setRutaAcceso("/admin/headerAdmin.xhtml");
+		else if(usuario.getTipousuario().equals("secretaria"))
+			loginDTO.setRutaAcceso("/secretaria/index.xhtml");
 		return loginDTO;
 	}
 	

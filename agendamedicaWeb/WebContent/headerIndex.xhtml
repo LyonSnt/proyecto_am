@@ -21,7 +21,7 @@
 		<p:submenu label="Registrar" icon="pi pi-check">
 			<p:column>
 				<p:submenu label="-">
-					<p:menuitem value="Tipo de usuario" url="./tipousuario.xhtml" />
+					<!-- <p:menuitem value="Tipo de usuario" url="./tipousuario.xhtml" /> -->
 					<p:menuitem value="Responsable Turno" url="./responsableturno.xhtml" />
 					<p:menuitem value="Estado" url="./estado.xhtml" />
 					<p:menuitem value="Paciente" url="./paciente.xhtml" />
@@ -92,5 +92,19 @@
 			value="http://img.europapress.es/fotoweb/fotonoticia_20170202174759_640.jpg"
 			style="width:100%" />
 	</div> -->
+	
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Inicio" action="index" icon="fa fa-home"></p:menuitem>
+			<p:menuitem value="Crear Paciente" action="paciente"
+				icon="fa fa-laptop"></p:menuitem>
+			<p:menuitem value="Facturas" action="facturas" icon="fa fa-bars"></p:menuitem>
+			<p:menuitem value="Parámetros" action="parametros" icon="fa fa-cog"></p:menuitem>
+			<f:facet name="options">
+				<p:commandButton value="Salir" action="#{beanLogin.salirSistema()}"
+					icon="fa fa-sign-out" />
+			</f:facet>
+		</p:menubar>
+	</h:form>
 </body>
 </html>

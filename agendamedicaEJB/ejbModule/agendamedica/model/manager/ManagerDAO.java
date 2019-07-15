@@ -101,7 +101,7 @@ public class ManagerDAO {
 	 * @param clase La clase sobre la que se desea consultar, ejemplo: Usuario.class
 	 * @param pID Identificador (la clave primaria) que permitira la busqueda.
 	 * @return El objeto solicitado (si existiera).
-	 * @throws Exception
+	 * @throws Exceptioncc
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public Object findById(Class clase, Object pID) throws Exception {
