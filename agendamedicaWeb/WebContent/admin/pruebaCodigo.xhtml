@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head></h:head> 
+<body> 
+<h:panelGrid id = "panel" columns = "2" border="1"
+      cellpadding = "10" cellspacing = "1">
+   
+   <f:facet name = "header">
+      <h:outputText value = "Login"/>
+   </f:facet>
+   <h:outputLabel value = "Username" />
+   <h:inputText  />
+   <h:outputLabel value = "Password" />
+   <h:inputSecret />
+   
+   <f:facet name = "footer">
+      <h:panelGroup style = "display:block; text-align:center">
+         <h:commandButton id = "submit" value = "Submit" />
+      </h:panelGroup>
+   </f:facet>
+</h:panelGrid>
+
+<table id = "j_idt10:panel" border = "1" cellpadding = "10" cellspacing = "1">
+   <thead>
+      <tr><th colspan = "2" scope = "colgroup">Login</th></tr>
+   </thead>
+   
+   <tfoot>
+      <tr>
+         <td colspan = "2">
+            <span style = "display:block; text-align:center">
+               <input id = "j_idt10:submit" type = "submit"
+                  name = "j_idt10:submit" value = "Submit" />
+            </span>
+         </td>
+      </tr>
+   </tfoot>
+   
+   <tbody>
+      <tr>
+         <td><label>Username</label></td>
+         <td><input type = "text" name = "j_idt10:j_idt17" /></td>
+      </tr>
+      <tr>
+         <td><label>Password</label></td>
+         <td><input type = "password" name = "j_idt10:j_idt21" value = "" /></td>
+      </tr>
+   
+   </tbody>
+</table>
+
+ <h2>h:panelGrid example</h2>
+      <hr />
+      
+      <h:form>
+         <h:panelGrid id = "panel" columns = "2" border = "1"
+            cellpadding = "10" cellspacing = "1">
+            
+            <f:facet name = "header">
+               <h:outputText value = "Login"/>
+            </f:facet>
+            <h:outputLabel value = "Username" />
+            <h:inputText  />
+            <h:outputLabel value = "Password" />
+            <h:inputSecret />
+            
+            <f:facet name = "footer">
+               <h:panelGroup style = "display:block; text-align:center">
+                  <h:commandButton id = "submit" value = "Submit" />
+               </h:panelGroup>
+            </f:facet>
+         </h:panelGrid>
+      </h:form>
+          <p:panel header="Ejemplo temas de apariencia">
+            <p:outputLabel value="Pulsa sobre mí para ver como exploto">
+                <!-- Aplicamos un efecto al texto cuando se pulse sobre el -->
+                <!-- Efectos posibles en el atributo type:-->
+                <!-- blind,clip,drop,explode,fold,puff,slide,scale,bounce, -->
+                <!-- highlight pulsate shake size transfer -->
+                <p:effect type="explode" event="click" />
+            </p:outputLabel>
+            <p:editor />
+        </p:panel>
+</body> 
+</html>

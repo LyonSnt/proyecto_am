@@ -12,18 +12,22 @@
 	width: 1000px;
 }
 
-body {
-	background: url("../../img/core-img/breadcumb.png");
+.myclass .ui-panel-content{
+background:red;
 }
-
 </style>
 </h:head>
 <body>
-	<h1>pagina estado</h1>
-	<p:panel header="CONSULTORIO MÉDICO - Módulo Agenda Médica">
-		<div align="center">
+	<ui:include src="/headerIndex.xhtml" />
+	<!-- <p:panel header="CONSULTORIO MÉDICO - Módulo Agenda Médica"> -->
+	<br />
+<p:panelGrid columns="2" bordr="1">
 
+<h1>holaa</h1>
+</p:panelGrid>
+	<div align="center">
 
+		<p:panelGrid columns="1">
 			<h:form>
 				<p:growl id="messages" showDetail="true" />
 
@@ -71,10 +75,11 @@ body {
 					</h:panelGrid>
 				</p:dialog>
 			</h:form>
+		</p:panelGrid>
+	</div>
 
-		</div>
-	</p:panel>
 
+	<!-- 	</p:panel> -->
 
 </body>
 </html>
