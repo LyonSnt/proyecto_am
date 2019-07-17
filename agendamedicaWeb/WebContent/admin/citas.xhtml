@@ -6,14 +6,18 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
+<f:facet name="first">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
+		<title>Citas</title>
+	</f:facet>
 
 	<style type="text/css">
 .value {
 	width: 1000px;
 }
-
-.myclass .ui-panel-content{
-background:red;
+body {
+	background: url("../../img/core-img/breadcumb.png");
 }
 </style>
 </h:head>
@@ -21,10 +25,7 @@ background:red;
 	<ui:include src="/headerIndex.xhtml" />
 	<!-- <p:panel header="CONSULTORIO MÉDICO - Módulo Agenda Médica"> -->
 	<br />
-<p:panelGrid columns="2" bordr="1">
 
-<h1>holaa</h1>
-</p:panelGrid>
 	<div align="center">
 
 		<p:panelGrid columns="1">
