@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<f:facet name="first">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
+		<title>Paciente</title>
+	</f:facet>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<p:panel header="Secretaria:">
+		<h:outputText value="Maria Gracia" />
+	</p:panel>
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Inicio" action="index" icon="fa fa-home"></p:menuitem>
+			<p:menuitem value="turno" action="turno"
+				icon="fa fa-laptop"></p:menuitem>
+			<p:menuitem value="Facturas" action="facturas" icon="fa fa-bars"></p:menuitem>
+			<p:menuitem value="Parámetros" action="parametros" icon="fa fa-cog"></p:menuitem>
+			<f:facet name="options">
+				<p:commandButton value="Salir" action="#{beanLogin.salirSistema()}"
+					icon="fa fa-sign-out" />
+			</f:facet>
+		</p:menubar>
+	</h:form>
+	<div align="center">
+		<h:form id="form1">
+			<p:messages>
+				<p:autoUpdate />
+			</p:messages>
+			<p:panel collapsed="#{beanPaciente.panelColapsado}"
+				style="width:400px">
+				<f:facet name="header">
+					<p:commandButton value="Nuevo paciente" icon="fa fa-plus"
+						update="@form"
+						actionListener="#{beanPaciente.actionListenerColapsarPanel()}"></p:commandButton>
+				</f:facet>
+				<p:panelGrid columns="2">
+					<h:outputText value="Cédula:" />
+					<p:inputText value="#{beanPaciente.paciente.cedulaPaciente}" />
+					<h:outputText value="Apellidos:" />
+					<p:inputText value="#{beanPaciente.paciente.apellidoPaciente}"></p:inputText>
+					<h:outputText value="Nombres:" />
+					<p:inputText value="#{beanPaciente.paciente.nombrePaciente}"></p:inputText>
+					<h:outputText value="Celular" />
+					<p:inputText value="#{beanPaciente.paciente.celularPaciente}"></p:inputText>
+					<h:outputText value="Direccion" />
+					<p:inputText value="#{beanPaciente.paciente.direccionPaciente}"></p:inputText>
+					<h:outputText value="Correo" />
+					<p:inputText value="#{beanPaciente.paciente.correoPaciente}"></p:inputText>
+					<p:commandButton value="Insertar" icon="fa fa-save"
+						update="@form,:form2"
+						actionListener="#{beanPaciente.actionListenerInsertarPaciente()}"></p:commandButton>
+				</p:panelGrid>
+
+			</p:panel>
+		</h:form>
+	</div>
+	<br />
+	<h:form id="form2">
+		<p:panel header="Datos Pacientes">
+			<p:dataTable value="#{beanPaciente.listaPacientes}" var="paciente"
+				reflow="true" paginator="true" rows="5">
+				<p:column headerText="CEDULA">
+					<h:outputText value="#{paciente.cedulaPaciente}" />
+				</p:column>
+				<p:column headerText="APELLIDO">
+					<h:outputText value="#{paciente.apellidoPaciente}" />
+				</p:column>
+				<p:column headerText="NOMBRE">
+					<h:outputText value="#{paciente.nombrePaciente}" />
+				</p:column>
+				<p:column headerText="CELULAR">
+					<h:outputText value="#{paciente.celularPaciente}" />
+				</p:column>
+				<p:column headerText="DIRECCION">
+					<h:outputText value="#{paciente.direccionPaciente}" />
+				</p:column>
+				<p:column headerText="CORREO">
+					<h:outputText value="#{paciente.correoPaciente}" />
+				</p:column>
+				<p:column headerText="POCIONES" priority="1">
+					<p:commandButton icon="fa fa-close" title="eliminar" update="@form"
+						actionListener="#{beanPaciente.actionListenerEliminarPaciente(paciente.idPaciente)}">
+						<p:confirm header="cinfirmación" message="desea eliminar?"
+							icon="fa fa-exclamation-triangle"></p:confirm>
+					</p:commandButton>
+					<p:commandButton icon="fa fa-edit" title="Editar"
+						action="#{beanPaciente.actionListenerSeleccionarPaciente(paciente)}"
+						update="fromEdicion" oncomplete="PF('dlgEdicion').show();">
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+	<p:dialog header="editar informacion" widgetVar="dlgEdicion"
+		modal="true">
+		<h:form id="fromEdicion">
+			<p:growl>
+				<p:autoUpdate />
+			</p:growl>
+			<h:outputText value="CEDULA" />
+			<h:outputText
+				value="#{beanPaciente.pacienteSeleccionado.cedulaPaciente}" />
+			<p:panelGrid columns="2">
+				<h:outputText value="Apellidos:" />
+				<p:inputText
+					value="#{beanPaciente.pacienteSeleccionado.apellidoPaciente}"></p:inputText>
+				<h:outputText value="Nombres:" />
+				<p:inputText
+					value="#{beanPaciente.pacienteSeleccionado.nombrePaciente}"></p:inputText>
+				<h:outputText value="Celular" />
+				<p:inputText
+					value="#{beanPaciente.pacienteSeleccionado.celularPaciente}"></p:inputText>
+				<h:outputText value="Direccion" />
+				<p:inputText
+					value="#{beanPaciente.pacienteSeleccionado.direccionPaciente}"></p:inputText>
+				<h:outputText value="Correo" />
+				<p:inputText
+					value="#{beanPaciente.pacienteSeleccionado.correoPaciente}"></p:inputText>
+			</p:panelGrid>
+			<p:commandButton value="actualizar" icon="fa fa-save"
+				update="@form, :form2"
+				actionListener="#{beanPaciente.actionListetenerActualizarestudiante()}" />
+
+		</h:form>
+	</p:dialog>
+	<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+		<p:commandButton value="Si" type="button"
+			styleClass="ui-confirmdialog-yes" icon="fa fa-check" />
+		<p:commandButton value="No" type="button"
+			styleClass="ui-confirmdialog-no" icon="fa fa-times" />
+	</p:confirmDialog>
+</body>
+</html>

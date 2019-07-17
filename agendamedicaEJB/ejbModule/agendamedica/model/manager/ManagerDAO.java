@@ -18,7 +18,6 @@ import agendamedica.model.util.ModelUtil;
  * Varios metodos implementados en esta clase utilitaria pueden ser
  * inseguros ante ataques sql-injection.
  * 
- * @author mrea
  *
  */
 @Stateless
