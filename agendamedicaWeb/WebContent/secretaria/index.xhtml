@@ -8,6 +8,7 @@
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Opciones Secretaria</title>
+	
 </h:head>
 <body>
 	<p:growl>
@@ -19,9 +20,8 @@
 	<h:form>
 		<p:menubar>
 			<p:menuitem value="Turno" action="turno" icon="fa fa-shopping-cart"></p:menuitem>
-			<p:menuitem value="Cear Pacientes" action="paciente" icon="fa fa-laptop"></p:menuitem>
-			<p:menuitem value="Facturas" action="facturas" icon="fa fa-bars"></p:menuitem>
-			<p:menuitem value="Parámetros" action="parametros" icon="fa fa-cog"></p:menuitem>
+			<p:menuitem value="Cear Pacientes" action="paciente"
+				icon="fa fa-laptop"></p:menuitem>
 			<f:facet name="options">
 				<p:commandButton value="Salir" action="#{beanLogin.salirSistema()}"
 					icon="fa fa-sign-out" />

@@ -21,8 +21,6 @@
 			<p:menuitem value="Inicio" action="index" icon="fa fa-home"></p:menuitem>
 			<p:menuitem value="Crear Paciente" action="paciente"
 				icon="fa fa-laptop"></p:menuitem>
-			<p:menuitem value="Facturas" action="facturas" icon="fa fa-bars"></p:menuitem>
-			<p:menuitem value="Parámetros" action="parametros" icon="fa fa-cog"></p:menuitem>
 			<f:facet name="options">
 				<p:commandButton value="Salir" action="#{beanLogin.salirSistema()}"
 					icon="fa fa-sign-out" />
@@ -33,30 +31,32 @@
 	<p:panel id="panel1">
 		<h:form id="form1">
 			<p:panelGrid columns="2">
-				<p:commandButton value="Generar Turno" update="form1 "
-					icon="fa fa-file-o" />
+				<p:commandButton action="#{beanTurno.crearNuevaTurno()}"
+					value="Generar Turno" update="form1 " icon="fa fa-file-o" />
 				<h:panelGroup>
 					<p:commandButton value="Guardar Turno" icon="fa fa-save"
-						update="@form" />
-					<p:commandButton value="Imprimir" rendered="" type="button"
+						action="#{beanTurno.guardarTurno()}" update="@form" />
+					<p:commandButton value="Imprimir"
+						rendered="#{beanTurno.turnoTmpGuardada}" type="button"
 						icon="fa fa-print">
 						<p:printer target=":panel1" />
 					</p:commandButton>
 				</h:panelGroup>
 				<h:outputText value="Nro. de Turno:" style="font-weight: bold" />
-				<h:outputText />
+				<h:outputText value="#{beanTurno.turnoTmp.idTurno}" />
 				<h:outputText value="Fecha de la Truno:" style="font-weight: bold" />
-				<h:outputText>
+				<h:outputText value="#{beanTurno.turnoTmp.fechaTurno}">
 					<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
 				</h:outputText>
 				<h:outputText value="Seleccione el Paciente:"
 					style="font-weight: bold" />
 				<h:panelGroup>
-					<p:selectOneMenu filter="true" filterMatchMode="contains">
+					<p:selectOneMenu value="#{beanTurno.cedulaPaciente}" filter="true"
+						filterMatchMode="contains">
 						<f:selectItem itemLabel="Seleccione..." itemValue=""
 							noSelectionOption="true" />
-						<f:selectItems />
-						<p:ajax></p:ajax>
+						<f:selectItems value="#{beanTurno.listaPacienteSI}" />
+						<p:ajax update="cedulaPaciente" listener="#{beanTurno.asignarPaciente()}"></p:ajax>
 					</p:selectOneMenu>
 				</h:panelGroup>
 				<h:outputText value="Seleccione el Medico:"
@@ -70,12 +70,12 @@
 					</p:selectOneMenu>
 				</h:panelGroup>
 				<h:outputText value="Codigo del Paciene:" style="font-weight: bold" />
-				<h:outputText id="cedulaPaciente" />
+				<h:outputText id="cedulaPaciente" value="#{beanTurno.cedulaPaciente}"/>
 				<h:outputText value="Valor:" style="font-weight: bold" />
-				<h:inputText value="" />
+				<h:inputText value="#{beanTurno.turno.valorTurno}" />
 			</p:panelGrid>
 		</h:form>
-		
+
 	</p:panel>
 
 </body>

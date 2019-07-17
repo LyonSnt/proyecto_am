@@ -2,6 +2,7 @@ package agendamedica.model.manager;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -18,6 +19,8 @@ import agendamedica.model.entities.Paciente;
 public class ManagerPaciente {
 	@PersistenceContext
 	private EntityManager em;
+	@EJB
+	private ManagerDAO managerDAO;
 
 	/**
 	 * Default constructor.
@@ -25,7 +28,33 @@ public class ManagerPaciente {
 	public ManagerPaciente() {
 
 	}
-
+	/**
+  	 * Metodo finder para la consulta de paciente.
+  	 * Hace uso del componente {@link agendamedica.model.manager.ManagerDAO ManagerDAO} de la capa model.
+  	 * @return listado de pacientes ordenados por apellidos.
+  	 */
+  	@SuppressWarnings("unchecked")
+  	public List<Paciente> findAllPacientes(){
+  		return managerDAO.findAll(Paciente.class, "o.apellidoPaciente");
+  	}
+  	
+	/**
+  	 * Metodo finder para la consulta de un paciente especifico.
+  	 * @param cedula cedula del paciente que se desea buscar.
+  	 * @return datos del paciente.
+  	 * @throws Exception
+  	 */
+  	public Paciente findPacienteById(String cedula) throws Exception{
+  		Paciente paciente=null;
+  		try {
+  			paciente=(Paciente)managerDAO.findById(Paciente.class, cedula);
+  		} catch (Exception e) {
+  			e.printStackTrace();
+  			throw new Exception("Error al buscar paciente: "+e.getMessage());
+  		}
+  		return paciente;
+  	}
+  	
 	public List<Paciente> findAllPaciente() {
 		String consulta = "select p from Paciente p ";
 		Query q = em.createQuery(consulta, Paciente.class);

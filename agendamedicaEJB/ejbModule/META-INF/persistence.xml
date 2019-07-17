@@ -10,5 +10,6 @@
 		<class>agendamedica.model.entities.Paciente</class>
 		<class>agendamedica.model.entities.Turno</class>
 		<class>agendamedica.model.entities.Usuario</class>
+		<class>agendamedica.model.entities.Parametro</class>
 	</persistence-unit>
 </persistence>
