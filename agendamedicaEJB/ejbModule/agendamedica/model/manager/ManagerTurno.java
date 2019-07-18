@@ -1,6 +1,5 @@
 package agendamedica.model.manager;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -78,6 +77,11 @@ public class ManagerTurno {
 		turnoTmp.setFechaTurno(new Date());
 		return turnoTmp;
 	}
+	
+	public Date fechaT() {
+		Date fecha=new Date();
+		return fecha;
+	}
 
 	/**
 	 * Asigna un paciente a un turno temporal.
@@ -94,15 +98,15 @@ public class ManagerTurno {
 		try {
 			paciente = managerPaciente.findPacienteById(cedulaPaciente);
 			if (paciente == null)
-				throw new Exception("Error al asignar cliente.");
+				throw new Exception("Error al asignar Paciente.");
 			turnoTmp.setPaciente(paciente);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw new Exception("Error al asignar cliente: " + e.getMessage());
+			throw new Exception("Error al asignar paciente: " + e.getMessage());
 		}
 	}
 	
-	
+
 
 	/**
 	 * Guarda en la base de datos una factura.

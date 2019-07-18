@@ -8,8 +8,8 @@
 		<class>agendamedica.model.entities.Horario</class>
 		<class>agendamedica.model.entities.Medico</class>
 		<class>agendamedica.model.entities.Paciente</class>
+		<class>agendamedica.model.entities.Parametro</class>
 		<class>agendamedica.model.entities.Turno</class>
 		<class>agendamedica.model.entities.Usuario</class>
-		<class>agendamedica.model.entities.Parametro</class>
 	</persistence-unit>
 </persistence>

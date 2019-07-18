@@ -2,6 +2,7 @@ package agendamedica.model.manager;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -19,6 +20,9 @@ public class ManagerMedico {
 
 	@PersistenceContext
 	private EntityManager em;
+	@EJB
+	private ManagerDAO managerDAO;
+
 	
     public ManagerMedico() {
         // TODO Auto-generated constructor stub
@@ -29,7 +33,7 @@ public class ManagerMedico {
 		Query q = em.createQuery(consulta, Medico.class);
 		return q.getResultList();
 	}
-
+   
 	public List<Medico> findMedicoByCedula(String cedulaMedico) {
 		String consulta = "SELECT u FROM Medico u where u.cedulaMedico='" + cedulaMedico + "'";
 		Query q = em.createQuery(consulta, Medico.class);
@@ -68,5 +72,22 @@ public class ManagerMedico {
 		medi.setHorario(medico.getHorario());
 		em.merge(medi);
 	}
+	
+	/**
+  	 * Metodo finder para la consulta de un paciente especifico.
+  	 * @param cedula cedula del paciente que se desea buscar.
+  	 * @return datos del paciente.
+  	 * @throws Exception
+  	 */
+  	public Medico findMedicoById(String cedula) throws Exception{
+  		Medico medico=null;
+  		try {
+  			medico=(Medico)managerDAO.findById(Medico.class, cedula);
+  		} catch (Exception e) {
+  			e.printStackTrace();
+  			throw new Exception("Error al buscar medico: "+e.getMessage());
+  		}
+  		return medico;
+  	}
 
 }

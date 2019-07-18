@@ -8,7 +8,6 @@ import javax.inject.Named;
 import agendamedica.model.entities.Paciente;
 import agendamedica.model.manager.ManagerPaciente;
 import agendamedica.view.util.JSFUtil;
-import jdk.nashorn.internal.runtime.JSONFunctions;
 
 import java.io.Serializable;
 import java.util.List;

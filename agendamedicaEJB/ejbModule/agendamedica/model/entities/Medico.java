@@ -16,7 +16,7 @@ public class Medico implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="MEDICO_IDMEDICO_GENERATOR", sequenceName="SEQ_MEDICO",allocationSize=1)
+	@SequenceGenerator(name="MEDICO_IDMEDICO_GENERATOR", sequenceName="SEQ_MEDICO")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="MEDICO_IDMEDICO_GENERATOR")
 	@Column(name="id_medico", unique=true, nullable=false)
 	private Integer idMedico;
