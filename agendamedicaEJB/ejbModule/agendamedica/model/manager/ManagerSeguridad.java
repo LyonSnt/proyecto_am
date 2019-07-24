@@ -42,16 +42,15 @@ public class ManagerSeguridad {
 			throw new Exception("Error en usuario y/o clave.");
 		
 		LoginDTO loginDTO=new LoginDTO();
-		
+		loginDTO.setCodigoUsuario(usuario.getIdUsuario());
 		loginDTO.setUsuario(usuario.getNombreUsuario());
 		loginDTO.setTipoUsuario(usuario.getTipousuario());
-		loginDTO.setCodigoUsuario(usuario.getIdUsuario());
 		
 		//dependiendo del tipo de usuario, configuramos la ruta de acceso a las pags web:
-		if(usuario.getTipousuario().equals("medico"))
-			loginDTO.setRutaAcceso("/medico/index.xhtml");
-		else if(usuario.getTipousuario().equals("admin"))
+		if(usuario.getTipousuario().equals("admin"))
 			loginDTO.setRutaAcceso("/admin/headerAdmin.xhtml");
+		else if(usuario.getTipousuario().equals("medico"))
+			loginDTO.setRutaAcceso("/medico/index.xhtml");
 		else if(usuario.getTipousuario().equals("secretaria"))
 			loginDTO.setRutaAcceso("/secretaria/index.xhtml");
 		return loginDTO;

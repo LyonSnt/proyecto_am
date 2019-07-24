@@ -17,7 +17,7 @@ public class Horario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="HORARIO_IDHORARIO_GENERATOR", sequenceName="SEQ_HORARIO")
+	@SequenceGenerator(name="HORARIO_IDHORARIO_GENERATOR", sequenceName="SEQ_HORARIO",allocationSize = 1)
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="HORARIO_IDHORARIO_GENERATOR")
 	@Column(name="id_horario", unique=true, nullable=false)
 	private Integer idHorario;
