@@ -13,7 +13,9 @@
 	</f:facet>
 </h:head>
 <body>
-	<p:panel header="CONSULTORIO MÉDICO - Módulo Agenda Médica"></p:panel>
+	<p:panel header="CONSULTORIO MÉDICO - Módulo Agenda Médica">
+	<h:outputText value="#{beanLogin.nombre} - #{beanLogin.tipoUsuario}" />
+	</p:panel>
 	
 	<p:megaMenu>
 		<p:menuitem value="Inicio" url="headerAdmin.xhtml" icon="fa fa-home" />

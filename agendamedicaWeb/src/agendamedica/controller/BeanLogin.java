@@ -22,6 +22,7 @@ import java.io.Serializable;
 public class BeanLogin implements Serializable {
 	private static final long serialVersionUID = 1L;
 
+	private String nombre;
 	private String codigoUsuario;
 	private String clave;
 	private String tipoUsuario;
@@ -48,6 +49,7 @@ public class BeanLogin implements Serializable {
 			loginDTO = managerSeguridad.accederSistema(codigoUsuario, clave);
 			// verificamos el acceso del usuario:
 			tipoUsuario = loginDTO.getTipoUsuario();
+			nombre = loginDTO.getUsuario();
 			// redireccion dependiendo del tipo de usuario:
 			managerAuditoria.crearEvento(codigoUsuario, this.getClass(), "accederSistema", "Acceso a login");
 			return loginDTO.getRutaAcceso() + "?faces-redirect=true";
@@ -125,5 +127,14 @@ public class BeanLogin implements Serializable {
 	public void setTipoUsuario(String tipoUsuario) {
 		this.tipoUsuario = tipoUsuario;
 	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
 
 }

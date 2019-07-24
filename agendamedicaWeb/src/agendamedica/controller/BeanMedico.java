@@ -16,6 +16,11 @@ import java.util.List;
 @SessionScoped
 public class BeanMedico implements Serializable {
 	private static final long serialVersionUID = 1L;
+	private String cedula;
+	private String nombres;
+	private String apellidos;
+	private String direccion;
+	
 	
 	@EJB
 	private ManagerMedico managerMedico;
@@ -31,6 +36,30 @@ public class BeanMedico implements Serializable {
 		panelColapsado = true;
 	}
 
+	
+	public String actionComprobarCedula() {
+		try {
+			//Medico c = managerClientes.findClienteById(cedula);
+			Medico c = managerMedico.findMedicosById(cedula);
+			// verificamos la existencia del cliente:
+			if (c == null)
+				return "registro";// debe registrarse
+			
+			//caso contrario si ya existe el cliente, recuperamos la informacion
+			// para presentarla en la pagina de pedidos:
+			nombres = c.getNombreMedico();
+			apellidos = c.getApellidoMedico();
+			direccion = c.getDireccionMedico();
+			//creamos el pedido temporal y asignamos el cliente automaticamente:
+			return "pedido";
+		} catch (Exception e) {
+			// error no esperado:
+			e.printStackTrace();
+			JSFUtil.crearMensajeError(e.getMessage());
+			return "";
+		}
+	}
+	
 	public void actionListenerColapsarPanel() {
 		panelColapsado = !panelColapsado;
 	}
@@ -100,6 +129,46 @@ public class BeanMedico implements Serializable {
 
 	public void setMedicoSeleccionado(Medico medicoSeleccionado) {
 		this.medicoSeleccionado = medicoSeleccionado;
+	}
+
+
+	public String getCedula() {
+		return cedula;
+	}
+
+
+	public void setCedula(String cedula) {
+		this.cedula = cedula;
+	}
+
+
+	public String getNombres() {
+		return nombres;
+	}
+
+
+	public void setNombres(String nombres) {
+		this.nombres = nombres;
+	}
+
+
+	public String getApellidos() {
+		return apellidos;
+	}
+
+
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
+	}
+
+
+	public String getDireccion() {
+		return direccion;
+	}
+
+
+	public void setDireccion(String direccion) {
+		this.direccion = direccion;
 	}
 	
 	

@@ -27,6 +27,23 @@ public class ManagerMedico {
     public ManagerMedico() {
         // TODO Auto-generated constructor stub
     }
+    
+    @SuppressWarnings("unchecked")
+	public List<Medico> findAllMedicoss(){
+  		return managerDAO.findAll(Medico.class, "o.apellidoMedico");
+  	}
+    
+    public Medico findMedicosById(String cedula) throws Exception{
+    	Medico cliente=null;
+  		try {
+  			cliente=(Medico)managerDAO.findById(Medico.class, cedula);
+  		} catch (Exception e) {
+  			e.printStackTrace();
+  			throw new Exception("Error al buscar cliente: "+e.getMessage());
+  		}
+  		return cliente;
+  	}
+  	
 
     public List<Medico> findAllMedicos() {
 		String consulta = "select o from Medico o";
