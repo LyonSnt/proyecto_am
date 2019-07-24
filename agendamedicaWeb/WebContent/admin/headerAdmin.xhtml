@@ -4,7 +4,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-	
+
 <h:head>
 	<f:facet name="first">
 		<meta name="viewport"
@@ -21,14 +21,14 @@
 		<p:submenu label="Registrar" icon="pi pi-check">
 			<p:column>
 				<p:submenu label=".">
-					
+
 					<p:menuitem value="Paciente" url="./paciente.xhtml" />
 					<p:menuitem value="Horario" url="./horario.xhtml" />
 					<p:menuitem value="Especialidad" url="./especialidad.xhtml" />
 					<p:menuitem value="Medico" url="./medico.xhtml" />
 					<p:menuitem value="Usuario" url="./usuario.xhtml" />
 					<p:menuitem value="Turno" url="./turno.xhtml" />
-					
+
 				</p:submenu>
 			</p:column>
 		</p:submenu>
@@ -46,7 +46,7 @@
 
 		</p:submenu>
 
-		<p:menuitem value="Citas" url="./estado.xhtml" icon="fa fa-book" />
+		<p:menuitem value="Citas" url="./citas.xhtml" icon="fa fa-book" />
 
 		<f:facet name="options">
 			<p:commandButton value="Salir" action="#{beanLogin.salirSistema()}"
@@ -55,6 +55,7 @@
 	</p:megaMenu>
 
 	<!-- </p:panel> -->
+
 	<div align="center">
 		<h:graphicImage
 			value="http://img.europapress.es/fotoweb/fotonoticia_20170202174759_640.jpg"

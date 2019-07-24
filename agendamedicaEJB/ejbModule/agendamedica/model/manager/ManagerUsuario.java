@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-
 import agendamedica.model.entities.Usuario;
 
 /**
@@ -31,11 +30,11 @@ public class ManagerUsuario {
 		// TODO Auto-generated constructor stub
 	}
 
-	
-	 public Usuario findUsuarioByUsername(String username) {
-			return em.find(Usuario.class,username);
-		}
-	@SuppressWarnings("unlikely-arg-type")
+	public Usuario findUsuarioByUsername(String username) {
+		return em.find(Usuario.class, username);
+	}
+
+	//@SuppressWarnings("unlikely-arg-type")
 	public boolean comprobarUsuarios(String nombreUsuario, String clave, String tipo) throws Exception {
 		Usuario u = findUsuarioByUsername(nombreUsuario);
 		if (u == null)
@@ -46,13 +45,13 @@ public class ManagerUsuario {
 			return true;
 		throw new Exception("Contraseña no válida.");
 	}
-	
+
 //	public List <Tipousuario> findAllTipoUsauarios() {
 //		String consulta = "SELECT r FROM Tipousuario r";
 //		Query q = em.createQuery(consulta, Tipousuario.class);
 //		return q.getResultList();
 //	}
-	
+
 	public List<Usuario> findAllUsuarios() {
 		String consulta = "select o from Usuario o";
 		Query q = em.createQuery(consulta, Usuario.class);
@@ -66,14 +65,13 @@ public class ManagerUsuario {
 
 	}
 
-
 	public void insertarUsuario(Usuario usuario) throws Exception {
 		if (findUsuarioByNombreUsuario(usuario.getNombreUsuario()).size() > 0)
 			throw new Exception("Ya existe el usuario");
 		em.persist(usuario);
 
 	}
-	
+
 	public Usuario findUsuarioByIdUsuario(int idUsuario) {
 		return em.find(Usuario.class, idUsuario);
 	}
@@ -84,27 +82,19 @@ public class ManagerUsuario {
 			em.remove(usuario);
 	}
 
-//	public void actualizarUsuarioh(Usuario usuario) throws Exception {
-//		Usuario u = findUsuarioById(usuario.getIdUsuario());
-//		if (u == null)
-//			throw new Exception("No existe el usuario con el id especificado");
-//		u.setNombreUsuario(usuario.getNombreUsuario());
-//		u.setPasswordUsuario(usuario.getPasswordUsuario());
-//		em.merge(u);
-//
-//	}
-	
-//	public void actualizarUsuario(Usuario usuario) throws Exception  {
-//		Usuario user = findUsuarioByIdUsuario(usuario.getIdUsuario());
-//		if (user == null)
-//			throw new Exception("no existe.");
-//		user.setNombreUsuario(usuario.getNombreUsuario());
-//		user.setPasswordUsuario(usuario.getPasswordUsuario());
-//		user.setTipousuario(usuario.getTipousuario());
-//		user.setEstadoUsuario(usuario.getEstadoUsuario());
-//		user.setResponsableturno(usuario.getResponsableturno());
-//		user.setMedico(usuario.getMedico());
-//		em.merge(user);
-//	}
+	public Usuario findUsuarioByIdUsuarioActualizar(String idUsuario) {
+		return em.find(Usuario.class, idUsuario);
+	}
+
+	public void actualizarUsuario(Usuario usuario) throws Exception {
+		Usuario u = findUsuarioByIdUsuarioActualizar(usuario.getIdUsuario());
+		if (u == null)
+			throw new Exception("No existe el usuario con el id especificado");
+		u.setNombreUsuario(usuario.getNombreUsuario());
+		u.setPasswordUsuario(usuario.getPasswordUsuario());
+		u.setTipousuario(usuario.getTipousuario());
+		em.merge(u);
+
+	}
 
 }

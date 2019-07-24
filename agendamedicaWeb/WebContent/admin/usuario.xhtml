@@ -11,7 +11,7 @@
 			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
 		<title>Usuario</title>
 	</f:facet>
-		<style type="text/css">
+	<style type="text/css">
 body {
 	background: url("../../img/core-img/breadcumb.png");
 }
@@ -40,48 +40,28 @@ body {
 
 				<p:panelGrid columns="2">
 
-					<h:outputText value="Nombre de Usuario" />
+					<h:outputText value="Usuario" />
+					<p:inputText value="#{controllerUsuario.usuario.idUsuario}"></p:inputText>
+
+
+					<h:outputText value="Nombre y Apellido" />
 					<p:inputText value="#{controllerUsuario.usuario.nombreUsuario}"></p:inputText>
 
 					<h:outputText value="Contraseña" />
 					<p:inputText value="#{controllerUsuario.usuario.passwordUsuario}"></p:inputText>
 
-					<h:outputText value="Tipo Usuario:" />
-					<p:selectOneMenu value="#{beanLogin.tipoUsuario}">
-						<f:selectItem itemLabel="Seleccione" />
-						<f:selectItems value="#{beanLogin.listaTipousuario}" var="tipo"
-							itemLabel="#{tipo.nombreTipousuario}"
-							itemValue="#{tipo.idTipousuario}" />
-					</p:selectOneMenu>
+					<h:outputText value="Tipo de usuario" />
+					<p:selectOneMenu value="#{controllerUsuario.usuario.tipousuario}"
+						required="true" requiredMessage="Debe seleccionar el tipo.">
+						<f:selectItem itemLabel="Administrador" itemValue="admin" />
+						<f:selectItem itemLabel="Medico" itemValue="medico" />
+						<f:selectItem itemLabel="Secretaria" itemValue="secretaria" />
 
-					<h:outputText value="Estado" />
-					<p:inputText value="#{controllerUsuario.usuario.estadoUsuario}"></p:inputText>
-
-					<h:outputText value="Fecha Registro" />
-					<p:inputText
-						value="#{controllerUsuario.usuario.fecharegistroUsuario}"></p:inputText>
-
-					<h:outputText value="Responsable" />
-					<p:selectOneMenu value="#{beanResponsable.responsable}">
-						<f:selectItem itemLabel="Seleccione" />
-						<f:selectItems value="#{beanResponsable.listaResponsable}"
-							var="responsable"
-							itemLabel="#{responsable.nombreResponsableturno} #{responsable.apellidoResponsableturno}"
-							itemValue="#{responsable.idResponsableturno}" />
-					</p:selectOneMenu>
-
-						<h:outputText value="Medico" />
-					<p:selectOneMenu value="#{beanMedico.medico}">
-						<f:selectItem itemLabel="Seleccione" />
-						<f:selectItems value="#{beanMedico.listaMedico}"
-							var="medico" itemLabel="#{medico.nombreMedico} #{medico.apellidoMedico}"
-							itemValue="#{medico.idMedico}" />
 					</p:selectOneMenu>
 
 					<p:commandButton value="Ingresar" icon="fa fa-save"
 						update="@form,:form2"
 						actionListener="#{controllerUsuario.actionListenerInsertarUsuario()}"></p:commandButton>
-
 				</p:panelGrid>
 
 			</p:panel>
@@ -93,30 +73,21 @@ body {
 		<p:panel header="Usuarios">
 			<p:dataTable value="#{controllerUsuario.listaUsuarios}" var="usuario"
 				reflow="true" rows="5">
-				<p:column headerText="Id usuario">
+				<p:column headerText="Usuario">
 					<h:outputText value="#{usuario.idUsuario}" />
 				</p:column>
-				<p:column headerText="Nombre Usuario">
+				<p:column headerText="Nombre y Apellido">
 					<h:outputText value="#{usuario.nombreUsuario}" />
 				</p:column>
 				<p:column headerText="Contraseña">
 					<h:outputText value="#{usuario.passwordUsuario}" />
 				</p:column>
-				<p:column headerText="Tipo de Usuario">
+
+				<p:column headerText="Tipo de usuario">
 					<h:outputText value="#{usuario.tipousuario}" />
 				</p:column>
-				<p:column headerText="Estado">
-					<h:outputText value="#{usuario.estadoUsuario}" />
-				</p:column>
-				<p:column headerText="Fecha de Registro">
-					<h:outputText value="#{usuario.fecharegistroUsuario}" />
-				</p:column>
-				<p:column headerText="Id Responsable">
-					<h:outputText value="#{usuario.responsableturno}" />
-				</p:column>
-				<p:column headerText="Id Medico">
-					<h:outputText value="#{usuario.medico}" />
-				</p:column>
+
+
 
 				<p:column headerText="OPCIONES" priority="1">
 					<p:commandButton icon="fa fa-close" title="Eliminar" update="@form"
@@ -153,6 +124,16 @@ body {
 				<h:outputText value="Contraseña" />
 				<p:inputText
 					value="#{controllerUsuario.usuarioSeleccionado.passwordUsuario}"></p:inputText>
+
+					<h:outputText value="Tipo de usuario" />
+					<p:selectOneMenu value="#{controllerUsuario.usuarioSeleccionado.tipousuario}"
+						required="true" requiredMessage="Debe seleccionar el tipo.">
+						<f:selectItem itemLabel="Administrador" itemValue="admin" />
+						<f:selectItem itemLabel="Medico" itemValue="medico" />
+						<f:selectItem itemLabel="Secretaria" itemValue="secretaria" />
+
+					</p:selectOneMenu>
+
 				<p:commandButton value="Actualizar" icon="fa fa-save"
 					update="@form,:form2"
 					actionListener="#{controllerUsuario.actionListenerActualizarUsuario()}"></p:commandButton>

@@ -2,10 +2,29 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"> 
+      xmlns:h="http://java.sun.com/jsf/html"
+      	xmlns:p="http://primefaces.org/ui">
 
-<h:head></h:head> 
+<h:head>
+<style type="text/css">
+    .left {
+        text-align: left;
+    }
+     
+    .right div {
+        float: right;
+    }
+</style>
+</h:head> 
 <body> 
-<h1>pagina turno</h1>
+
+<div align="center">
+		<h:panelGrid columns="2" columnClasses="left,right" style="width:100%">
+ 
+			<p:chart type="bar" model="#{beanGrafico.animatedModel2}"
+				style="width:500px;" />
+		</h:panelGrid>
+	</div>
+
 </body> 
 </html>

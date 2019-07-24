@@ -81,13 +81,19 @@ body {
 				var="medico" reflow="true" rows="5">
 
 
-				<p:column headerText="Cedula">
+				<p:column headerText="Cedula" 
+					filterBy="#{medico.cedulaMedico}"
+					filterMatchMode="contains">
 					<h:outputText value="#{medico.cedulaMedico}" />
 				</p:column>
-				<p:column headerText="Nombre">
+				<p:column headerText="Nombre"
+				filterBy="#{medico.nombreMedico}"
+					filterMatchMode="contains">
 					<h:outputText value="#{medico.nombreMedico}" />
 				</p:column>
-				<p:column headerText="Apellidos">
+				<p:column headerText="Apellidos"
+				filterBy="#{medico.apellidoMedico}"
+					filterMatchMode="contains">
 					<h:outputText value="#{medico.apellidoMedico}" />
 				</p:column>
 				<p:column headerText="Celular">
@@ -100,10 +106,15 @@ body {
 					<h:outputText value="#{medico.correoMedico}" />
 				</p:column>
 				<p:column headerText="Especialidad">
-					<h:outputText value="#{medico.especialidad}" />
+					<h:outputText value="#{medico.especialidad.nombreEspecialidad}" />
 				</p:column>
+				
 				<p:column headerText="Horario">
-					<h:outputText value="#{medico.horario}" />
+					<h:outputText value="#{medico.horario.inicioHorario}" />
+				</p:column>
+				
+				<p:column headerText="Horario">
+					<h:outputText value="#{medico.horario.finHorario}" />
 				</p:column>
 
 				<p:column headerText="OPCIONES">

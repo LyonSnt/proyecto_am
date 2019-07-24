@@ -45,20 +45,6 @@ public class ControllerUsuario implements Serializable {
 		panelColapsado = !panelColapsado;
 	}
 
-//	public void actionListerInsertarUsuarios() {
-//		try {
-//
-//			managerUsuario.insertarUsuario(usuario);
-//			listaUsuarios = managerUsuario.findAllUsuarios();
-//			usuario = new Usuario();
-//			JSFUtil.crearMensajeInfo("Datos de usuario insertados.");
-//		} catch (Exception e) {
-//			JSFUtil.crearMensajeError(e.getMessage());
-//			e.printStackTrace();
-//		}
-//
-//	}
-
 	public void actionListenerInsertarUsuario() {
 		try {
 
@@ -81,23 +67,22 @@ public class ControllerUsuario implements Serializable {
 		JSFUtil.crearMensajeInfo("Usuario Eliminado");
 	}
 	
-	//ESTA PARTE ES PARA ACTUALIZAR
-	public void actionListenerSeleccionarUsuario(Usuario usuario) {
-		usuarioSeleccionado = usuario;
-	}
+	// ESTA PARTE ES PARA ACTUALIZAR
+		public void actionListenerSeleccionarUsuario(Usuario usuario) {
+			usuarioSeleccionado = usuario;
+		}
 
-//	public void actionListenerActualizarUsuario() {
-//		try {
-//			managerUsuario.actualizarUsuario(usuarioSeleccionado);
-//			listaUsuarios = managerUsuario.findAllUsuarios();
-//			JSFUtil.crearMensajeInfo("Datos actualizados");
-//		} catch (Exception e) {
-//			JSFUtil.crearMensajeError(e.getMessage());
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//	}
-//	
+		public void actionListenerActualizarUsuario() {
+			try {
+				managerUsuario.actualizarUsuario(usuarioSeleccionado);
+				listaUsuarios = managerUsuario.findAllUsuarios();
+				JSFUtil.crearMensajeInfo("Datos actualizados");
+			} catch (Exception e) {
+				JSFUtil.crearMensajeError(e.getMessage());
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 
 	public String getIdUsuario() {
 		return idUsuario;
