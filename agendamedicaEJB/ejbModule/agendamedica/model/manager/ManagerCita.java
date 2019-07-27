@@ -34,6 +34,7 @@ public class ManagerCita {
 //				"  WHERE id_estado = 2", Turno.class);
 //		return q.getResultList();
 //	}
+	
 
 	public List<Turno> listar() {
 		Query q = em.createNativeQuery(
