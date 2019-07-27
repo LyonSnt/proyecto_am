@@ -8,9 +8,71 @@
 	<f:event listener="#{beanLogin.actionVerificarLogin()}"
 		type="preRenderView"></f:event>
 </f:metadata>
-<h:head></h:head>
+
+
+<h:head>
+
+	<f:facet name="first">
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
+		<title>Citas</title>
+	</f:facet>
+	<style type="text/css">
+.left {
+	text-align: left;
+}
+
+.right div {
+	float: right;
+}
+/* body {
+	background: url("../../img/core-img/breadcumb.png");
+} */
+</style>
+</h:head>
 <body>
-	<p:panel header="FUNCIONES DEL medico">
+	<p:panel header="CONSULTORIO MÉDICO - Módulo Agenda Médica">
+		<h:outputText value="#{beanLogin.nombre} - #{beanLogin.tipoUsuario}" />
 	</p:panel>
+	<p:megaMenu>
+		<p:menuitem value="Inicio" url="index.xhtml" icon="pi pi-home" />
+
+		<p:submenu label="Consultar" icon="pi pi-file">
+
+			<p:column>
+				<p:submenu label="Paciente">
+					<p:menuitem value="Médico" url="#" />
+					<p:menuitem value="Turno" url="#" />
+				</p:submenu>
+			</p:column>
+
+		</p:submenu>
+
+		<p:menuitem value="Citas" url="./citas.xhtml" icon="fa fa-book" />
+
+		<f:facet name="options">
+			<p:commandButton value="Salir" action="#{beanLogin.salirSistema()}"
+				icon="fa fa-sign-out" />
+		</f:facet>
+	</p:megaMenu>
+	
+	<br />
+
+
+<p:panel>
+<h:panelGrid columns="2" columnClasses="left,right" style="width:100%">
+
+			<p:chart type="bar" model="#{beanGrafico.animatedModel2}"/>
+		</h:panelGrid>
+</p:panel>
+
+
+	<!-- </p:panel> -->
+
+	<!-- <div align="center">
+		<h:graphicImage
+			value="http://img.europapress.es/fotoweb/fotonoticia_20170202174759_640.jpg"
+			style="width:100%" />
+	</div> -->
 </body>
 </html>

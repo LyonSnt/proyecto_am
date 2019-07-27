@@ -4,39 +4,35 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-
 <f:metadata>
 	<f:event listener="#{beanLogin.actionVerificarLogin()}"
 		type="preRenderView"></f:event>
 </f:metadata>
 
+
 <h:head>
+
 	<f:facet name="first">
 		<meta name="viewport"
 			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
-		<title>Citas</title>
+		<title>Medico</title>
 	</f:facet>
+	<style type="text/css">
+.left {
+	text-align: left;
+}
+
+.right div {
+	float: right;
+}
+</style>
 </h:head>
 <body>
-
-	<p:panel header="CONSULTORIO MÉDICO - Módulo Agenda Médica"></p:panel>
+	<p:panel header="CONSULTORIO MÉDICO - Módulo Agenda Médica">
+		<h:outputText value="#{beanLogin.nombre} - #{beanLogin.tipoUsuario}" />
+	</p:panel>
 	<p:megaMenu>
-		<p:menuitem value="Inicio" url="headerAdmin.xhtml" icon="pi pi-home" />
-
-		<p:submenu label="Registrar" icon="pi pi-check">
-			<p:column>
-				<p:submenu label=".">
-
-					<p:menuitem value="Paciente" url="./paciente.xhtml" />
-					<p:menuitem value="Horario" url="./horario.xhtml" />
-					<p:menuitem value="Especialidad" url="./especialidad.xhtml" />
-					<p:menuitem value="Medico" url="./medico.xhtml" />
-					<p:menuitem value="Usuario" url="./usuario.xhtml" />
-					<p:menuitem value="Turno" url="./turno.xhtml" />
-
-				</p:submenu>
-			</p:column>
-		</p:submenu>
+		<p:menuitem value="Inicio" url="index.xhtml" icon="pi pi-home" />
 
 
 
@@ -58,13 +54,16 @@
 				icon="fa fa-sign-out" />
 		</f:facet>
 	</p:megaMenu>
+	
+	<br />
+
 
 	<!-- </p:panel> -->
 
-	<div align="center">
+	<!-- <div align="center">
 		<h:graphicImage
 			value="http://img.europapress.es/fotoweb/fotonoticia_20170202174759_640.jpg"
 			style="width:100%" />
-	</div>
+	</div> -->
 </body>
 </html>

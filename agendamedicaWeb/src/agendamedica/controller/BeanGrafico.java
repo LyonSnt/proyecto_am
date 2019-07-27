@@ -52,7 +52,10 @@ public class BeanGrafico implements Serializable {
         BarChartModel model = new BarChartModel();
       //  Medico med = new Medico();
         ChartSeries boys = new ChartSeries();
+        
         boys.setLabel("Atendido");
+      //  boys.set(managerCita.listar().get(i).getIdTurno(), managerCita.listar().get(i).getCantmedicinaTurno());
+
         boys.set("Enero", 5);
         boys.set("Febrero", 10);
         boys.set("Marzo", 9);
