@@ -25,26 +25,25 @@ public class ManagerCita {
 		// listar();
 	}
 
-//	public List<Turno> listar(){
-//		Query q = em.createNativeQuery("SELECT id_turno, id_paciente, id_medico, id_usuario, valor_turno, fecha_turno, \n" + 
-//				"       enfermedad_turno, sintoma_turno, alergia_turno, tiposangre_turno, \n" + 
-//				"       nombremedicina_turno, cantmedicina_turno, dosisdiaria_turno, \n" + 
-//				"       id_estado\n" + 
-//				"  FROM public.turno\n" + 
-//				"  WHERE id_estado = 2", Turno.class);
+	public List<Turno> listar() {
+		Query q = em
+				.createNativeQuery("SELECT id_turno, id_paciente, id_medico, id_usuario, valor_turno, fecha_turno, \n"
+						+ "       enfermedad_turno, sintoma_turno, alergia_turno, tiposangre_turno, \n"
+						+ "       nombremedicina_turno, cantmedicina_turno, dosisdiaria_turno, \n"
+						+ "       id_estado \n" + "  FROM public.turno", Turno.class);
+		return q.getResultList();
+	}
+	
+//	public List<Turno> listar() {
+//		Query q = em.createNativeQuery(
+//				"select id_estado,fecha_turno\n" + 
+//				"	from turno\n" + 
+//				"	where id_estado=1\n" + 
+//				"	group by fecha_turno,id_estado",
+//				Turno.class);
 //		return q.getResultList();
 //	}
 	
-
-	public List<Turno> listar() {
-		Query q = em.createNativeQuery(
-				"SELECT id_turno, id_paciente, id_medico, id_usuario, valor_turno, fecha_turno, \n"
-						+ "       enfermedad_turno, sintoma_turno, alergia_turno, tiposangre_turno, \n"
-						+ "       nombremedicina_turno, cantmedicina_turno, dosisdiaria_turno, \n"
-					+ "       id_estado \n" + "  FROM public.turno",
-				Turno.class);
-		return q.getResultList();
-	}
 
 	public Turno listarr() {
 		String consulta = "select count(id_estado) from turno group by id_estado";

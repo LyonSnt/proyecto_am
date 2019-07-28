@@ -34,18 +34,23 @@ public class BeanCita implements Serializable {
 	@PostConstruct
 	private void inicializar() {
 		listaCita = managerCita.listar();
+		//graficar();
 		
 //		listaCita = managerCita.findAllCitas();
 //		turno = new Turno();
 	}
+	 public ManagerCita getmanagerCita() {
+	        return managerCita;
+	    }
+
 
 	public void graficar() {
 		barra = new BarChartModel();
 		for (int i = 0; i < managerCita.listar().size(); i++) {
 			ChartSeries serie = new BarChartSeries();
 
-			serie.setLabel(managerCita.listar().get(i).getEstado().getNombreEstado());// esta parte es del los nombres																				// de la columna
-			serie.set(managerCita.listar().get(i).getEstado(), managerCita.listar().get(i).getCantmedicinaTurno());
+			serie.setLabel(managerCita.listar().get(i).getEstado().getNombreEstado());// esta parte es del los nombresdel lengend																			// de la columna
+			serie.set(managerCita.listar().get(i).getEstado().getNombreEstado(), managerCita.listar().get(i).getCantmedicinaTurno());
 			barra.addSeries(serie);
 		}
 		barra.setTitle("Citas");

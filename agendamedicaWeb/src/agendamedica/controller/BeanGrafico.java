@@ -41,7 +41,7 @@ public class BeanGrafico implements Serializable {
  
         FacesContext.getCurrentInstance().addMessage(null, msg);
     }
- 
+
  
     public BarChartModel getAnimatedModel2() {
         return animatedModel2;

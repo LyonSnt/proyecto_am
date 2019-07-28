@@ -6,7 +6,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<f:facet name="first">
+	<f:facet name="first">
 		<meta name="viewport"
 			content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no" />
 		<title>Citas</title>
@@ -28,17 +28,23 @@
 
 
 	<!-- 	</p:panel> -->
-	
-	<h:form>
-		<p:commandButton value="Graficar" id="graficar" actionListener="#{beanCita.graficar()}" update="hpgGrafico"></p:commandButton>
-	
-	<h:panelGrid id="hpgGrafico">
-	<p:chart type="bar" model="#{beanCita.barra}" style="width: 1000px; height: 500px" rendered="#{beanCita.barra != null}"></p:chart>
-	
-	
-	</h:panelGrid>
-	
-	</h:form>
 
+	<!-- <p:panel> -->
+	<div align="center">
+		<h:form>
+			<p:commandButton value="Graficar" id="graficar"
+				actionListener="#{beanCita.graficar()}" update="hpgGrafico"></p:commandButton>
+
+			<h:panelGrid id="hpgGrafico">
+				<p:chart type="bar" model="#{beanCita.barra}"
+					style="width: 1000px; height: 500px"
+					rendered="#{beanCita.barra != null}"></p:chart>
+
+
+			</h:panelGrid>
+
+		</h:form>
+		</div>
+	<!-- </p:panel> -->
 </body>
 </html>
