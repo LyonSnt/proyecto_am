@@ -19,7 +19,7 @@ body {
 	<p:growl>
 		<p:autoUpdate />
 	</p:growl>
-	<p:panel header="CONSULTORIO MÉDICO - Módulo Agenda Médica" >
+	<p:panel header="CONSULTORIO MÉDICO - Módulo Agenda Médica">
 		<h:outputText value="#{beanLogin.nombre} - #{beanLogin.tipoUsuario}" />
 	</p:panel>
 	<h:form>
@@ -57,31 +57,40 @@ body {
 				<h:outputText value="Seleccione el Paciente:"
 					style="font-weight: bold" />
 				<h:panelGroup>
-					<p:selectOneMenu value="#{beanTurno.cedulaPl}" filter="true"
+					<p:selectOneMenu value="#{beanTurno.idPaciente}" filter="true"
 						filterMatchMode="contains">
 						<f:selectItem itemLabel="Seleccione..." itemValue=""
 							noSelectionOption="true" />
-						<f:selectItems  value="#{beanTurno.listaPacienteSI}"/>
-					<p:ajax update="cedulaPl"
-							listener="#{beanTurno.asignarPaciente()}"></p:ajax>
+						<f:selectItems value="#{beanTurno.listaPacienteSI}" />
+						<p:ajax listener="#{beanTurno.asignarPaciente()}"></p:ajax>
 					</p:selectOneMenu>
 				</h:panelGroup>
-				<h:outputText value="Codigo del paciente:" style="font-weight: bold" />
-				<h:outputText id="cedulaPl"
-					value="#{beanTurno.cedulaPl}" />
-				
+
 				<h:outputText value="Seleccione el Medico:"
 					style="font-weight: bold" />
 				<h:panelGroup>
-					<p:selectOneMenu value="#{beanTurno.cedulaMedico}" filter="true"
+					<p:selectOneMenu value="#{beanTurno.idMedico}" filter="true"
 						filterMatchMode="contains">
 						<f:selectItem itemLabel="Seleccione..." itemValue=""
 							noSelectionOption="true" />
 						<f:selectItems value="#{beanTurno.listaMedicoSI}" />
+						<p:ajax listener="#{beanTurno.asignarMedico()}"></p:ajax>
 					</p:selectOneMenu>
 				</h:panelGroup>
 				<h:outputText value="Valor:" style="font-weight: bold" />
-				<h:inputText value="#{beanTurno.turno.valorTurno}" />
+				<h:outputText value="#{beanTurno.turnoTmp.valorTurno}" />
+				
+				<h:outputText value="Seleccione el Estado:"
+					style="font-weight: bold" />
+				<h:panelGroup>
+					<p:selectOneMenu value="#{beanTurno.idMedico}" filter="true"
+						filterMatchMode="contains">
+						<f:selectItem itemLabel="Seleccione..." itemValue=""
+							noSelectionOption="true" />
+						<f:selectItems value="#{beanTurno.listaMedicoSI}" />
+						<p:ajax listener="#{beanTurno.asignarMedico()}"></p:ajax>
+					</p:selectOneMenu>
+				
 			</p:panelGrid>
 		</h:form>
 

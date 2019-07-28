@@ -34,6 +34,23 @@ public class ManagerMedico {
 		return managerDAO.findAll(Medico.class, "o.apellidoMedico");
 	}
 	
+	/**
+	 * Metodo finder para la consulta de un medicdo especifico.
+	 * 
+	 * @param cedula cedula del medico que se desea buscar.
+	 * @return datos del paciente.
+	 * @throws Exception
+	 */
+	public Medico findMedicoByIds(Integer id) throws Exception {
+		Medico medico = null;
+		try {
+			medico = (Medico) managerDAO.findById(Medico.class, id);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception("Error al buscar medico: " + e.getMessage());
+		}
+		return medico;
+	}
 	
 	
 //	SELECT id_medico, cedula_medico, nombre_medico, apellido_medico, celular_medico, 

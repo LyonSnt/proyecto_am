@@ -25,10 +25,9 @@ import java.util.List;
 public class BeanTurno implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private String cedulaPaciente;
-	private String cedulaMedico;
 	private Date fecha;
-	private Integer cedulaPl;
+	private Integer idPaciente;
+	private Integer idMedico;
 	@EJB
 	private ManagerMedico managerMedico;
 	@EJB
@@ -38,7 +37,6 @@ public class BeanTurno implements Serializable {
 
 	private Turno turnoTmp;
 	private boolean turnoTmpGuardada;
-	private Turno turno;
 	private Medico medico;
 	private Paciente paciente;
 
@@ -53,8 +51,8 @@ public class BeanTurno implements Serializable {
 	@PostConstruct
 	private void iniciar() {
 		// TODO Auto-generated method stub
-		turno = new Turno();
-		// paciente =new Paciente();
+		turnoTmp = new Turno();
+		paciente = new Paciente();
 	}
 
 	/**
@@ -64,12 +62,13 @@ public class BeanTurno implements Serializable {
 	 * 
 	 * @return outcome para la navegacion.
 	 */
-	public String crearNuevaTurno() {
+	public void crearNuevaTurno() {
 		turnoTmp = managerTurno.crearTurnoTmp();
-		cedulaPl = null;
-		cedulaMedico = null;
+		idPaciente = null;
+		idMedico = null;
+		
 		turnoTmpGuardada = false;
-		return "";
+
 	}
 
 	/**
@@ -84,8 +83,20 @@ public class BeanTurno implements Serializable {
 			JSFUtil.crearMensajeWarning("El Turno ya fue guardada.");
 		}
 		try {
-			System.out.println("hola " + turnoTmp);
-			managerTurno.asignarPacienteTurnoTmp(turnoTmp, cedulaPl);
+			System.out.println("hola paciente" + turnoTmp);
+			managerTurno.asignarPacienteTurnoTmp(turnoTmp, idPaciente);
+		} catch (Exception e) {
+			JSFUtil.crearMensajeError(e.getMessage());
+		}
+	}
+
+	public void asignarMedico() {
+		if (turnoTmpGuardada == true) {
+			JSFUtil.crearMensajeWarning("El Turno ya fue guardada.");
+		}
+		try {
+			System.out.println("hola medico" + turnoTmp);
+			managerTurno.asignarMedicoTurnoTmp(turnoTmp, idMedico);
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError(e.getMessage());
 		}
@@ -94,7 +105,7 @@ public class BeanTurno implements Serializable {
 	/**
 	 * Action que almacena en la base de datos una turno temporal creada en memoria.
 	 * Hace uso del componente {@link agendamedica.model.manager.ManagerTurno
-	 * ManagerTur0...............................no} de la capa model.
+	 * ManagerTurno} de la capa model.
 	 * 
 	 * @return outcome para la navegacion.
 	 */
@@ -104,6 +115,7 @@ public class BeanTurno implements Serializable {
 			return "";
 		}
 		try {
+			System.out.println("examinar turno hhhhhhh->   " + turnoTmp.getUsuario());
 			managerTurno.guardarTurnoTemporal(beanLogin.getCodigoUsuario(), turnoTmp);
 			turnoTmpGuardada = true;
 		} catch (Exception e) {
@@ -112,30 +124,21 @@ public class BeanTurno implements Serializable {
 
 		return "";
 	}
-	
 
-	public String getCedulaPaciente() {
-		return cedulaPaciente;
+	public Integer getIdMedico() {
+		return idMedico;
 	}
 
-	public void setCedulaPaciente(String cedulaPaciente) {
-		this.cedulaPaciente = cedulaPaciente;
+	public void setIdMedico(Integer idMedico) {
+		this.idMedico = idMedico;
 	}
 
-	public String getCedulaMedico() {
-		return cedulaMedico;
+	public Integer getIdPaciente() {
+		return idPaciente;
 	}
 
-	public void setCedulaMedico(String cedulaMedico) {
-		this.cedulaMedico = cedulaMedico;
-	}
-
-	public Integer getCedulaPl() {
-		return cedulaPl;
-	}
-
-	public void setCedulaPl(Integer cedulaPl) {
-		this.cedulaPl = cedulaPl;
+	public void setIdPaciente(Integer idPaciente) {
+		this.idPaciente = idPaciente;
 	}
 
 	public Date getFecha() {
@@ -157,8 +160,7 @@ public class BeanTurno implements Serializable {
 		List<Paciente> listadoPaciente = managerPaciente.findAllPacientes();
 
 		for (Paciente p : listadoPaciente) {
-			SelectItem item = new SelectItem(p.getCedulaPaciente(),
-					p.getApellidoPaciente() + " " + p.getNombrePaciente());
+			SelectItem item = new SelectItem(p.getIdPaciente(), p.getApellidoPaciente() + " " + p.getNombrePaciente());
 			listadoSI.add(item);
 		}
 		return listadoSI;
@@ -172,10 +174,10 @@ public class BeanTurno implements Serializable {
 	 */
 	public List<SelectItem> getListaMedicoSI() {
 		List<SelectItem> listadoSI = new ArrayList<SelectItem>();
-		List<Medico> listadoMedico = managerMedico.findAllMedicos();
+		List<Medico> listadoMedico = managerMedico.findAllMedicoss();
 
 		for (Medico m : listadoMedico) {
-			SelectItem item = new SelectItem(m.getCedulaMedico(), m.getApellidoMedico() + " " + m.getNombreMedico());
+			SelectItem item = new SelectItem(m.getIdMedico(), m.getApellidoMedico() + " " + m.getNombreMedico());
 			listadoSI.add(item);
 		}
 		return listadoSI;
@@ -203,14 +205,6 @@ public class BeanTurno implements Serializable {
 
 	public void setBeanLogin(BeanLogin beanLogin) {
 		this.beanLogin = beanLogin;
-	}
-
-	public Turno getTurno() {
-		return turno;
-	}
-
-	public void setTurno(Turno turno) {
-		this.turno = turno;
 	}
 
 	public Medico getMedico() {
