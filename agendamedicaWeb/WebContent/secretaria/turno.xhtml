@@ -37,7 +37,7 @@ body {
 	<p:panel id="panel1">
 		<h:form id="form1">
 			<p:panelGrid columns="2">
-				<p:commandButton actionListener="#{beanTurno.asignarFecha()}"
+				<p:commandButton actionListener="#{beanTurno.crearNuevaTurno()}"
 					value="Generar Turno" update="@form" icon="fa fa-file-o" />
 				<h:panelGroup>
 					<p:commandButton value="Guardar Turno" icon="fa fa-save"
@@ -51,24 +51,25 @@ body {
 				<h:outputText value="Nro. de Turno:" style="font-weight: bold" />
 				<h:outputText value="#{beanTurno.turnoTmp.idTurno}" />
 				<h:outputText value="Fecha de la Truno:" style="font-weight: bold" />
-				<h:outputText value="#{beanTurno.fecha}">
+				<h:outputText value="#{beanTurno.turnoTmp.fechaTurno}">
 					<f:convertDateTime pattern="dd/MM/yyyy HH:mm:ss" />
 				</h:outputText>
 				<h:outputText value="Seleccione el Paciente:"
 					style="font-weight: bold" />
 				<h:panelGroup>
-					<p:selectOneMenu value="#{beanTurno.cedulaPaciente}" filter="true"
+					<p:selectOneMenu value="#{beanTurno.cedulaPl}" filter="true"
 						filterMatchMode="contains">
 						<f:selectItem itemLabel="Seleccione..." itemValue=""
 							noSelectionOption="true" />
-						<f:selectItems value="#{beanTurno.listaPacienteSI}" />
-						<p:ajax update="cedulaPaciente"
+						<f:selectItems  value="#{beanTurno.listaPacienteSI}"/>
+					<p:ajax update="cedulaPl"
 							listener="#{beanTurno.asignarPaciente()}"></p:ajax>
 					</p:selectOneMenu>
 				</h:panelGroup>
-				<h:outputText value="Codigo del Paciene:" style="font-weight: bold" />
-				<h:outputText id="cedulaPaciente"
-					value="#{beanTurno.cedulaPaciente}" />
+				<h:outputText value="Codigo del paciente:" style="font-weight: bold" />
+				<h:outputText id="cedulaPl"
+					value="#{beanTurno.cedulaPl}" />
+				
 				<h:outputText value="Seleccione el Medico:"
 					style="font-weight: bold" />
 				<h:panelGroup>

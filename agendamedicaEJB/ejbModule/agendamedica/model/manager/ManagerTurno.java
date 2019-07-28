@@ -78,28 +78,29 @@ public class ManagerTurno {
 		return turnoTmp;
 	}
 	
-	public Date fechaT() {
-		Date fecha=new Date();
-		return fecha;
-	}
+
 
 	/**
 	 * Asigna un paciente a un turno temporal.
 	 * 
 	 * @param turnoTmp       Turno temporal creada en memoria.
-	 * @param cedulaPaciente codigo del Paciente.
+	 * @param idPaciente codigo del Paciente.
 	 * @throws Exception
 	 */
-	public void asignarPacienteTurnoTmp(Turno turnoTmp, String cedulaPaciente) throws Exception {
+	public void asignarPacienteTurnoTmp(Turno turnoTmp, Integer idPaciente) throws Exception {
 
-		Paciente paciente = null;
-		if (cedulaPaciente == null || cedulaPaciente.length() == 0)
-			throw new Exception("Error debe especificar la cedula del paciente.");
+		Paciente paciente = new Paciente();
+		if (idPaciente == null || idPaciente.toString().length() == 0)
+			throw new Exception("Error debe especificar la id del paciente.");
+		
 		try {
-			paciente = managerPaciente.findPacienteById(cedulaPaciente);
-			if (paciente == null)
+			
+			paciente = managerPaciente.findPacienteByIds(idPaciente);
+			if (paciente == null)				
 				throw new Exception("Error al asignar Paciente.");
+			
 			turnoTmp.setPaciente(paciente);
+			System.out.println("examinar turno temporal"+ turnoTmp);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception("Error al asignar paciente: " + e.getMessage());

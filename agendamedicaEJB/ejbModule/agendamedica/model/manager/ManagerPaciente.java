@@ -47,10 +47,10 @@ public class ManagerPaciente {
 	 * @return datos del paciente.
 	 * @throws Exception
 	 */
-	public Paciente findPacienteById(String cedula) throws Exception {
+	public Paciente findPacienteByIds(Integer id) throws Exception {
 		Paciente paciente = null;
 		try {
-			paciente = (Paciente) managerDAO.findById(Paciente.class, cedula);
+			paciente = (Paciente) managerDAO.findById(Paciente.class, id);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new Exception("Error al buscar paciente: " + e.getMessage());

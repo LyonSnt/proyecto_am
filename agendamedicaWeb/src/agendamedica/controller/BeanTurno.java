@@ -40,6 +40,7 @@ public class BeanTurno implements Serializable {
 	private boolean turnoTmpGuardada;
 	private Turno turno;
 	private Medico medico;
+	private Paciente paciente;
 
 	// Inyeccion de beans manejados:
 	@Inject
@@ -48,11 +49,14 @@ public class BeanTurno implements Serializable {
 	public BeanTurno() {
 
 	}
+
 	@PostConstruct
 	private void iniciar() {
 		// TODO Auto-generated method stub
-		turno=new Turno();
+		turno = new Turno();
+		// paciente =new Paciente();
 	}
+
 	/**
 	 * Action para la creacion de una turno temporal en memoria. Hace uso del
 	 * componente {@link agendamedica.model.manager.ManagerTurno ManagerTurno} de la
@@ -62,15 +66,10 @@ public class BeanTurno implements Serializable {
 	 */
 	public String crearNuevaTurno() {
 		turnoTmp = managerTurno.crearTurnoTmp();
-		//turnoTmp.setFechaTurno(new Date());
-		cedulaPaciente = null;
-		cedulaMedico= null;
+		cedulaPl = null;
+		cedulaMedico = null;
 		turnoTmpGuardada = false;
 		return "";
-	}
-	
-	public void asignarFecha() {
-		fecha = managerTurno.fechaT();
 	}
 
 	/**
@@ -85,17 +84,17 @@ public class BeanTurno implements Serializable {
 			JSFUtil.crearMensajeWarning("El Turno ya fue guardada.");
 		}
 		try {
-			managerTurno.asignarPacienteTurnoTmp(turnoTmp, cedulaPaciente);
+			System.out.println("hola " + turnoTmp);
+			managerTurno.asignarPacienteTurnoTmp(turnoTmp, cedulaPl);
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError(e.getMessage());
 		}
 	}
-	
 
 	/**
 	 * Action que almacena en la base de datos una turno temporal creada en memoria.
 	 * Hace uso del componente {@link agendamedica.model.manager.ManagerTurno
-	 * ManagerTurno} de la capa model.
+	 * ManagerTur0...............................no} de la capa model.
 	 * 
 	 * @return outcome para la navegacion.
 	 */
@@ -113,6 +112,7 @@ public class BeanTurno implements Serializable {
 
 		return "";
 	}
+	
 
 	public String getCedulaPaciente() {
 		return cedulaPaciente;
@@ -120,10 +120,8 @@ public class BeanTurno implements Serializable {
 
 	public void setCedulaPaciente(String cedulaPaciente) {
 		this.cedulaPaciente = cedulaPaciente;
-	}  
-	
-	
-	
+	}
+
 	public String getCedulaMedico() {
 		return cedulaMedico;
 	}
@@ -131,8 +129,6 @@ public class BeanTurno implements Serializable {
 	public void setCedulaMedico(String cedulaMedico) {
 		this.cedulaMedico = cedulaMedico;
 	}
-	
-	
 
 	public Integer getCedulaPl() {
 		return cedulaPl;
@@ -141,8 +137,6 @@ public class BeanTurno implements Serializable {
 	public void setCedulaPl(Integer cedulaPl) {
 		this.cedulaPl = cedulaPl;
 	}
-	
-	
 
 	public Date getFecha() {
 		return fecha;
@@ -160,7 +154,7 @@ public class BeanTurno implements Serializable {
 	 */
 	public List<SelectItem> getListaPacienteSI() {
 		List<SelectItem> listadoSI = new ArrayList<SelectItem>();
-		List<Paciente> listadoPaciente = managerPaciente.findAllPaciente();
+		List<Paciente> listadoPaciente = managerPaciente.findAllPacientes();
 
 		for (Paciente p : listadoPaciente) {
 			SelectItem item = new SelectItem(p.getCedulaPaciente(),
@@ -181,14 +175,11 @@ public class BeanTurno implements Serializable {
 		List<Medico> listadoMedico = managerMedico.findAllMedicos();
 
 		for (Medico m : listadoMedico) {
-			SelectItem item = new SelectItem(m.getCedulaMedico(),
-					m.getApellidoMedico() + " " + m.getNombreMedico());
+			SelectItem item = new SelectItem(m.getCedulaMedico(), m.getApellidoMedico() + " " + m.getNombreMedico());
 			listadoSI.add(item);
 		}
 		return listadoSI;
 	}
-
-	
 
 	public Turno getTurnoTmp() {
 		return turnoTmp;
@@ -228,6 +219,14 @@ public class BeanTurno implements Serializable {
 
 	public void setMedico(Medico medico) {
 		this.medico = medico;
+	}
+
+	public Paciente getPaciente() {
+		return paciente;
+	}
+
+	public void setPaciente(Paciente paciente) {
+		this.paciente = paciente;
 	}
 
 }
