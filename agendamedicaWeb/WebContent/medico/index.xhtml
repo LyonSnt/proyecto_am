@@ -55,16 +55,20 @@
 				icon="fa fa-sign-out" />
 		</f:facet>
 	</p:megaMenu>
-	
+
 	<br />
 
+	<p:layout>
 
-<p:panel>
-<h:panelGrid columns="2" columnClasses="left,right" style="width:100%">
+		<p:layoutUnit position="center">
+			<h:panelGrid columns="2" columnClasses="left,right"
+				style="width:100%">
 
-			<p:chart type="bar" model="#{beanGrafico.animatedModel2}"/>
-		</h:panelGrid>
-</p:panel>
+				<p:chart type="bar" model="#{beanGrafico.animatedModel2}" />
+			</h:panelGrid>
+		</p:layoutUnit>
+	</p:layout>
+	<br />
 
 
 	<!-- </p:panel> -->

@@ -90,7 +90,7 @@ public class BeanGrafico implements Serializable {
     	
     	
         animatedModel2 = initBarModel();
-        animatedModel2.setTitle("Citas medicas");
+        animatedModel2.setTitle("Gráfico");
         animatedModel2.setAnimate(true);
         animatedModel2.setLegendPosition("ne");
         org.primefaces.model.chart.Axis yAxis  = animatedModel2.getAxis(AxisType.Y);

@@ -16,7 +16,7 @@ public class Especialidad implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="ESPECIALIDAD_IDESPECIALIDAD_GENERATOR", sequenceName="SEQ_ESPECIALIDAD",allocationSize = 1)
+	@SequenceGenerator(name="ESPECIALIDAD_IDESPECIALIDAD_GENERATOR", sequenceName="SEQ_ESPECIALIDAD")
 	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="ESPECIALIDAD_IDESPECIALIDAD_GENERATOR")
 	@Column(name="id_especialidad", unique=true, nullable=false)
 	private Integer idEspecialidad;

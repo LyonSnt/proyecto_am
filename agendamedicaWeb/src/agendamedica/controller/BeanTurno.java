@@ -223,4 +223,5 @@ public class BeanTurno implements Serializable {
 		this.paciente = paciente;
 	}
 
+	
 }
