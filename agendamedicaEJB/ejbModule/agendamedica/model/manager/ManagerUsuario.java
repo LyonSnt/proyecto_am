@@ -76,15 +76,23 @@ public class ManagerUsuario {
 		return em.find(Usuario.class, idUsuario);
 	}
 
+	public Usuario findUsuarioByIdUsuarioActualizar(String idUsuario) {
+		return em.find(Usuario.class, idUsuario);
+	}
+	
+	public void eliminarUsuario2(String idUsuario) {
+		Usuario usuario = findUsuarioByIdUsuarioActualizar(idUsuario);
+		if (usuario != null)
+			em.remove(usuario);
+	}
+	
 	public void eliminarUsuario(int idUsuario) {
 		Usuario usuario = findUsuarioByIdUsuario(idUsuario);
 		if (usuario != null)
 			em.remove(usuario);
 	}
 
-	public Usuario findUsuarioByIdUsuarioActualizar(String idUsuario) {
-		return em.find(Usuario.class, idUsuario);
-	}
+	
 
 	public void actualizarUsuario(Usuario usuario) throws Exception {
 		Usuario u = findUsuarioByIdUsuarioActualizar(usuario.getIdUsuario());

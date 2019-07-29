@@ -34,7 +34,7 @@
 					<p:menuitem value="Especialidad" url="./especialidad.xhtml" />
 					<p:menuitem value="Medico" url="./medico.xhtml" />
 					<p:menuitem value="Usuario" url="./usuario.xhtml" />
-					<p:menuitem value="Turno" url="./turno.xhtml" />
+					
 
 				</p:submenu>
 			</p:column>
@@ -42,18 +42,9 @@
 
 
 
-		<p:submenu label="Consultar" icon="pi pi-file">
-
-			<p:column>
-				<p:submenu label="Paciente">
-					<p:menuitem value="Médico" url="#" />
-					<p:menuitem value="Turno" url="#" />
-				</p:submenu>
-			</p:column>
-
-		</p:submenu>
 
 		<p:menuitem value="Citas" url="./citas.xhtml" icon="fa fa-book" />
+			<p:menuitem value="Calendario" url="./estado.xhtml" icon="fa fa-calendar" />
 
 		<f:facet name="options">
 			<p:commandButton value="Salir" action="#{beanLogin.salirSistema()}"

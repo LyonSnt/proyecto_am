@@ -61,8 +61,8 @@ public class ControllerUsuario implements Serializable {
 		}
 	}
 
-	public void actionListenerEliminarUsuario(int idUsuario) {
-		managerUsuario.eliminarUsuario(idUsuario);
+	public void actionListenerEliminarUsuario(String idUsuario) {
+		managerUsuario.eliminarUsuario2(idUsuario);
 		listaUsuarios = managerUsuario.findAllUsuarios();
 		JSFUtil.crearMensajeInfo("Usuario Eliminado");
 	}
