@@ -9,10 +9,12 @@ import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 import agendamedica.model.entities.Estado;
 import agendamedica.model.entities.Medico;
 import agendamedica.model.entities.Paciente;
+import agendamedica.model.entities.Parametro;
 import agendamedica.model.entities.Turno;
 import agendamedica.model.entities.Usuario;
 
@@ -34,8 +36,9 @@ public class ManagerTurno {
 	private ManagerMedico managerMedico;
 	@EJB
 	private ManagerParametro managerParametros;
+	@EJB
+	private ManagerEstado managerEstado;
 
-	
 	public ManagerTurno() {
 
 	}
@@ -87,7 +90,8 @@ public class ManagerTurno {
 		Turno turnoTmp = new Turno();
 		turnoTmp.setFechaTurno(new Date());
 		turnoTmp.setValorTurno(new BigDecimal(20.00));
-		turnoTmp.getEstado();
+		
+		
 		return turnoTmp;
 	}
 
@@ -130,6 +134,22 @@ public class ManagerTurno {
 		}
 	}
 
+	public void asignarEstadoTurnoTmp(Turno turnoTmp, Integer idEstado) throws Exception {
+
+		Estado estado = new Estado();
+		if (idEstado == null || idEstado.toString().length() == 0)
+			throw new Exception("Error debe especificar la id del Estado.");
+		try {
+			estado = managerEstado.findEstadoByIds(idEstado);
+			if (estado == null)
+				throw new Exception("Error al asignar Estado.");
+			turnoTmp.setEstado(estado);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new Exception("Error al asignar Estado: " + e.getMessage());
+		}
+	}
+
 	/**
 	 * Guarda en la base de datos una factura.
 	 * 
@@ -137,7 +157,8 @@ public class ManagerTurno {
 	 * @param facturaCabTmp factura temporal creada en memoria.
 	 * @throws Exception problemas ocurridos en la insercion.
 	 */
-	public void guardarTurnoTemporal(String idUsuario, Turno turnoTmp) throws Exception {
+	public void guardarTurnoTemporal(String idUsuario, Turno turnoTmp, int idPaciente, int idMedico, int idEstado)
+			throws Exception {
 
 		if (turnoTmp == null)
 			throw new Exception("Debe crear una turno primero.");
@@ -145,38 +166,151 @@ public class ManagerTurno {
 			throw new Exception("Debe registrar el paciente.");
 		if (turnoTmp.getMedico() == null)
 			throw new Exception("Debe registrar el medico.");
+		if (turnoTmp.getEstado() == null)
+			throw new Exception("Debe registrar el estado.");
+
+		Turno turno = new Turno();
+		Paciente paciente = findPacienteById(idPaciente);
+		Medico medico = findMedicoById(idMedico);
+		Estado estado = findEstadoById(idEstado);
 
 		// asignacion del usuario que crea el turno
 		Usuario usuario = managerSeguridad.findUsuarioById(idUsuario);
 		turnoTmp.setUsuario(usuario);
 		
-		//turnoTmp.setFechaTurno(new Date());
-		//turnoTmp.setValorTurno(new BigDecimal(20.00));
-		
-		//turnoTmp.setCantmedicinaTurno(0);
-		/*turnoTmp.setAlergiaTurno(null);
-		turnoTmp.setDosisdiariaTurno(null);
-		turnoTmp.setEnfermedadTurno(null);
-		turnoTmp.setNombremedicinaTurno(null);
-		turnoTmp.setSintomaTurno(null);
-		turnoTmp.setTiposangreTurno(null);*/
-
 		// obtenemos el numero de la nueva turno:
 		int contTurno;
 		contTurno = getContadorTurno();
 		contTurno++;
-		//turnoTmp.setIdTurno(contTurno);
+		turnoTmp.setIdTurno(contTurno);
+
+		turno.setFechaTurno(turnoTmp.getFechaTurno());
+		turno.setUsuario(turnoTmp.getUsuario());
+		turno.setPaciente(paciente);
+		turno.setMedico(medico);
+		turno.setValorTurno(turnoTmp.getValorTurno());
+		turno.setEstado(estado);
+		turno.setIdTurno(turnoTmp.getIdTurno());
+		
 
 		// guardamos la turno completa en la bdd:
-		//managerDAO.insertar(turnoTmp);
-		em.persist(turnoTmp);
-		
+		//managerDAO.insertar(turno);
+		em.persist(turno);
+
 		// actualizamos los parametros contadores de turnos:
 		actualizarContTurnos(contTurno);
 
-		//turnoTmp = null;
+		turno = null;
 
+	}
+
+	public List<Turno> findAllTurnos() {
+		String consulta = "select t from Turno t ";
+		Query q = em.createQuery(consulta, Turno.class);
+		return q.getResultList();
+	}
+	
+	public List<Paciente> findAllPaciente() {
+		String consulta = "select t from Paciente t ";
+		Query q = em.createQuery(consulta, Paciente.class);
+		return q.getResultList();
+	}
+	public List<Medico> findAllMedico() {
+		String consulta = "select t from Medico t ";
+		Query q = em.createQuery(consulta, Medico.class);
+		return q.getResultList();
+	}
+	
+	public List<Estado> findAllEstado() {
+		String consulta = "select t from Estado t ";
+		Query q = em.createQuery(consulta, Estado.class);
+		return q.getResultList();
+	}
+	
+	public List<Usuario> findAllUsuario() {
+		String consulta = "select t from Usuario t ";
+		Query q = em.createQuery(consulta, Usuario.class);
+		return q.getResultList();
 	}
 	
 	
+
+	public Paciente findPacienteById(int idPaciente) {
+		Paciente paciente= em.find(Paciente.class, idPaciente);
+		return paciente;
+	}
+
+	public Medico findMedicoById(int idMedico) {
+		Medico medico= em.find(Medico.class, idMedico);
+		return medico;
+		
+	}
+
+	public Estado findEstadoById(int idEstado) {
+		Estado estado= em.find(Estado.class, idEstado);
+		return estado;
+	}
+	
+	public Usuario findUsuarioById(String idUsuario) {
+		Usuario usuario= em.find(Usuario.class, idUsuario);
+		return usuario;
+	}
+
+	public void insertarTurno(String idUsuario, int idPaciente, int idMedico, int idEstado, BigDecimal valorTurno, Date fechaTurno)
+			throws Exception {
+
+		Turno turno = new Turno();
+		Paciente paciente = findPacienteById(idPaciente);
+		Medico medico = findMedicoById(idMedico);
+		Estado estado = findEstadoById(idEstado);
+		Usuario usuario= findUsuarioById(idUsuario);
+
+		// asignacion del usuario que crea el turno
+		//Usuario usuario = managerSeguridad.findUsuarioById(idUsuario);
+
+		
+		turno.setPaciente(paciente);
+		turno.setMedico(medico);
+		turno.setUsuario(usuario);
+		turno.setEstado(estado);		
+		turno.setFechaTurno(new Date());		
+		turno.setValorTurno(new BigDecimal(20));
+		
+		
+		Turno turnoTmp = new Turno();
+			//turno.setIdTurno(idTurno);
+		int contTurno;
+		
+			contTurno = getContadorTurno();
+			contTurno++;
+			
+			turnoTmp.setIdTurno(contTurno);
+			actualizarContTurnos(contTurno);
+
+		
+		
+		em.persist(turno);
+		
+		
+		
+		
+	}
+
+	public void contador() {
+		Turno turnoTmp = new Turno();
+		int contTurno;
+		try {
+			contTurno = getContadorTurno();
+			contTurno++;
+			
+			turnoTmp.setIdTurno(contTurno);
+			actualizarContTurnos(contTurno);
+
+		} catch (Exception e) {
+			
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
 }
