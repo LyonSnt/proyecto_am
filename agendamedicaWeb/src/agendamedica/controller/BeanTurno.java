@@ -7,15 +7,19 @@ import javax.faces.model.SelectItem;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import agendamedica.model.entities.Estado;
 import agendamedica.model.entities.Medico;
 import agendamedica.model.entities.Paciente;
 import agendamedica.model.entities.Turno;
+import agendamedica.model.entities.Usuario;
+import agendamedica.model.manager.ManagerEstado;
 import agendamedica.model.manager.ManagerMedico;
 import agendamedica.model.manager.ManagerPaciente;
 import agendamedica.model.manager.ManagerTurno;
 import agendamedica.view.util.JSFUtil;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,17 +32,32 @@ public class BeanTurno implements Serializable {
 	private Date fecha;
 	private Integer idPaciente;
 	private Integer idMedico;
+	private Integer idEstado;
+	private Integer idTurno;
+	private BigDecimal valorTurno;
+	private String idUsuario;
+	private List<Turno> listaTurno;
+	private List<Paciente> listaPaciente;
+	private List<Medico> listaMedico;
+	private List<Estado> listaEstado;
+	private List<Usuario> listaUsuario;
+
 	@EJB
 	private ManagerMedico managerMedico;
 	@EJB
 	private ManagerPaciente managerPaciente;
 	@EJB
 	private ManagerTurno managerTurno;
+	@EJB
+	private ManagerEstado managerEstado;
 
 	private Turno turnoTmp;
+	private Turno turno;
 	private boolean turnoTmpGuardada;
 	private Medico medico;
 	private Paciente paciente;
+	private Estado estado;
+	private Usuario usuario;
 
 	// Inyeccion de beans manejados:
 	@Inject
@@ -51,8 +70,14 @@ public class BeanTurno implements Serializable {
 	@PostConstruct
 	private void iniciar() {
 		// TODO Auto-generated method stub
+		listaEstado = managerTurno.findAllEstado();
+		listaMedico = managerTurno.findAllMedico();
+		listaPaciente = managerTurno.findAllPaciente();
+		listaUsuario = managerTurno.findAllUsuario();
+		listaTurno = managerTurno.findAllTurnos();
+		//*****
+
 		turnoTmp = new Turno();
-		paciente = new Paciente();
 	}
 
 	/**
@@ -66,63 +91,35 @@ public class BeanTurno implements Serializable {
 		turnoTmp = managerTurno.crearTurnoTmp();
 		idPaciente = null;
 		idMedico = null;
-		
+		idEstado = null;
+
 		turnoTmpGuardada = false;
 
 	}
 
-	/**
-	 * Action para asignar un paciente a la turno temporal actual. Hace uso del
-	 * componente {@link agendamedica.model.manager.ManagerTurno ManagerTurno} de la
-	 * capa model.
-	 * 
-	 * @return outcome para la navegacion.
-	 */
-	public void asignarPaciente() {
-		if (turnoTmpGuardada == true) {
-			JSFUtil.crearMensajeWarning("El Turno ya fue guardada.");
-		}
+	public void actionListenerInsertarTurno() {
+
 		try {
-			System.out.println("hola paciente" + turnoTmp);
-			managerTurno.asignarPacienteTurnoTmp(turnoTmp, idPaciente);
+
+			managerTurno.insertarTurno(beanLogin.getCodigoUsuario(), idPaciente, idMedico, 1, valorTurno, fecha);
+			listaTurno = managerTurno.findAllTurnos();
+			turno = new Turno();
+			JSFUtil.crearMensajeInfo("Turno Guardado");
 		} catch (Exception e) {
 			JSFUtil.crearMensajeError(e.getMessage());
+			e.printStackTrace();
+			System.out.println("error en bean" + e.getMessage());
 		}
 	}
 
-	public void asignarMedico() {
-		if (turnoTmpGuardada == true) {
-			JSFUtil.crearMensajeWarning("El Turno ya fue guardada.");
-		}
-		try {
-			System.out.println("hola medico" + turnoTmp);
-			managerTurno.asignarMedicoTurnoTmp(turnoTmp, idMedico);
-		} catch (Exception e) {
-			JSFUtil.crearMensajeError(e.getMessage());
-		}
+
+
+	public List<Turno> getListaTurno() {
+		return listaTurno;
 	}
 
-	/**
-	 * Action que almacena en la base de datos una turno temporal creada en memoria.
-	 * Hace uso del componente {@link agendamedica.model.manager.ManagerTurno
-	 * ManagerTurno} de la capa model.
-	 * 
-	 * @return outcome para la navegacion.
-	 */
-	public String guardarTurno() {
-		if (turnoTmpGuardada == true) {
-			JSFUtil.crearMensajeWarning("El Turno ya fue guardada.");
-			return "";
-		}
-		try {
-			System.out.println("examinar turno hhhhhhh->   " + turnoTmp.getUsuario());
-			managerTurno.guardarTurnoTemporal(beanLogin.getCodigoUsuario(), turnoTmp);
-			turnoTmpGuardada = true;
-		} catch (Exception e) {
-			JSFUtil.crearMensajeError(e.getMessage());
-		}
-
-		return "";
+	public void setListaTurno(List<Turno> listaTurno) {
+		this.listaTurno = listaTurno;
 	}
 
 	public Integer getIdMedico() {
@@ -149,38 +146,20 @@ public class BeanTurno implements Serializable {
 		this.fecha = fecha;
 	}
 
-	/**
-	 * Devuelve un listado de componentes SelectItem a partir de un listado de
-	 * {@link agendamedica.model.dao.entities.Paciente Paciente}.
-	 * 
-	 * @return listado de SelectItems de pacientes.
-	 */
-	public List<SelectItem> getListaPacienteSI() {
-		List<SelectItem> listadoSI = new ArrayList<SelectItem>();
-		List<Paciente> listadoPaciente = managerPaciente.findAllPacientes();
-
-		for (Paciente p : listadoPaciente) {
-			SelectItem item = new SelectItem(p.getIdPaciente(), p.getApellidoPaciente() + " " + p.getNombrePaciente());
-			listadoSI.add(item);
-		}
-		return listadoSI;
+	public Integer getIdEstado() {
+		return idEstado;
 	}
 
-	/**
-	 * Devuelve un listado de componentes SelectItem a partir de un listado de
-	 * {@link agendamedica.model.dao.entities.Medico Medico}.
-	 * 
-	 * @return listado de SelectItems de medicos.
-	 */
-	public List<SelectItem> getListaMedicoSI() {
-		List<SelectItem> listadoSI = new ArrayList<SelectItem>();
-		List<Medico> listadoMedico = managerMedico.findAllMedicoss();
+	public void setIdEstado(Integer idEstado) {
+		this.idEstado = idEstado;
+	}
 
-		for (Medico m : listadoMedico) {
-			SelectItem item = new SelectItem(m.getIdMedico(), m.getApellidoMedico() + " " + m.getNombreMedico());
-			listadoSI.add(item);
-		}
-		return listadoSI;
+	public Integer getIdTurno() {
+		return idTurno;
+	}
+
+	public void setIdTurno(Integer idTurno) {
+		this.idTurno = idTurno;
 	}
 
 	public Turno getTurnoTmp() {
@@ -223,5 +202,76 @@ public class BeanTurno implements Serializable {
 		this.paciente = paciente;
 	}
 
-	
+	public BigDecimal getValorTurno() {
+		return valorTurno;
+	}
+
+	public void setValorTurno(BigDecimal valorTurno) {
+		this.valorTurno = valorTurno;
+	}
+
+	public Turno getTurno() {
+		return turno;
+	}
+
+	public void setTurno(Turno turno) {
+		this.turno = turno;
+	}
+
+	public String getIdUsuario() {
+		return idUsuario;
+	}
+
+	public void setIdUsuario(String idUsuario) {
+		this.idUsuario = idUsuario;
+	}
+
+	public List<Paciente> getListaPaciente() {
+		return listaPaciente;
+	}
+
+	public void setListaPaciente(List<Paciente> listaPaciente) {
+		this.listaPaciente = listaPaciente;
+	}
+
+	public List<Medico> getListaMedico() {
+		return listaMedico;
+	}
+
+	public void setListaMedico(List<Medico> listaMedico) {
+		this.listaMedico = listaMedico;
+	}
+
+	public List<Estado> getListaEstado() {
+		return listaEstado;
+	}
+
+	public void setListaEstado(List<Estado> listaEstado) {
+		this.listaEstado = listaEstado;
+	}
+
+	public List<Usuario> getListaUsuario() {
+		return listaUsuario;
+	}
+
+	public void setListaUsuario(List<Usuario> listaUsuario) {
+		this.listaUsuario = listaUsuario;
+	}
+
+	public Estado getEstado() {
+		return estado;
+	}
+
+	public void setEstado(Estado estado) {
+		this.estado = estado;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
 }

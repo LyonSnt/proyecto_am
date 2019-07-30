@@ -22,17 +22,21 @@ public class ManagerCita {
 
 	public ManagerCita() {
 		// TODO Auto-generated constructor stub
-		// listar();
+		 //listar();
 	}
 
+//	public List<Turno> listar() {
+//		Query q = em
+//				.createQuery("select t from Turno t", Turno.class);
+//		return q.getResultList();
+//	}
+	
 	public List<Turno> listar() {
-		Query q = em
-				.createNativeQuery("SELECT id_turno, id_paciente, id_medico, id_usuario, valor_turno, fecha_turno, \n"
-						+ "       enfermedad_turno, sintoma_turno, alergia_turno, tiposangre_turno, \n"
-						+ "       nombremedicina_turno, cantmedicina_turno, dosisdiaria_turno, \n"
-						+ "       id_estado \n" + "  FROM public.turno", Turno.class);
+		String consulta = "select t from Turno t where t.estado=1";
+		Query q = em.createQuery(consulta, Turno.class);
 		return q.getResultList();
 	}
+
 	
 //	public List<Turno> listar() {
 //		Query q = em.createNativeQuery(

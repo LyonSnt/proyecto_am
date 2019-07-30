@@ -48,7 +48,7 @@ public class BeanMedico implements Serializable {
 	public String actionComprobarCedula() {
 		try {
 			// Medico c = managerClientes.findClienteById(cedula);
-			Medico c = managerMedico.findMedicosById(cedula);
+			Medico c = managerMedico.findMedicoById(cedula);
 			// verificamos la existencia del cliente:
 			if (c == null)
 				return "registro";// debe registrarse
@@ -74,7 +74,7 @@ public class BeanMedico implements Serializable {
 
 	public void actionListenerInsertaMed() {
 		try {
-			managerMedico.insertarmed(idmedico, cedula, nombres, apellidos, celular, direccion, correo, idespecialidad,
+			managerMedico.insertarmed(cedula, nombres, apellidos, celular, direccion, correo, idespecialidad,
 					idhorario);
 			listaMedico = managerMedico.findAllMedicos();
 			medico = new Medico();
@@ -88,8 +88,8 @@ public class BeanMedico implements Serializable {
 	public void actionListerInsertarMedico() {
 		try {
 
-			//managerMedico.insertarMedico(medico);
-			managerMedico.insertar(medico);
+			
+			managerMedico.insertarmed( cedula, nombres, apellidos, celular, direccion, correo, idespecialidad, idhorario);;
 			listaMedico = managerMedico.findAllMedicos();
 			medico = new Medico();
 			JSFUtil.crearMensajeInfo("Datos del medico insertados");

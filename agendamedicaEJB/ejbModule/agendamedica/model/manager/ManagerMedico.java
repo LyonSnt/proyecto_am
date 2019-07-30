@@ -57,16 +57,6 @@ public class ManagerMedico {
 //    direccion_medico, correo_medico, id_especialidad, id_horario
 //FROM public.medico;
 
-	public Medico findMedicosById(String cedula) throws Exception {
-		Medico cliente = null;
-		try {
-			cliente = (Medico) managerDAO.findById(Medico.class, cedula);
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new Exception("Error al buscar cliente: " + e.getMessage());
-		}
-		return cliente;
-	}
 
 	public List<Medico> findAllMedicos() {
 		String consulta = "select o from Medico o";
@@ -109,14 +99,14 @@ public class ManagerMedico {
 
 
 	
-	public void insertarmed(int idmedico, String cedula, String nombre, String apellido, String celular,
+	public void insertarmed( String cedula, String nombre, String apellido, String celular,
 			String direccion, String correo, int idespecialidad, int idhorario) {
 
 		Medico medico = new Medico();
 		Especialidad espe = buscarEspecialidad(idespecialidad);
 		Horario hor = buscarHorario(idhorario);
 		
-		medico.setIdMedico(idmedico);
+		
 		medico.setCedulaMedico(cedula);
 		medico.setNombreMedico(nombre);
 		medico.setApellidoMedico(apellido);

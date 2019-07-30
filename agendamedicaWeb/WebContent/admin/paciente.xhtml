@@ -31,29 +31,41 @@ body {
 	</p:growl>
 	<div align="center">
 		<h:form id="form1">
-			<p:messages>
-				<p:autoUpdate />
-			</p:messages>
-			<p:panel collapsed="#{beanPaciente.panelColapsado}"
-				style="width:400px">
+			
+			<p:panel 
+				style="width:800px">
 				<f:facet name="header">
 					<p:commandButton value="Nuevo paciente" icon="fa fa-plus"
 						update="@form"
 						actionListener="#{beanPaciente.actionListenerColapsarPanel()}"></p:commandButton>
 				</f:facet>
-				<p:panelGrid columns="2">
+				<p:panelGrid columns="4">
 					<h:outputText value="Cédula:" />
-					<p:inputText value="#{beanPaciente.paciente.cedulaPaciente}" />
+					<p:inputText value="#{beanPaciente.paciente.cedulaPaciente}" maxlength="10" required="true"
+					requiredMessage="el campo cedula es obligatorio." converter="javax.faces.Integer" ></p:inputText>
 					<h:outputText value="Apellidos:" />
-					<p:inputText value="#{beanPaciente.paciente.apellidoPaciente}"></p:inputText>
+					<p:inputText value="#{beanPaciente.paciente.apellidoPaciente}" required="true"
+					requiredMessage="el campo Apellidos es obligatorio."></p:inputText>
 					<h:outputText value="Nombres:" />
-					<p:inputText value="#{beanPaciente.paciente.nombrePaciente}"></p:inputText>
+					<p:inputText value="#{beanPaciente.paciente.nombrePaciente}" required="true"
+					requiredMessage="el campo nombre es obligatorio."></p:inputText>
+					
 					<h:outputText value="Celular" />
-					<p:inputText value="#{beanPaciente.paciente.celularPaciente}"></p:inputText>
+					<p:inputText value="#{beanPaciente.paciente.celularPaciente}" maxlength="10" required="true"
+					requiredMessage="el campo celular es obligatorio." converter="javax.faces.Integer"></p:inputText>
+					
 					<h:outputText value="Direccion" />
-					<p:inputText value="#{beanPaciente.paciente.direccionPaciente}"></p:inputText>
+					<p:inputText value="#{beanPaciente.paciente.direccionPaciente}" required="true"
+					requiredMessage="el campo direccion es obligatorio."></p:inputText>
 					<h:outputText value="Correo" />
-					<p:inputText value="#{beanPaciente.paciente.correoPaciente}"></p:inputText>
+					<p:inputText id="email" required="true" label="email" 
+						requiredMessage="Porfavor ingrese el correo ."
+						validatorMessage="Formato de email es inválido"
+						value="#{beanPaciente.paciente.correoPaciente}">
+						<f:validateRegex
+							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+					</p:inputText>
+
 					<p:commandButton value="Insertar" icon="fa fa-save"
 						update="@form,:form2"
 						actionListener="#{beanPaciente.actionListenerInsertarPaciente()}"></p:commandButton>

@@ -34,10 +34,11 @@ public class BeanCita implements Serializable {
 	@PostConstruct
 	private void inicializar() {
 		listaCita = managerCita.listar();
-		//graficar();
 		
-//		listaCita = managerCita.findAllCitas();
-//		turno = new Turno();
+		graficar();
+		
+listaCita = managerCita.findAllCitas();
+turno = new Turno();
 	}
 	 public ManagerCita getmanagerCita() {
 	        return managerCita;

@@ -27,6 +27,8 @@ body {
 			<p:menuitem value="Inicio" action="index" icon="fa fa-home"></p:menuitem>
 			<p:menuitem value="Crear Paciente" action="paciente"
 				icon="fa fa-laptop"></p:menuitem>
+			<p:menuitem value="Lista Turno" action="listaTurno"
+				icon="fa fa-laptop"></p:menuitem>
 			<f:facet name="options">
 				<p:commandButton value="Salir" action="#{beanLogin.salirSistema()}"
 					icon="fa fa-sign-out" />
@@ -41,7 +43,7 @@ body {
 					value="Generar Turno" update="@form" icon="fa fa-file-o" />
 				<h:panelGroup>
 					<p:commandButton value="Guardar Turno" icon="fa fa-save"
-						action="#{beanTurno.guardarTurno()}" update="@form" />
+						action="#{beanTurno.actionListenerInsertarTurno()}" update="@form" />
 					<p:commandButton value="Imprimir"
 						rendered="#{beanTurno.turnoTmpGuardada}" type="button"
 						icon="fa fa-print">
@@ -59,10 +61,12 @@ body {
 				<h:panelGroup>
 					<p:selectOneMenu value="#{beanTurno.idPaciente}" filter="true"
 						filterMatchMode="contains">
-						<f:selectItem itemLabel="Seleccione..." itemValue=""
-							noSelectionOption="true" />
-						<f:selectItems value="#{beanTurno.listaPacienteSI}" />
-						<p:ajax listener="#{beanTurno.asignarPaciente()}"></p:ajax>
+
+						<f:selectItem itemLabel="Seleccione...!" />
+						<f:selectItems value="#{beanTurno.listaPaciente}" var="paciente"
+							itemLabel="#{paciente.apellidoPaciente}"
+							itemValue="#{paciente.idPaciente}" />
+
 					</p:selectOneMenu>
 				</h:panelGroup>
 
@@ -71,14 +75,17 @@ body {
 				<h:panelGroup>
 					<p:selectOneMenu value="#{beanTurno.idMedico}" filter="true"
 						filterMatchMode="contains">
-						<f:selectItem itemLabel="Seleccione..." itemValue=""
-							noSelectionOption="true" />
-						<f:selectItems value="#{beanTurno.listaMedicoSI}" />
-						<p:ajax listener="#{beanTurno.asignarMedico()}"></p:ajax>
+						<f:selectItem itemLabel="Seleccione...!" />
+						<f:selectItems value="#{beanTurno.listaMedico}" var="medico"
+							itemLabel="#{medico.apellidoMedico}"
+							itemValue="#{medico.idMedico}" />
 					</p:selectOneMenu>
 				</h:panelGroup>
 				<h:outputText value="Valor:" style="font-weight: bold" />
 				<h:outputText value="#{beanTurno.turnoTmp.valorTurno}" />
+
+
+
 			</p:panelGrid>
 		</h:form>
 

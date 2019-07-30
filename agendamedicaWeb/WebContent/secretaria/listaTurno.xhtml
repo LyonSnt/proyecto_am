@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Turno</title>
+
+	<style type="text/css">
+body {
+	background: url("../../img/core-img/breadcumb.png");
+}
+</style>
+</h:head>
+<body>
+	<p:growl>
+		<p:autoUpdate />
+	</p:growl>
+	<p:panel header="CONSULTORIO MÉDICO - Módulo Agenda Médica">
+		<h:outputText value="#{beanLogin.nombre} - #{beanLogin.tipoUsuario}" />
+	</p:panel>
+	<h:form>
+		<p:menubar>
+			<p:menuitem value="Inicio" action="index" icon="fa fa-home"></p:menuitem>
+			<p:menuitem value="turno" action="turno" icon="fa fa-laptop"></p:menuitem>
+			<p:menuitem value="Crear Paciente" action="paciente"
+				icon="fa fa-laptop"></p:menuitem>
+			<f:facet name="options">
+				<p:commandButton value="Salir" action="#{beanLogin.salirSistema()}"
+					icon="fa fa-sign-out" />
+			</f:facet>
+		</p:menubar>
+	</h:form>
+	
+	<h:form id="form2">
+		<p:panel header="Lista de Turnos Creadas">
+			<p:dataTable value="#{beanTurno.listaTurno}" var="turno"
+				reflow="true" paginator="true" rows="10">
+				<p:column headerText="Numero de Turno">
+					<h:outputText value="#{turno.idTurno}" />
+				</p:column>
+				<p:column headerText="Fecha">
+					<h:outputText value="#{turno.fechaTurno}" />
+				</p:column>
+				<p:column headerText="Cedula Paciente">
+					<h:outputText value="#{turno.paciente.cedulaPaciente}" />
+				</p:column>
+				<p:column headerText="Nombre Paciente">
+					<h:outputText value="#{turno.paciente.nombrePaciente} #{turno.paciente.apellidoPaciente}" />
+				</p:column>
+				<p:column headerText="Medico">
+					<h:outputText value="#{turno.medico.nombreMedico} #{turno.medico.apellidoMedico}" />
+				</p:column>
+				<p:column headerText="Valor">
+					<h:outputText value="#{turno.valorTurno}" />
+				</p:column>
+				
+			</p:dataTable>
+		</p:panel>
+	</h:form>
+
+	
+</body>
+</html>

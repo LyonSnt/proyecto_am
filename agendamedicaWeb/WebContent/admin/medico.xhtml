@@ -29,38 +29,47 @@ body {
 
 	<div align="center">
 		<h:form id="form1">
-			<p:messages>
-				<p:autoUpdate />
-			</p:messages>
 
-			<p:panel collapsed="#{beanMedico.panelColapsado}" style="width:400px">
+			<p:panel style="width:800px">
 				<f:facet name="header">
 					<p:commandButton value="Nuevo Medico" icon="fa fa-plus"
 						update="@form"
 						actionListener="#{beanMedico.actionListenerColapsarPanel()}"></p:commandButton>
 				</f:facet>
 
-				<p:panelGrid columns="2">
+				<p:panelGrid columns="4">
 
 					<h:outputText value="Cedula" />
-					<p:inputText value="#{beanMedico.medico.cedulaMedico}"></p:inputText>
+					<p:inputText value="#{beanMedico.cedula}" maxlength="10" required="true"
+					requiredMessage="El campo cedula es obligatorio." converter="javax.faces.Integer"></p:inputText>
 					<h:outputText value="Nombre" />
-					<p:inputText value="#{beanMedico.medico.nombreMedico}"></p:inputText>
+					<p:inputText value="#{beanMedico.nombres}" required="true"
+					requiredMessage="El campo nombre es obligatorio."></p:inputText>
 
 					<h:outputText value="Apellido" />
-					<p:inputText value="#{beanMedico.medico.apellidoMedico}"></p:inputText>
+					<p:inputText value="#{beanMedico.apellidos}" required="true"
+					requiredMessage="El campo Apellido es obligatorio."></p:inputText>
 
 					<h:outputText value="Celular" />
-					<p:inputText value="#{beanMedico.medico.celularMedico}"></p:inputText>
+					<p:inputText value="#{beanMedico.celular}" maxlength="10" required="true"
+					requiredMessage="El campo celular es obligatorio." converter="javax.faces.Integer"></p:inputText>
 
-					<h:outputText value="Direccion" />
-					<p:inputText value="#{beanMedico.medico.direccionMedico}"></p:inputText>
+					<h:outputText value="Dirección" />
+					<p:inputText value="#{beanMedico.direccion}" required="true"
+					requiredMessage="El campo dirección es obligatorio."></p:inputText>
 
 					<h:outputText value="Correo" />
-					<p:inputText value="#{beanMedico.medico.correoMedico}"></p:inputText>
+					<p:inputText id="email" required="true" label="email" 
+						requiredMessage="Porfavor ingrese el correo ."
+						validatorMessage="Formato de email es inválido"
+						value="#{beanPaciente.paciente.correoPaciente}">
+						<f:validateRegex
+							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+					</p:inputText>
 
 					<h:outputText value="Especialidad" />
 					<p:selectOneMenu value="#{beanMedico.idespecialidad}">
+						<f:selectItem itemLabel="Seleccione...!" />
 						<f:selectItems value="#{beanEspecialidad.listaEspecialidad}"
 							var="espe" itemLabel="#{espe.nombreEspecialidad}"
 							itemValue="#{espe.idEspecialidad}" />
@@ -68,6 +77,7 @@ body {
 					</p:selectOneMenu>
 					<h:outputText value="Horario" />
 					<p:selectOneMenu value="#{beanMedico.idhorario}">
+						<f:selectItem itemLabel="Seleccione...!" />
 						<f:selectItems value="#{beanHorario.listaHorario}" var="hora"
 							itemLabel="#{hora.inicioHorario}" itemValue="#{hora.idHorario}" />
 
@@ -77,7 +87,7 @@ body {
 
 					<p:commandButton value="Guardar" icon="fa fa-save"
 						update="@form,:form2"
-						actionListener="#{beanMedico.actionListenerActualizarMedico()}"></p:commandButton>
+						actionListener="#{beanMedico.actionListerInsertarMedico()}"></p:commandButton>
 
 				</p:panelGrid>
 
@@ -127,7 +137,7 @@ body {
 
 				<p:column headerText="OPCIONES">
 					<p:commandButton icon="fa fa-close" title="Eliminar" update="@form"
-						actionListener="#{beanResponsable.actionListenerEliminarResponsableturno(responsable.idResponsableturno)}">
+						actionListener="#{beanMedico.actionListenerEliminarMedico(medico.idMedico)}">
 						<p:confirm header="Confirmacion" message="Desea eliminar?"
 							icon="fa fa-exclamation-triangle"></p:confirm>
 					</p:commandButton>

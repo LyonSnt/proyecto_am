@@ -27,13 +27,10 @@ body {
 	<p:growl>
 		<p:autoUpdate></p:autoUpdate>
 	</p:growl>
-
+<br />
 	<div align="center">
 		<h:form id="form">
-			<p:messages>
-				<p:autoUpdate />
-			</p:messages>
-
+	
 			<p:panel collapsed="#{controllerUsuario.panelColapsado}"
 				style="width:400px">
 				<f:facet name="header">
@@ -45,18 +42,22 @@ body {
 				<p:panelGrid columns="2">
 
 					<h:outputText value="Usuario" />
-					<p:inputText value="#{controllerUsuario.usuario.idUsuario}"></p:inputText>
+					<p:inputText value="#{controllerUsuario.usuario.idUsuario}" required="true"
+					requiredMessage="El campo usuario es obligatorio."></p:inputText>
 
 
 					<h:outputText value="Nombre y Apellido" />
-					<p:inputText value="#{controllerUsuario.usuario.nombreUsuario}"></p:inputText>
+					<p:inputText value="#{controllerUsuario.usuario.nombreUsuario}" required="true"
+					requiredMessage="El campo nombre y apellido es obligatorio."></p:inputText>
 
 					<h:outputText value="Contraseña" />
-					<p:inputText value="#{controllerUsuario.usuario.passwordUsuario}"></p:inputText>
+					<p:inputText value="#{controllerUsuario.usuario.passwordUsuario}" required="true"
+					requiredMessage="El campo contaseña es obligatorio."></p:inputText>
 
 					<h:outputText value="Tipo de usuario" />
 					<p:selectOneMenu value="#{controllerUsuario.usuario.tipousuario}"
 						required="true" requiredMessage="Debe seleccionar el tipo.">
+						<f:selectItem itemLabel="Seleccione...!" />
 						<f:selectItem itemLabel="Administrador" itemValue="admin" />
 						<f:selectItem itemLabel="Medico" itemValue="medico" />
 						<f:selectItem itemLabel="Secretaria" itemValue="secretaria" />

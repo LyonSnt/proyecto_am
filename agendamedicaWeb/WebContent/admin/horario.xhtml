@@ -43,6 +43,7 @@ body {
 				</f:facet>
 
 				<p:panelGrid columns="2">
+
 					<h:outputText value="Fecha Inicio" />
 					<p:inputText value="#{beanHorario.horario.inicioHorario}"></p:inputText>
 					<h:outputText value="Fecha Fin" />
@@ -75,7 +76,7 @@ body {
 	<h:form id="form2">
 		<p:panel header="Horario">
 			<p:dataTable value="#{beanHorario.listaHorario}" var="horario"
-				reflow="true" rows="5">
+				reflow="true" paginator="true" rows="5">
 				<p:column headerText="Id">
 					<h:outputText value="#{horario.idHorario}" />
 				</p:column>
