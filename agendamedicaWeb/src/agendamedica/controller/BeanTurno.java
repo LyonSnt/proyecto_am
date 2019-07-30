@@ -95,87 +95,6 @@ public class BeanTurno implements Serializable {
 
 	}
 
-	/**
-	 * Action para asignar un paciente a la turno temporal actual. Hace uso del
-	 * componente {@link agendamedica.model.manager.ManagerTurno ManagerTurno} de la
-	 * capa model.
-	 * 
-	 * @return outcome para la navegacion.
-	 */
-	public void asignarPaciente() {
-		if (turnoTmpGuardada == true) {
-			JSFUtil.crearMensajeWarning("El Turno ya fue guardada.");
-		}
-		try {
-			System.out.println("hola paciente" + turnoTmp);
-			managerTurno.asignarPacienteTurnoTmp(turnoTmp, idPaciente);
-		} catch (Exception e) {
-			JSFUtil.crearMensajeError(e.getMessage());
-		}
-	}
-
-	public void asignarMedico() {
-		if (turnoTmpGuardada == true) {
-			JSFUtil.crearMensajeWarning("El Turno ya fue guardada.");
-		}
-		try {
-			System.out.println("hola medico" + turnoTmp);
-			managerTurno.asignarMedicoTurnoTmp(turnoTmp, idMedico);
-		} catch (Exception e) {
-			JSFUtil.crearMensajeError(e.getMessage());
-		}
-	}
-
-	public void asignarEstado() {
-		if (turnoTmpGuardada == true) {
-			JSFUtil.crearMensajeWarning("El Turno ya fue guardada.");
-		}
-		try {
-			System.out.println("hola Estado" + turnoTmp);
-			managerTurno.asignarEstadoTurnoTmp(turnoTmp, idEstado);
-		} catch (Exception e) {
-			JSFUtil.crearMensajeError(e.getMessage());
-		}
-	}
-
-	/**
-	 * Action que almacena en la base de datos una turno temporal creada en memoria.
-	 * Hace uso del componente {@link agendamedica.model.manager.ManagerTurno
-	 * ManagerTurno} de la capa model.
-	 * 
-	 * @return outcome para la navegacion.
-	 */
-	public String guardarTurno() {
-		if (turnoTmpGuardada == true) {
-			JSFUtil.crearMensajeWarning("El Turno ya fue guardada.");
-			return "";
-		}
-		try {
-
-			managerTurno.guardarTurnoTemporal(beanLogin.getCodigoUsuario(), turnoTmp, idPaciente, idMedico, idEstado);
-			turnoTmpGuardada = true;
-		} catch (Exception e) {
-			JSFUtil.crearMensajeError(e.getMessage());
-		}
-
-		return "";
-	}
-
-	public void actionListenerInsertarTurnos() {
-
-		try {
-
-			
-			listaTurno = managerTurno.findAllTurnos();
-			turno = new Turno();
-			JSFUtil.crearMensajeInfo("Turno Guardado");
-		} catch (Exception e) {
-			JSFUtil.crearMensajeError(e.getMessage());
-			e.printStackTrace();
-			System.out.println("error en bean" + e.getMessage());
-		}
-	}
-	
 	public void actionListenerInsertarTurno() {
 
 		try {
@@ -191,56 +110,7 @@ public class BeanTurno implements Serializable {
 		}
 	}
 
-	/**
-	 * Devuelve un listado de componentes SelectItem a partir de un listado de
-	 * {@link agendamedica.model.dao.entities.Paciente Paciente}.
-	 * 
-	 * @return listado de SelectItems de pacientes.
-	 */
-	public List<SelectItem> getListaPacienteSI() {
-		List<SelectItem> listadoSI = new ArrayList<SelectItem>();
-		List<Paciente> listadoPaciente = managerPaciente.findAllPacientes();
 
-		for (Paciente p : listadoPaciente) {
-			SelectItem item = new SelectItem(p.getIdPaciente(), p.getApellidoPaciente() + " " + p.getNombrePaciente());
-			listadoSI.add(item);
-		}
-		return listadoSI;
-	}
-
-	/**
-	 * Devuelve un listado de componentes SelectItem a partir de un listado de
-	 * {@link agendamedica.model.dao.entities.Medico Medico}.
-	 * 
-	 * @return listado de SelectItems de medicos.
-	 */
-	public List<SelectItem> getListaMedicoSI() {
-		List<SelectItem> listadoSI = new ArrayList<SelectItem>();
-		List<Medico> listadoMedico = managerMedico.findAllMedicoss();
-
-		for (Medico m : listadoMedico) {
-			SelectItem item = new SelectItem(m.getIdMedico(), m.getApellidoMedico() + " " + m.getNombreMedico());
-			listadoSI.add(item);
-		}
-		return listadoSI;
-	}
-
-	/**
-	 * Devuelve un listado de componentes SelectItem a partir de un listado de
-	 * {@link agendamedica.model.dao.entities.Estado Estado}.
-	 * 
-	 * @return listado de SelectItems de estados.
-	 */
-	public List<SelectItem> getListaEstadoSI() {
-		List<SelectItem> listadoSI = new ArrayList<SelectItem>();
-		List<Estado> listadoEstado = managerEstado.findAllEstado();
-
-		for (Estado e : listadoEstado) {
-			SelectItem item = new SelectItem(e.getIdEstado(), e.getNombreEstado());
-			listadoSI.add(item);
-		}
-		return listadoSI;
-	}
 
 	public List<Turno> getListaTurno() {
 		return listaTurno;
