@@ -14,7 +14,6 @@ import javax.persistence.Query;
 import agendamedica.model.entities.Estado;
 import agendamedica.model.entities.Medico;
 import agendamedica.model.entities.Paciente;
-import agendamedica.model.entities.Parametro;
 import agendamedica.model.entities.Turno;
 import agendamedica.model.entities.Usuario;
 

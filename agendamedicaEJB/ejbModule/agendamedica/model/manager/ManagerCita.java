@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import agendamedica.model.entities.Estado;
 import agendamedica.model.entities.Turno;
 
 /**
@@ -32,7 +33,7 @@ public class ManagerCita {
 //	}
 	
 	public List<Turno> listar() {
-		String consulta = "select t from Turno t where t.estado=1";
+		String consulta = "select t from Turno t";
 		Query q = em.createQuery(consulta, Turno.class);
 		return q.getResultList();
 	}
@@ -55,7 +56,13 @@ public class ManagerCita {
 	}
 
 	public List<Turno> findAllCitas() {
-		String consulta = "select t from Turno t";
+		String consulta = "select t from Turno t where t.estado=1";
+		Query q = em.createQuery(consulta, Turno.class);
+		return q.getResultList();
+	}
+	
+	public List<Turno> findAllCitasHistorial() {
+		String consulta = "select t from Turno t where t.estado=2 or t.estado=3 order by t.estado";
 		Query q = em.createQuery(consulta, Turno.class);
 		return q.getResultList();
 	}
@@ -69,10 +76,16 @@ public class ManagerCita {
 		if (turno != null)
 			em.remove(turno);
 	}
+	
+	public Estado findEstadoById(int idEstado) {
+		Estado estado = em.find(Estado.class, idEstado);
+		return estado;
+	}
 
-	public void actualizarTurno(Turno turno) throws Exception {
+	public void actualizarTurno(Turno turno,int idEstado) throws Exception {
 
 		Turno tur = findCitaById(turno.getIdTurno());
+		Estado estado = findEstadoById(idEstado);
 		if (tur == null)
 			throw new Exception("no existe.");
 
@@ -83,8 +96,10 @@ public class ManagerCita {
 		tur.setNombremedicinaTurno(turno.getNombremedicinaTurno());
 		tur.setCantmedicinaTurno(turno.getCantmedicinaTurno());
 		tur.setDosisdiariaTurno(turno.getDosisdiariaTurno());
-		// tur.setEstado(tur.getEstado());
+		tur.setEstado(estado);
 		em.merge(tur);
 	}
+	
+	
 
 }

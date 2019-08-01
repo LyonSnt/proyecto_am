@@ -4,7 +4,7 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui">
-	<f:metadata>
+<f:metadata>
 	<f:event listener="#{beanLogin.actionVerificarLogin()}"
 		type="preRenderView"></f:event>
 </f:metadata>
@@ -17,7 +17,7 @@
 	</p:growl>
 	<h:form id="form2">
 		<p:panel header="Citas">
-			<p:dataTable value="#{beanCita.listaCita}" var="cita" reflow="true"
+			<p:dataTable value="#{beanCita.listaCitaHistorial}" var="cita" reflow="true"
 				paginator="true" rows="5">
 
 
@@ -29,10 +29,7 @@
 					<h:outputText
 						value="#{cita.paciente.nombrePaciente} #{cita.paciente.apellidoPaciente}" />
 				</p:column>
-				<p:column headerText="Médico">
-					<h:outputText
-						value="#{cita.medico.nombreMedico} #{cita.medico.apellidoMedico}" />
-				</p:column>
+				
 				<p:column headerText="Usuario">
 					<h:outputText value="#{cita.usuario.nombreUsuario}" />
 				</p:column>
@@ -73,72 +70,10 @@
 					<h:outputText value="#{cita.estado.nombreEstado}" />
 				</p:column>
 
-
-
-				<p:column headerText="OPCIONES">
-					<p:commandButton icon="fa fa-close" title="Eliminar" update="@form"
-						actionListener="#{beanCita.actionListenerEliminarTurno(cita.idTurno)}">
-						<p:confirm header="Confirmacion" message="Desea eliminar?"
-							icon="fa fa-exclamation-triangle"></p:confirm>
-					</p:commandButton>
-
-					<p:commandButton icon="fa fa-edit" title="Editar"
-						actionListener="#{beanCita.actionListenerSeleccionarTurno(cita)}"
-						update=":formEdicion" oncomplete="PF('dlgEdicion').show();"></p:commandButton>
-				</p:column>
 			</p:dataTable>
 		</p:panel>
 	</h:form>
 
-	<p:dialog header="Editar informacion" widgetVar="dlgEdicion"
-		modal="true">
-		<h:form id="formEdicion">
-			<p:growl>
-				<p:autoUpdate></p:autoUpdate>
-			</p:growl>
-			<h:outputText value="# Turno: " />
-			<h:outputText value="#{beanCita.turnoSeleccionado.idTurno}" />
-			<br />
-			<h:outputText value="Paciente: " />
-			<h:outputText
-				value="#{beanCita.turnoSeleccionado.paciente.nombrePaciente} #{beanCita.turnoSeleccionado.paciente.apellidoPaciente}" />
-
-			<p:panelGrid columns="2">
-
-				<h:outputText value="Enfermedad" />
-				<p:inputText
-					value="#{beanCita.turnoSeleccionado.enfermedadTurno}"></p:inputText>
-
-				<h:outputText value="Síntoma" />
-				<p:inputText
-					value="#{beanCita.turnoSeleccionado.sintomaTurno}"></p:inputText>
-				<h:outputText value="Alergia" />
-				<p:inputText
-					value="#{beanCita.turnoSeleccionado.alergiaTurno}"></p:inputText>
-
-				<h:outputText value="Tipo sangre" />
-				<p:inputText value="#{beanCita.turnoSeleccionado.tiposangreTurno}"></p:inputText>
-				<h:outputText value="Medicina" />
-				<p:inputText value="#{beanCita.turnoSeleccionado.nombremedicinaTurno}"></p:inputText>
-				
-				
-				<h:outputText value="Cantidad" />
-				<p:inputText value="#{beanCita.turnoSeleccionado.cantmedicinaTurno}"></p:inputText>
-				
-				<h:outputText value="Dosis Diaria" />
-				<p:inputText value="#{beanCita.turnoSeleccionado.dosisdiariaTurno}"></p:inputText>
-				
-				
-
-				<p:commandButton value="Actualizar" icon="fa fa-save"
-					update="@form,:form2"
-					actionListener="#{beanCita.actionListenerActualizarTurno()}"></p:commandButton>
-
-			</p:panelGrid>
-
-
-		</h:form>
-	</p:dialog>
 
 </body>
 </html>

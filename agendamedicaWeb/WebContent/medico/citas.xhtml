@@ -40,10 +40,6 @@ body {
 					<h:outputText
 						value="#{cita.paciente.nombrePaciente} #{cita.paciente.apellidoPaciente}" />
 				</p:column>
-				<p:column headerText="Médico">
-					<h:outputText
-						value="#{cita.medico.nombreMedico} #{cita.medico.apellidoMedico}" />
-				</p:column>
 
 				<p:column headerText="Valor">
 					<h:outputText value="#{cita.valorTurno}" />
@@ -76,7 +72,7 @@ body {
 
 
 
-	<p:dialog header="Editar informacion" widgetVar="dlgEdicion"
+	<p:dialog header="Editar información" widgetVar="dlgEdicion"
 		modal="true">
 		<h:form id="formEdicion">
 			<p:growl>
@@ -100,14 +96,23 @@ body {
 				<p:inputText value="#{beanCita.turnoSeleccionado.alergiaTurno}"></p:inputText>
 
 				<h:outputText value="Tipo sangre" />
-				<p:inputText value="#{beanCita.turnoSeleccionado.tiposangreTurno}"></p:inputText>
+				<p:selectOneMenu value="#{beanCita.turnoSeleccionado.tiposangreTurno}">
+					<f:selectItem itemValue="A+" itemLabel="A+" />
+					<f:selectItem itemValue="A-" itemLabel="A-" />
+					<f:selectItem itemValue="B+" itemLabel="B+" />
+					<f:selectItem itemValue="B-" itemLabel="B-" />
+					<f:selectItem itemValue="O+" itemLabel="O+" />
+					<f:selectItem itemValue="O-" itemLabel="O-" />
+					<f:selectItem itemValue="AB+" itemLabel="AB+" />
+					<f:selectItem itemValue="AB-" itemLabel="AB-" />
+				</p:selectOneMenu>
 				<h:outputText value="Medicina" />
 				<p:inputText
 					value="#{beanCita.turnoSeleccionado.nombremedicinaTurno}"></p:inputText>
 
 
 				<h:outputText value="Cantidad" />
-				<p:inputText value="#{beanCita.turnoSeleccionado.cantmedicinaTurno}"></p:inputText>
+				<p:spinner value="#{beanCita.turnoSeleccionado.cantmedicinaTurno}"></p:spinner>
 
 				<h:outputText value="Dosis Diaria" />
 				<p:inputText value="#{beanCita.turnoSeleccionado.dosisdiariaTurno}"></p:inputText>

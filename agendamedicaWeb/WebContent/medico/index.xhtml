@@ -31,6 +31,10 @@
 </style>
 </h:head>
 <body>
+
+
+		
+
 	<p:panel header="CONSULTORIO MÉDICO - Módulo Agenda Médica">
 		<h:outputText value="#{beanLogin.nombre} - #{beanLogin.tipoUsuario}" />
 	</p:panel>
@@ -42,22 +46,22 @@
 			<p:column>
 				<p:submenu label="." url="citasDetalle.xhtml">
 					<p:menuitem value="Historial" url="citasDetalle.xhtml" />
-					<p:menuitem value="Turno" url="#" />
+
 				</p:submenu>
 			</p:column>
 
 		</p:submenu>
 
 		<p:menuitem value="Citas" url="./citas.xhtml" icon="fa fa-book" />
-
-			<f:facet name="options">
-			<p:commandButton value="Salir" action="#{beanLogin.salirSistema()}"
-				icon="fa fa-sign-out" />
-		</f:facet>
 	</p:megaMenu>
 
 	<br />
 
+		<form action="../admin/headerAdmin.xhtml?faces-redirect=true">
+		<p:commandButton value="Salir">
+			<f:ajax />
+		</p:commandButton>
+		</form>
 	<p:layout>
 
 		<p:layoutUnit position="center">

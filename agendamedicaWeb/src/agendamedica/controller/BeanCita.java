@@ -27,6 +27,7 @@ public class BeanCita implements Serializable {
 	@EJB
 	private ManagerCita managerCita;
 	private List<Turno> listaCita;
+	private List<Turno> listaCitaHistorial;
 	private Turno turno;
 	private Turno turnoSeleccionado;
 	private BarChartModel barra;
@@ -34,24 +35,28 @@ public class BeanCita implements Serializable {
 	@PostConstruct
 	private void inicializar() {
 		listaCita = managerCita.listar();
-		
-		graficar();
-		
-listaCita = managerCita.findAllCitas();
-turno = new Turno();
-	}
-	 public ManagerCita getmanagerCita() {
-	        return managerCita;
-	    }
 
+		graficar();
+
+		listaCita = managerCita.findAllCitas();
+		listaCitaHistorial = managerCita.findAllCitasHistorial();
+		turno = new Turno();
+	}
+
+	public ManagerCita getmanagerCita() {
+		return managerCita;
+	}
 
 	public void graficar() {
 		barra = new BarChartModel();
 		for (int i = 0; i < managerCita.listar().size(); i++) {
 			ChartSeries serie = new BarChartSeries();
 
-			serie.setLabel(managerCita.listar().get(i).getEstado().getNombreEstado());// esta parte es del los nombresdel lengend																			// de la columna
-			serie.set(managerCita.listar().get(i).getEstado().getNombreEstado(), managerCita.listar().get(i).getCantmedicinaTurno());
+			serie.setLabel(managerCita.listar().get(i).getEstado().getNombreEstado());// esta parte es del los
+																						// nombresdel lengend // de la
+																						// columna
+			serie.set(managerCita.listar().get(i).getEstado().getNombreEstado(),
+					managerCita.listar().get(i).getCantmedicinaTurno());
 			barra.addSeries(serie);
 		}
 		barra.setTitle("Citas");
@@ -66,12 +71,13 @@ turno = new Turno();
 		yAxis.setMax(30);
 
 	}
+
 	public void graficarr() {
 		barra = new BarChartModel();
-		for (Turno turn:managerCita.listar()) {
+		for (Turno turn : managerCita.listar()) {
 			ChartSeries serie = new BarChartSeries();
-			serie.set(turn.getEstado(),turn.getCantmedicinaTurno());
-			
+			serie.set(turn.getEstado(), turn.getCantmedicinaTurno());
+
 		}
 		barra.setTitle("cantidad");
 		barra.setLegendPosition("ne");
@@ -97,7 +103,7 @@ turno = new Turno();
 
 	public void actionListenerActualizarTurno() {
 		try {
-			managerCita.actualizarTurno(turnoSeleccionado);
+			managerCita.actualizarTurno(turnoSeleccionado, 2);
 			listaCita = managerCita.findAllCitas();
 			JSFUtil.crearMensajeInfo("Datos actualizados");
 		} catch (Exception e) {
@@ -137,5 +143,14 @@ turno = new Turno();
 	public void setBarra(BarChartModel barra) {
 		this.barra = barra;
 	}
+
+	public List<Turno> getListaCitaHistorial() {
+		return listaCitaHistorial;
+	}
+
+	public void setListaCitaHistorial(List<Turno> listaCitaHistorial) {
+		this.listaCitaHistorial = listaCitaHistorial;
+	}
+	
 
 }
